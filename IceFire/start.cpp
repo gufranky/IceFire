@@ -5,7 +5,7 @@ start::start(QWidget* parent) :
 {
     player = new QMediaPlayer(this);
     playlist = new QMediaPlaylist(this);
-    playlist->addMedia(QUrl("qrc:/re/start.mp3"));
+    playlist->addMedia(QUrl("qrc:/IceFire/re/menu.mp3"));
     playlist->setPlaybackMode(QMediaPlaylist::Loop);
     player->setPlaylist(playlist);
     player->play();//²¥·ÅÒôÀÖ
@@ -25,7 +25,8 @@ start::start(QWidget* parent) :
         "}");
     //°´Å¥ÉèÖÃ
     imageLabel = new QLabel(this);
-    QPixmap image(":/re/back.jpg");
+    QPixmap image;
+    image.load(":/IceFire/re/back.jpg");
     imageLabel->setPixmap(image);
     imageLabel->setScaledContents(true);
     imageLabel->lower();

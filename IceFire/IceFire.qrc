@@ -1,4 +1,7 @@
 <RCC>
-    <qresource prefix="IceFire">
+    <qresource prefix="/IceFire">
+        <file>re/background.jpg</file>
+        <file>re/back.jpg</file>
+        <file>re/menu.mp3</file>
     </qresource>
 </RCC>
