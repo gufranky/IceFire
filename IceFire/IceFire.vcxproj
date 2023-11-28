@@ -89,6 +89,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Barrier.cpp" />
     <ClCompile Include="engine.cpp" />
     <ClCompile Include="Mainwindow.cpp" />
     <ClCompile Include="Person.cpp" />
@@ -106,6 +107,7 @@
     <QtMoc Include="start.h" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="Barrier.h" />
     <ClInclude Include="engine.h" />
     <ClInclude Include="Person.h" />
   </ItemGroup>

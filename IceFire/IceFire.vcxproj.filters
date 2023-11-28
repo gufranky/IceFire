@@ -52,12 +52,18 @@
     <ClCompile Include="engine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Barrier.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Mainwindow.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="start.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Barrier.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
