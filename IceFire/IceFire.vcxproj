@@ -89,7 +89,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="engine.cpp" />
     <ClCompile Include="Mainwindow.cpp" />
+    <ClCompile Include="Person.cpp" />
     <ClCompile Include="start.cpp" />
     <QtRcc Include="IceFire.qrc" />
     <QtUic Include="IceFire.ui" />
@@ -102,6 +104,10 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="start.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="engine.h" />
+    <ClInclude Include="Person.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 #include <QMainWindow>
 #include <QStackedWidget>
-//#include "engine.h"
+#include "engine.h"
 #include "start.h"
 class MainWindow : public QMainWindow
 {
@@ -14,7 +14,7 @@ public:
     MainWindow(QWidget* parent = nullptr);
     ~MainWindow();
     void onButtonClicked();
-    start* page1;
-    //engine* page2;
+    start *page1;
+    engine *page2;
 };
 #endif // MAINWINDOW_H

@@ -18,7 +18,7 @@ class start : public QWidget
     QMediaPlaylist* playlist;
 
 public:
-    explicit start(QWidget* parent = nullptr);
+    start(QWidget* parent = nullptr);
     ~start();
     void onStartButtonClicked();
 private:

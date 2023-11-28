@@ -1,5 +1,5 @@
 #include "mainwindow.h"
-//#include "engine.h"
+#include "engine.h"
 #include "start.h"
 #include <QPushButton>
 #include <QPixmap>
@@ -17,7 +17,7 @@ MainWindow::MainWindow(QWidget* parent)
         stackedWidget->addWidget(page1);
         stackedWidget->setCurrentIndex(0);
         this->setCentralWidget(stackedWidget);
-        //connect(page1, &start::buttonClicked, this, &MainWindow::onButtonClicked);
+        connect(page1, &start::buttonClicked, this, &MainWindow::onButtonClicked);
     }
 }
 
@@ -27,12 +27,11 @@ MainWindow::~MainWindow()
     delete page1;
     //delete page2;
 }
-/*
+
 void MainWindow::onButtonClicked()
 {
     this->setWindowTitle("Menu");
-    page2 = new engine;
+    page2 = new engine(this);
     stackedWidget->addWidget(page2);
     stackedWidget->setCurrentIndex(1);
 }
-*/
