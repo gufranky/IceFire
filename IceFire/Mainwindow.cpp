@@ -18,6 +18,8 @@ MainWindow::MainWindow(QWidget* parent)
         stackedWidget->setCurrentIndex(0);
         this->setCentralWidget(stackedWidget);
         connect(page1, &start::buttonClicked, this, &MainWindow::onButtonClicked);
+        setContentsMargins(0, 0, 0, 0); // ÉèÖÃ±ß¾àÎª0
+
     }
 }
 
