@@ -3,7 +3,7 @@
 engine::engine(QWidget* parent)
 {
 	x = 0, y = 0;
-	p = new Person(QString(":/IceFire/re/fire.png"));
+	p = new IFaccomplish(0,0,QString(":/IceFire/re/fire.png"));
 	scene = new QGraphicsScene(parent);
 	scene->addItem(p);
 	scene->setSceneRect(0, 0, 1920, 1080);
@@ -20,6 +20,7 @@ engine::engine(QWidget* parent)
 	layout->setContentsMargins(0, 0, 0, 0);
 	setLayout(layout);
 	setFocusPolicy(Qt::StrongFocus);
+	QObject::connect(this, &engine::signalA, p, &IFaccomplish::handleSignalA);
 }
 
 engine::~engine()
@@ -33,22 +34,18 @@ void engine::keyPressEvent(QKeyEvent* event)
 {
 	if (event->text() == "w")
 	{
-		y = y - 10;
-		p->setPos(x,y);
+		emit signalA(0);
 	}
 	if (event->text() == "a")
 	{
-		x = x - 10;
-		p->setPos(x, y);
+		emit signalA(1);
 	}
 	if (event->text() == "s")
 	{
-		y = y + 10;
-		p->setPos(x, y);
+		emit signalA(2);
 	}
 	if (event->text() == "d")
 	{
-		x = x + 10;
-		p->setPos(x, y);
+		emit signalA(3);
 	}
 }

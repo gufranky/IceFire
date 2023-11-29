@@ -1,8 +1,10 @@
 #include "Person.h"
 
-Person::Person(QString c, QGraphicsItem* parent)
-	: QGraphicsItem(parent)
+Person::Person(QString c, QGraphicsItem* parent, QObject* pt)
+	: QGraphicsItem(parent),QObject(pt)
 {
+    p = parent;
+    st = c;
 	pixmap.load(c);
 
 }
