@@ -3,5 +3,6 @@
         <file>re/background.jpg</file>
         <file>re/back.jpg</file>
         <file>re/menu.mp3</file>
+        <file>re/fire.png</file>
     </qresource>
 </RCC>

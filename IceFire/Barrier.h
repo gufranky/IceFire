@@ -15,11 +15,12 @@ public:
 	friend class Fence;
 	Barrier(QObject *parent);
 	~Barrier();
-
-	QGraphicsRectItem* fence1 = new QGraphicsRectItem(0, 0, 100, 10);
-	QGraphicsRectItem* fence2 = new QGraphicsRectItem(0, 0, 10, 100);
-	QGraphicsRectItem* fence3 = new QGraphicsRectItem(90, 0, 10, 100);
-	QGraphicsRectItem* fence4 = new QGraphicsRectItem(0, 90, 100, 10);
+	QGraphicsScene *scene01;
+	QGraphicsRectItem* fence1;
+	QGraphicsRectItem* fence2;
+	QGraphicsRectItem* fence3;
+	QGraphicsRectItem* fence4;
+	QGraphicsView* view;
 	//创建四周围栏
 	
 };

@@ -25,7 +25,7 @@ MainWindow::~MainWindow()
 {
     delete  stackedWidget;
     delete page1;
-    //delete page2;
+    delete page2;
 }
 
 void MainWindow::onButtonClicked()
