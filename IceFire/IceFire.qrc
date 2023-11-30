@@ -4,5 +4,13 @@
         <file>re/back.jpg</file>
         <file>re/menu.mp3</file>
         <file>re/fire.png</file>
+        <file>re/fireydown.png</file>
+        <file>re/fireyplus.png</file>
+        <file>re/firel.png</file>
+        <file>re/fireld.png</file>
+        <file>re/firelu.png</file>
+        <file>re/firerd.png</file>
+        <file>re/fireright.png</file>
+        <file>re/fireru.png</file>
     </qresource>
 </RCC>

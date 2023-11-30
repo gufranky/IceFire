@@ -1,12 +1,10 @@
 #include "Person.h"
-
+#include <qdebug.h>
 Person::Person(QString c, QGraphicsItem* parent, QObject* pt)
 	: QGraphicsItem(parent),QObject(pt)
 {
     p = parent;
     st = c;
-	pixmap.load(c);
-    pixmap = pixmap.scaled(pixmap.size() * 2);
 
 }
 
@@ -23,4 +21,12 @@ void Person::setPos(qreal x, qreal y){
     QGraphicsItem::setPos(x, y);
 
     // 这里可以执行其他在位置变化时需要的操作
+}
+
+void Person::Change(QString c)
+{
+    prepareGeometryChange();
+    st = c;
+    pixmap.load(c);
+    update();
 }

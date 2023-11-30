@@ -18,6 +18,7 @@ public:
 	// 重写 paint 方法进行图元的绘制
 	void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = nullptr) override;
 	void setPos(qreal x, qreal y) ;
+	void Change(QString c);
 private:
 	QPixmap pixmap; // 存储图像
 	qreal width = 200; // 图元宽度

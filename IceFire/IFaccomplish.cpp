@@ -21,7 +21,7 @@ void IFaccomplish::SetPos(int xx, int yy)
 		y = 0;
 		speedy = 0;
 	}
-	if (y >1000)
+	if (y >=1000)
 	{
 		y = 1000;
 		speedy = 0;
@@ -68,6 +68,15 @@ void IFaccomplish::timeChange()
 			speedx = 0;
 		}
 	}//水平处理已完成
+	if (true)
+	{
+		speedy += 3;
+	}//垂直处理已完成
+	if (y >= 1000)
+	{
+		speedy = 0;
+		jumpfirst = true;
+	}
 	if (w)
 	{
 		w = false;
@@ -78,10 +87,43 @@ void IFaccomplish::timeChange()
 		}
 
 	}
-	if (true)
+
+	if ((speedx==0)&&(speedy==0))
 	{
-		speedy += 3;
-	}//垂直处理已完成
+		Change(":/IceFire/re/fire.png");
+	}
+	if ((speedx == 0) && (speedy > 0))
+	{
+		Change(":/IceFire/re/fire.png");
+	}
+	if ((speedx==0) && (speedy < 0))
+	{
+		Change(":/IceFire/re/fireyplus.png");
+	}
+	if ((speedx > 0) && (speedy == 0))
+	{
+		Change(":/IceFire/re/fireright.png");
+	}
+	if ((speedx < 0) && (speedy == 0))
+	{
+		Change(":/IceFire/re/firel.png");
+	}
+	if ((speedx > 0) && (speedy > 0))
+	{
+		Change(":/IceFire/re/firerd.png");
+	}
+	if ((speedx > 0) && (speedy < 0))
+	{
+		Change(":/IceFire/re/fireru.png");
+	}
+	if ((speedx < 0) && (speedy > 0))
+	{
+		Change(":/IceFire/re/fireld.png");
+	}
+	if ((speedx < 0) && (speedy < 0))
+	{
+		Change(":/IceFire/re/firelu.png");
+	}
 	PosChange(speedx, speedy);
 }
 IFaccomplish::IFaccomplish(int x , int y , QString c ) :x(x), y(y), Person(c) 
@@ -90,6 +132,7 @@ IFaccomplish::IFaccomplish(int x , int y , QString c ) :x(x), y(y), Person(c)
 	speedy = 0;
 	jumpfirst = true;
 	w = false;a=false;s=false;d=false;
+	setCacheMode(QGraphicsItem::NoCache);
 	timer.setInterval(20);
 	timer.start();
 	QObject::connect(&timer, &QTimer::timeout, this, &IFaccomplish::timeChange);

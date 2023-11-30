@@ -10,6 +10,7 @@
 class engine  : public QWidget
 {
 	Q_OBJECT
+
 public:
 	engine(QWidget *parent=nullptr);
 	~engine();
