@@ -49,3 +49,22 @@ void engine::keyPressEvent(QKeyEvent* event)
 		emit signalA(3);
 	}
 }
+void engine::keyReleaseEvent(QKeyEvent* event)
+{
+	if (event->text() == "w")
+	{
+		emit signalA(4);
+	}
+	if (event->text() == "a")
+	{
+		emit signalA(5);
+	}
+	if (event->text() == "s")
+	{
+		emit signalA(6);
+	}
+	if (event->text() == "d")
+	{
+		emit signalA(7);
+	}
+}

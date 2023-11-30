@@ -1,6 +1,7 @@
 #pragma once
 #include"Person.h"
 #include <QObject>
+#include <QTimer>
 class IFaccomplish:public Person
 {
 	Q_OBJECT
@@ -9,27 +10,46 @@ public slots:
 	{
 		if (value == 0)
 		{
-			PosChange(0, -10);
+			w = true;
 		}
 		if (value == 1)
 		{
-			PosChange(-10, 0);
+			a = true;
 		}
 		if (value == 2)
 		{
-			PosChange(0, 10);
+			s = true;
 		}
 		if (value == 3)
 		{
-			PosChange(10, 0);
+			d = true;
+		}
+		if (value == 4)
+		{
+			w = false;
+		}
+		if (value == 5)
+		{
+			a = false;
+		}
+		if (value == 6)
+		{
+			s = false;
+		}
+		if (value == 7)
+		{
+			d = false;
 		}
 
 
 };
 public:
-	IFaccomplish(int x = 100, int y = 100, QString c=NULL) :x(x), y(y), Person(c){};
+	IFaccomplish(int x , int y , QString c );
 	void SetPos(int xx, int yy);
 	void PosChange(int Deltax, int Deltay);
+	QTimer timer;
+	void timeChange();
 private:
-	int x,y;
+	double x,y,speedx,speedy;
+	bool w, a, s, d,jumpfirst;
 };

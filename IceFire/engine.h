@@ -18,6 +18,7 @@ public:
 	QGraphicsScene* scene;
 	QGraphicsView* view;
 	void keyPressEvent(QKeyEvent* event) override;
+	void keyReleaseEvent(QKeyEvent* event) override;
 private:
 	int x, y;
 signals:

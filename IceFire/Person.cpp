@@ -6,6 +6,7 @@ Person::Person(QString c, QGraphicsItem* parent, QObject* pt)
     p = parent;
     st = c;
 	pixmap.load(c);
+    pixmap = pixmap.scaled(pixmap.size() * 2);
 
 }
 

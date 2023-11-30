@@ -20,8 +20,8 @@ public:
 	void setPos(qreal x, qreal y) ;
 private:
 	QPixmap pixmap; // 存储图像
-	qreal width = 100; // 图元宽度
-	qreal height = 100; // 图元高度
+	qreal width = 200; // 图元宽度
+	qreal height = 200; // 图元高度
 	QGraphicsItem* p;
 	QString st;
 };
