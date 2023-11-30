@@ -94,6 +94,7 @@
     <ClCompile Include="IFaccomplish.cpp" />
     <ClCompile Include="Mainwindow.cpp" />
     <ClCompile Include="Person.cpp" />
+    <ClCompile Include="mywidget.cpp" />
     <ClCompile Include="start.cpp" />
     <QtRcc Include="IceFire.qrc" />
     <QtUic Include="IceFire.ui" />
@@ -112,6 +113,9 @@
     <QtMoc Include="engine.h" />
     <QtMoc Include="IFaccomplish.h" />
     <QtMoc Include="Person.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="mywidget.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
