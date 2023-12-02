@@ -4,6 +4,12 @@
 #include <QStackedWidget>
 #include "engine.h"
 #include "start.h"
+#include "mywidget.h"
+
+namespace Ui {
+    class Mainwindow;
+}
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -16,5 +22,9 @@ public:
     void onButtonClicked();
     start *page1;
     engine *page2;
+
+private:
+    Ui::Mainwindow* ui;
+    MyWidget* myWidget;
 };
 #endif // MAINWINDOW_H
