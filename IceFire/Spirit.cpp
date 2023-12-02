@@ -9,8 +9,10 @@ Spirit::~Spirit()
 void Spirit::add(int x, int y, int w, int h,int more,int i)
 {
 	if(i==1)
-
-	spirits.push_back(std::make_unique<Door>(x,y,w,h,true,p1,p2));
+		if (more==1)
+			spirits.push_back(std::make_unique<Door>(x,y,w,h,true,p1,p2));
+		else
+			spirits.push_back(std::make_unique<Door>(x, y, w, h, false, p1, p2));
 }
 
 void Spirit::show(QGraphicsScene * s)
