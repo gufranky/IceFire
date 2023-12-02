@@ -145,7 +145,6 @@ IFaccomplish::~IFaccomplish()
 
 bool IFaccomplish::collides(double xx,double yy)
 {
-	Shadow->setPos(x + 15 + xx, y + 10 + yy);
 	if (Shadow->collidesWithItem(Another->Shadow))
 		return true;
 	Shadow->setPos(x + 15 + xx, y + 10 + yy);

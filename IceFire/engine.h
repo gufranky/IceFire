@@ -23,8 +23,9 @@ public:
 	void keyPressEvent(QKeyEvent* event) override;
 	void keyReleaseEvent(QKeyEvent* event) override;
 	void Update();
+	void LoadGame();
 private:
-	int x, y;
+	int p1x, p1y,p2x,p2y;
 	QTimer timer;
 signals:
 	void signalA(int value);

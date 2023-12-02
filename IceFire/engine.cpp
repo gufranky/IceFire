@@ -2,12 +2,12 @@
 #include"Barrier.h"
 engine::engine(QWidget* parent)
 {
-	x = 0, y = 0;
-	p1 = new IFaccomplish(100,100,true);
-	p2 = new IFaccomplish(0, 0, false);
+	barrier = new Barrier();
+	LoadGame();
+	p1 = new IFaccomplish(p1x,p1y,true);
+	p2 = new IFaccomplish(p2x, p2y, false);
 	p1->GetAnother(p2);
 	p2->GetAnother(p1);
-	barrier = new Barrier();
 	barrier->add(800, 800, 100, 100);
 	scene = new QGraphicsScene(parent);
 	scene->addItem(p1);
@@ -113,4 +113,16 @@ void engine::Update()
 {
 	p1->timeChange();
 	p2->timeChange();
+}
+
+void engine::LoadGame()
+{
+	
+		//读写文件
+	barrier->add()//目前只添加一个即可
+	p1x=
+	p1y=
+	p2x=
+	p2y=
+		//请填写
 }
