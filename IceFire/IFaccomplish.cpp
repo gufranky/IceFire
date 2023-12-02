@@ -1,7 +1,8 @@
 #include "IFaccomplish.h"
 const int MAXSPEED = 6;
 const int A = 1.2;
-void IFaccomplish::SetPos(int xx, int yy)
+#include "qdebug.h"
+void IFaccomplish::SetPos(double xx, double yy)
 {
 	x = xx;
 	y = yy;
@@ -28,10 +29,12 @@ void IFaccomplish::SetPos(int xx, int yy)
 		jumpfirst = true;
 	}
 	setPos(x, y);
+	Shadow->setPos(x+15, y+10);
 }
 void IFaccomplish::PosChange(int Deltax, int Deltay)
 {
-	SetPos(x + Deltax, y + Deltay);
+	checkspeed();
+	SetPos(x + speedx, y + speedy);
 }
 void IFaccomplish::timeChange()
 {
@@ -68,7 +71,7 @@ void IFaccomplish::timeChange()
 			speedx = 0;
 		}
 	}//水平处理已完成
-	if (true)
+	if (!collides(0, 3))
 	{
 		speedy += 3;
 	}//垂直处理已完成
@@ -136,4 +139,63 @@ IFaccomplish::IFaccomplish(int x , int y , QString c ) :x(x), y(y), Person(c)
 	timer.setInterval(20);
 	timer.start();
 	QObject::connect(&timer, &QTimer::timeout, this, &IFaccomplish::timeChange);
+	Shadow = new QGraphicsRectItem(x+15,y+10,50,65);//碰撞箱真实体积
 };
+
+IFaccomplish::~IFaccomplish()
+{
+	delete Shadow;
+}
+
+bool IFaccomplish::collides(double xx,double yy)
+{
+	Shadow->setPos(x + 15 + xx, y + 10 + yy);
+	for (int i = 0; i < bar->NowBarrier; i++)
+	{
+		if (Shadow->collidesWithItem(&bar->a[i]))
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+void IFaccomplish::GetBarrier(Barrier *b)
+{
+	bar = b;
+}
+void IFaccomplish::checkspeed()
+{
+	if (collides(0, speedy) && (speedy > 0))
+	{
+		jumpfirst = true;
+	}
+
+	while (collides(speedx, 0) && (abs(speedx)>0.25))
+	{
+		speedx = speedx / 2;
+	}
+	while (collides(0, speedy) && (abs(speedy) > 0.25))
+	{
+		speedy = speedy / 2;
+	}	
+	while (collides(speedx, speedy) && ((abs(speedx)>0.25)&&(abs(speedy) > 0.25)))
+	{
+		speedx = speedx / 2;
+		speedy = speedy / 2;
+	}
+	if ((abs(speedx) <= 0.25))
+	{
+		speedx = 0;
+	}
+	if ((abs(speedy) <= 0.25))
+	{
+		speedy = 0;
+	}
+	if (collides(speedx, speedy))
+	{
+		speedx = 0;
+		speedy = 0;
+	}
+}
+

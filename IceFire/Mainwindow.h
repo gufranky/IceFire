@@ -26,5 +26,6 @@ public:
 private:
     Ui::Mainwindow* ui;
     MyWidget* myWidget;
+    QPushButton* mainButton;
 };
 #endif // MAINWINDOW_H

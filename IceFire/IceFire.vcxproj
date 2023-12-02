@@ -109,7 +109,7 @@
     <QtMoc Include="start.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="Barrier.h" />
+    <ClInclude Include="Barrier.h" />
     <QtMoc Include="engine.h" />
     <QtMoc Include="IFaccomplish.h" />
     <QtMoc Include="Person.h" />

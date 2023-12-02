@@ -24,7 +24,7 @@ MainWindow::MainWindow(QWidget* parent)
 
     }
     // 创建按钮
-    QPushButton* mainButton = new QPushButton("Main Button", this);
+    mainButton = new QPushButton("Main Button", this);
 
     // 设置按钮的位置
     mainButton->setGeometry(50, 150, 150, 30);
@@ -38,6 +38,7 @@ MainWindow::~MainWindow()
     delete  stackedWidget;
     delete page1;
     delete page2;
+    delete mainButton;
 }
 
 void MainWindow::onButtonClicked()
@@ -47,4 +48,5 @@ void MainWindow::onButtonClicked()
     stackedWidget->addWidget(page2);
     stackedWidget->setCurrentIndex(1);
     qDebug() << "Main Button Clicked!";
+    mainButton->hide();
 }

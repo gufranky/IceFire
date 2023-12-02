@@ -3,9 +3,13 @@
 engine::engine(QWidget* parent)
 {
 	x = 0, y = 0;
-	p = new IFaccomplish(0,0,QString(":/IceFire/re/fire.png"));
+	p1 = new IFaccomplish(0,0,QString(":/IceFire/re/fire.png"));
+	barrier = new Barrier();
+	barrier->add(800, 800, 100, 100);
 	scene = new QGraphicsScene(parent);
-	scene->addItem(p);
+	scene->addItem(p1);
+	barrier->show(scene);
+	p1->GetBarrier(barrier);
 	scene->setSceneRect(0, 0, 1920, 1080);
 	view = new QGraphicsView(scene, parent);
 	view->setFixedSize(1920, 1080);
@@ -20,15 +24,16 @@ engine::engine(QWidget* parent)
 	layout->setContentsMargins(0, 0, 0, 0);
 	setLayout(layout);
 	setFocusPolicy(Qt::StrongFocus);
-	QObject::connect(this, &engine::signalA, p, &IFaccomplish::handleSignalA);
+	QObject::connect(this, &engine::signalA, p1, &IFaccomplish::handleSignalA);
 }
 
 engine::~engine()
 {
-	delete p;
+	delete p1;
 	delete layout;
-	delete scene;
 	delete view;
+	delete barrier;
+	delete scene;
 }
 void engine::keyPressEvent(QKeyEvent* event)
 {

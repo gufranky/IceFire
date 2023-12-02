@@ -55,6 +55,12 @@
     <ClCompile Include="Barrier.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="IFaccomplish.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mywidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Mainwindow.h">
@@ -63,15 +69,21 @@
     <QtMoc Include="start.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Barrier.h">
+    <QtMoc Include="engine.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="IFaccomplish.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Person.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="mywidget.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Person.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="engine.h">
+    <ClInclude Include="Barrier.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -14,10 +14,11 @@ class engine  : public QWidget
 public:
 	engine(QWidget *parent=nullptr);
 	~engine();
-	IFaccomplish*p;
+	IFaccomplish*p1;
 	QVBoxLayout* layout;
 	QGraphicsScene* scene;
 	QGraphicsView* view;
+	Barrier* barrier;
 	void keyPressEvent(QKeyEvent* event) override;
 	void keyReleaseEvent(QKeyEvent* event) override;
 private:
