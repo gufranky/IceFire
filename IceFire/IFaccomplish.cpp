@@ -1,6 +1,4 @@
 #include "IFaccomplish.h"
-const int MAXSPEED = 6;
-const int A = 1.2;
 #include "qdebug.h"
 void IFaccomplish::SetPos(double xx, double yy)
 {
@@ -93,53 +91,51 @@ void IFaccomplish::timeChange()
 
 	if ((speedx==0)&&(speedy==0))
 	{
-		Change(":/IceFire/re/fire.png");
+		Change(player?":/IceFire/re/fire.png":":/IceFire/re/ice.png");
 	}
 	if ((speedx == 0) && (speedy > 0))
 	{
-		Change(":/IceFire/re/fire.png");
+		Change(player ? ":/IceFire/re/fire.png": ":/IceFire/re/iceydown.png");
 	}
 	if ((speedx==0) && (speedy < 0))
 	{
-		Change(":/IceFire/re/fireyplus.png");
+		Change(player ? ":/IceFire/re/fireyplus.png": ":/IceFire/re/iceyplus.png");
 	}
 	if ((speedx > 0) && (speedy == 0))
 	{
-		Change(":/IceFire/re/fireright.png");
+		Change(player ? ":/IceFire/re/fireright.png": ":/IceFire/re/icer.png");
 	}
 	if ((speedx < 0) && (speedy == 0))
 	{
-		Change(":/IceFire/re/firel.png");
+		Change(player ? ":/IceFire/re/firel.png": ":/IceFire/re/icel.png");
 	}
 	if ((speedx > 0) && (speedy > 0))
 	{
-		Change(":/IceFire/re/firerd.png");
+		Change(player ? ":/IceFire/re/firerd.png": ":/IceFire/re/icrd.png");
 	}
 	if ((speedx > 0) && (speedy < 0))
 	{
-		Change(":/IceFire/re/fireru.png");
+		Change(player ? ":/IceFire/re/fireru.png": ":/IceFire/re/icceru.png");
 	}
 	if ((speedx < 0) && (speedy > 0))
 	{
-		Change(":/IceFire/re/fireld.png");
+		Change(player ? ":/IceFire/re/firelu.png": ":/IceFire/re/icelu.png");
 	}
 	if ((speedx < 0) && (speedy < 0))
 	{
-		Change(":/IceFire/re/firelu.png");
+		Change(player ? ":/IceFire/re/firelu.png": ":/IceFire/re/icelu.png");
 	}
 	PosChange(speedx, speedy);
 }
-IFaccomplish::IFaccomplish(int x , int y , QString c ) :x(x), y(y), Person(c) 
+IFaccomplish::IFaccomplish(int xx , int yy , bool p) :x(xx), y(yy), Person(xx,yy,p?FIRE:ICE) 
 {
 	speedx = 0;
 	speedy = 0;
+	player = p;
 	jumpfirst = true;
 	w = false;a=false;s=false;d=false;
 	setCacheMode(QGraphicsItem::NoCache);
-	timer.setInterval(20);
-	timer.start();
-	QObject::connect(&timer, &QTimer::timeout, this, &IFaccomplish::timeChange);
-	Shadow = new QGraphicsRectItem(x+15,y+10,50,65);//碰撞箱真实体积
+	Shadow = new QGraphicsRectItem(15,10,48,60);//碰撞箱真实体积
 };
 
 IFaccomplish::~IFaccomplish()
@@ -149,6 +145,9 @@ IFaccomplish::~IFaccomplish()
 
 bool IFaccomplish::collides(double xx,double yy)
 {
+	Shadow->setPos(x + 15 + xx, y + 10 + yy);
+	if (Shadow->collidesWithItem(Another->Shadow))
+		return true;
 	Shadow->setPos(x + 15 + xx, y + 10 + yy);
 	for (int i = 0; i < bar->NowBarrier; i++)
 	{
@@ -199,3 +198,7 @@ void IFaccomplish::checkspeed()
 	}
 }
 
+void IFaccomplish::GetAnother(IFaccomplish* Ano)
+{
+	Another = Ano;
+}

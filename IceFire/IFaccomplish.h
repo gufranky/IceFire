@@ -3,60 +3,75 @@
 #include <QObject>
 #include <QTimer>
 #include"Barrier.h"
+const int MAXSPEED = 7;
+const int A = 1.2;
+const QString FIRE=":/IceFire/fire.png";
+const QString ICE=":/IceFire/ice.png";
 class IFaccomplish:public Person
 {
 	Q_OBJECT
 public slots:
 	void handleSignalA(int value)
 	{
-		if (value == 0)
+		if (player)
 		{
-			w = true;
+			if (value == 0)
+				w = true;
+			if (value == 1)
+				a = true;
+			if (value == 2)
+				s = true;
+			if (value == 3)
+				d = true;
+			if (value == 4)
+				w = false;
+			if (value == 5)
+				a = false;
+			if (value == 6)
+				s = false;
+			if (value == 7)
+				d = false;
 		}
-		if (value == 1)
+		else
 		{
-			a = true;
-		}
-		if (value == 2)
-		{
-			s = true;
-		}
-		if (value == 3)
-		{
-			d = true;
-		}
-		if (value == 4)
-		{
-			w = false;
-		}
-		if (value == 5)
-		{
-			a = false;
-		}
-		if (value == 6)
-		{
-			s = false;
-		}
-		if (value == 7)
-		{
-			d = false;
+			if (value == 8)
+				w = true;
+			if (value == 9)
+				a = true;
+			if (value == 10)
+				s = true;
+			if (value == 11)
+				d = true;
+			if (value == 12)
+				w = false;
+			if (value == 13)
+				a = false;
+			if (value == 14)
+				s = false;
+			if (value == 15)
+				d = false;
 		}
 
 
 };
 public:
-	IFaccomplish(int x , int y , QString c );
+	IFaccomplish(int xx , int yy , bool p );
 	~IFaccomplish();
 	void SetPos(double xx, double yy);
 	void PosChange(int Deltax, int Deltay);
-	QTimer timer;
 	void timeChange();
 	bool collides(double x, double y);
 	void GetBarrier(Barrier *b);
 	void checkspeed();
+	void GetAnother(IFaccomplish* Ano);
+	QGraphicsRectItem* Debug()
+	{
+		return Shadow;
+	}
 private:
 	double x,y,speedx,speedy;
 	Barrier *bar;
-	bool w, a, s, d,jumpfirst;
+	IFaccomplish* Another;
+	bool w, a, s, d,jumpfirst,player;
 	QGraphicsRectItem* Shadow;
 };

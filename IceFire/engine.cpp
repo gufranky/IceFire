@@ -3,13 +3,20 @@
 engine::engine(QWidget* parent)
 {
 	x = 0, y = 0;
-	p1 = new IFaccomplish(0,0,QString(":/IceFire/re/fire.png"));
+	p1 = new IFaccomplish(100,100,true);
+	p2 = new IFaccomplish(0, 0, false);
+	p1->GetAnother(p2);
+	p2->GetAnother(p1);
 	barrier = new Barrier();
 	barrier->add(800, 800, 100, 100);
 	scene = new QGraphicsScene(parent);
 	scene->addItem(p1);
+	scene->addItem(p2);
+	scene->addItem(p1->Debug());
+	scene->addItem(p2->Debug());
 	barrier->show(scene);
 	p1->GetBarrier(barrier);
+	p2->GetBarrier(barrier);
 	scene->setSceneRect(0, 0, 1920, 1080);
 	view = new QGraphicsView(scene, parent);
 	view->setFixedSize(1920, 1080);
@@ -24,7 +31,11 @@ engine::engine(QWidget* parent)
 	layout->setContentsMargins(0, 0, 0, 0);
 	setLayout(layout);
 	setFocusPolicy(Qt::StrongFocus);
+	timer.setInterval(30);
+	timer.start();
 	QObject::connect(this, &engine::signalA, p1, &IFaccomplish::handleSignalA);
+	QObject::connect(this, &engine::signalA, p2, &IFaccomplish::handleSignalA);
+	QObject::connect(&timer, &QTimer::timeout, this, &engine::Update);
 }
 
 engine::~engine()
@@ -34,6 +45,7 @@ engine::~engine()
 	delete view;
 	delete barrier;
 	delete scene;
+	delete p2;
 }
 void engine::keyPressEvent(QKeyEvent* event)
 {
@@ -53,6 +65,18 @@ void engine::keyPressEvent(QKeyEvent* event)
 	{
 		emit signalA(3);
 	}
+	if (event->key() == Qt::Key_Up) { emit signalA(8);
+	}
+	else if (event->key() == Qt::Key_Left) {
+		emit signalA(9);
+	}
+	else if (event->key() == Qt::Key_Down) {
+		emit signalA(10);
+	}
+	else if (event->key() == Qt::Key_Right) {
+		emit signalA(11);
+	}
+
 }
 void engine::keyReleaseEvent(QKeyEvent* event)
 {
@@ -72,4 +96,21 @@ void engine::keyReleaseEvent(QKeyEvent* event)
 	{
 		emit signalA(7);
 	}
+	if (event->key() == Qt::Key_Up) {
+		emit signalA(12);
+	}
+	else if (event->key() == Qt::Key_Left) {
+		emit signalA(13);
+	}
+	else if (event->key() == Qt::Key_Down) {
+		emit signalA(14);
+	}
+	else if (event->key() == Qt::Key_Right) {
+		emit signalA(15);
+	}
+}
+void engine::Update()
+{
+	p1->timeChange();
+	p2->timeChange();
 }

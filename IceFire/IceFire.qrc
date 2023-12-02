@@ -12,5 +12,14 @@
         <file>re/firerd.png</file>
         <file>re/fireright.png</file>
         <file>re/fireru.png</file>
+        <file>re/ice.png</file>
+        <file>re/icceru.png</file>
+        <file>re/icel.png</file>
+        <file>re/iceld.png</file>
+        <file>re/icelu.png</file>
+        <file>re/icer.png</file>
+        <file>re/iceydown.png</file>
+        <file>re/iceyplus.png</file>
+        <file>re/icrd.png</file>
     </qresource>
 </RCC>

@@ -8,8 +8,7 @@ class Person  : public QObject,public QGraphicsItem
 {
 	Q_OBJECT
 public:
-	Person(QString c,QGraphicsItem*parent=nullptr,QObject* p = nullptr);
-	Person(Person* p) :Person(st, p) {};
+	Person(int x,int y,QString c,QGraphicsItem*parent=nullptr,QObject* p = nullptr);
 	~Person();
 	QRectF boundingRect() const override {
 		return QRectF(0, 0, width, height);

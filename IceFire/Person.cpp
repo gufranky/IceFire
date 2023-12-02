@@ -1,8 +1,9 @@
 #include "Person.h"
 #include <qdebug.h>
-Person::Person(QString c, QGraphicsItem* parent, QObject* pt)
+Person::Person(int xx,int yy,QString c, QGraphicsItem* parent, QObject* pt)
 	: QGraphicsItem(parent),QObject(pt)
 {
+    setPos(xx, yy);
     p = parent;
     st = c;
 
