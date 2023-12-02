@@ -1,5 +1,6 @@
 #include "engine.h"
 #include"Barrier.h"
+#include <fstream>
 engine::engine(QWidget* parent)
 {
 	x = 0, y = 0;
@@ -50,7 +51,6 @@ engine::~engine()
 	delete barrier;
 	delete scene;
 	delete p2;
-	delete sp;
 }
 void engine::keyPressEvent(QKeyEvent* event)
 {
@@ -118,5 +118,16 @@ void engine::Update()
 {
 	p1->timeChange();
 	p2->timeChange();
-	sp->inte();
+}
+
+void engine::LoadGame()
+{
+	std::ifstream configFile("Translation Files/l1 .cfg");
+		//读写文件
+	barrier->add(l1.wall)//目前只添加一个即可
+	p1x=
+	p1y=
+	p2x=
+	p2y=
+		//请填写
 }
