@@ -3,15 +3,17 @@
 #include <fstream>
 engine::engine(QWidget* parent)
 {
-	x = 0, y = 0;
-	p1 = new IFaccomplish(100,100,true);
-	p2 = new IFaccomplish(0, 0, false);
+	barrier = new Barrier();
+	LoadGame();
+	p1 = new IFaccomplish(p1x,p1y,true);
+	p2 = new IFaccomplish(p2x, p2y, false);
 	p1->GetAnother(p2);
 	p2->GetAnother(p1);
 	sp = new Spirit();
 	sp->addplayer(p1, p2);
 	sp->add(400, 800, 200, 200, 1, 1);
 	barrier = new Barrier();
+
 	barrier->add(800, 800, 100, 100);
 	scene = new QGraphicsScene(parent);
 	scene->addItem(p1);
@@ -123,11 +125,11 @@ void engine::Update()
 void engine::LoadGame()
 {
 	std::ifstream configFile("Translation Files/l1 .cfg");
-		//¶ÁĞ´ÎÄ¼ş
-	barrier->add(l1.wall)//Ä¿Ç°Ö»Ìí¼ÓÒ»¸ö¼´¿É
+		//è¯»å†™æ–‡ä»¶
+	barrier->add(l1.wall)//ç›®å‰åªæ·»åŠ ä¸€ä¸ªå³å¯
 	p1x=
 	p1y=
 	p2x=
 	p2y=
-		//ÇëÌîĞ´
+		//è¯·å¡«å†™
 }
