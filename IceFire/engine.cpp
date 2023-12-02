@@ -1,5 +1,6 @@
 #include "engine.h"
 #include"Barrier.h"
+#include <fstream>
 engine::engine(QWidget* parent)
 {
 	barrier = new Barrier();
@@ -8,6 +9,11 @@ engine::engine(QWidget* parent)
 	p2 = new IFaccomplish(p2x, p2y, false);
 	p1->GetAnother(p2);
 	p2->GetAnother(p1);
+	sp = new Spirit();
+	sp->addplayer(p1, p2);
+	sp->add(400, 800, 200, 200, 1, 1);
+	barrier = new Barrier();
+
 	barrier->add(800, 800, 100, 100);
 	scene = new QGraphicsScene(parent);
 	scene->addItem(p1);
@@ -15,6 +21,7 @@ engine::engine(QWidget* parent)
 	scene->addItem(p1->Debug());
 	scene->addItem(p2->Debug());
 	barrier->show(scene);
+	sp->show(scene);
 	p1->GetBarrier(barrier);
 	p2->GetBarrier(barrier);
 	scene->setSceneRect(0, 0, 1920, 1080);
@@ -117,12 +124,12 @@ void engine::Update()
 
 void engine::LoadGame()
 {
-	
-		//¶ÁĞ´ÎÄ¼ş
-	barrier->add()//Ä¿Ç°Ö»Ìí¼ÓÒ»¸ö¼´¿É
+	std::ifstream configFile("Translation Files/l1 .cfg");
+		//è¯»å†™æ–‡ä»¶
+	barrier->add(l1.wall)//ç›®å‰åªæ·»åŠ ä¸€ä¸ªå³å¯
 	p1x=
 	p1y=
 	p2x=
 	p2y=
-		//ÇëÌîĞ´
+		//è¯·å¡«å†™
 }
