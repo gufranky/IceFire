@@ -7,6 +7,7 @@
 #include <QVBoxLayout>
 #include <QKeyEvent>
 #include "IFaccomplish.h"
+#include "Spirit.h"
 class engine  : public QWidget
 {
 	Q_OBJECT
@@ -19,6 +20,9 @@ public:
 	QVBoxLayout* layout;
 	QGraphicsScene* scene;
 	QGraphicsView* view;
+	SpiritBase* spirit;
+	Spirit* sp;
+	Door* d;
 	Barrier* barrier;
 	void keyPressEvent(QKeyEvent* event) override;
 	void keyReleaseEvent(QKeyEvent* event) override;

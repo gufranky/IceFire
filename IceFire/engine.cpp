@@ -7,6 +7,9 @@ engine::engine(QWidget* parent)
 	p2 = new IFaccomplish(0, 0, false);
 	p1->GetAnother(p2);
 	p2->GetAnother(p1);
+	sp = new Spirit();
+	sp->addplayer(p1, p2);
+	sp->add(400, 800, 200, 200, 1, 1);
 	barrier = new Barrier();
 	barrier->add(800, 800, 100, 100);
 	scene = new QGraphicsScene(parent);
@@ -15,6 +18,7 @@ engine::engine(QWidget* parent)
 	scene->addItem(p1->Debug());
 	scene->addItem(p2->Debug());
 	barrier->show(scene);
+	sp->show(scene);
 	p1->GetBarrier(barrier);
 	p2->GetBarrier(barrier);
 	scene->setSceneRect(0, 0, 1920, 1080);
@@ -46,6 +50,7 @@ engine::~engine()
 	delete barrier;
 	delete scene;
 	delete p2;
+	delete sp;
 }
 void engine::keyPressEvent(QKeyEvent* event)
 {
@@ -113,4 +118,5 @@ void engine::Update()
 {
 	p1->timeChange();
 	p2->timeChange();
+	sp->inte();
 }

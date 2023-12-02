@@ -7,7 +7,7 @@ const int MAXSPEED = 7;
 const int A = 1.2;
 const QString FIRE=":/IceFire/fire.png";
 const QString ICE=":/IceFire/ice.png";
-class IFaccomplish:public Person
+class IFaccomplish:public SpiritBase
 {
 	Q_OBJECT
 public slots:
@@ -64,6 +64,10 @@ public:
 	void GetBarrier(Barrier *b);
 	void checkspeed();
 	void GetAnother(IFaccomplish* Ano);
+	void interaction(IFaccomplish* p);
+	void Show(QGraphicsScene* s) override;
+	QGraphicsRectItem* Shadow;
+	bool player;
 	QGraphicsRectItem* Debug()
 	{
 		return Shadow;
@@ -72,6 +76,5 @@ private:
 	double x,y,speedx,speedy;
 	Barrier *bar;
 	IFaccomplish* Another;
-	bool w, a, s, d,jumpfirst,player;
-	QGraphicsRectItem* Shadow;
+	bool w, a, s, d,jumpfirst;
 };

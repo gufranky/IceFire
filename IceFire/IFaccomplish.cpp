@@ -127,7 +127,7 @@ void IFaccomplish::timeChange()
 	}
 	PosChange(speedx, speedy);
 }
-IFaccomplish::IFaccomplish(int xx , int yy , bool p) :x(xx), y(yy), Person(xx,yy,p?FIRE:ICE) 
+IFaccomplish::IFaccomplish(int xx , int yy , bool p) :x(xx), y(yy), SpiritBase(xx,yy,p?FIRE:ICE,10,10) 
 {
 	speedx = 0;
 	speedy = 0;
@@ -201,4 +201,11 @@ void IFaccomplish::checkspeed()
 void IFaccomplish::GetAnother(IFaccomplish* Ano)
 {
 	Another = Ano;
+}
+void IFaccomplish::interaction(IFaccomplish* p)
+{
+}
+
+void IFaccomplish::Show(QGraphicsScene* s)
+{
 }
