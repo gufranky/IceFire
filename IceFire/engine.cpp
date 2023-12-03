@@ -1,6 +1,9 @@
 #include "engine.h"
 #include"Barrier.h"
 #include <fstream>
+#include<string>
+#include <sstream>
+#include <iostream>
 engine::engine(QWidget* parent)
 {
 	barrier = new Barrier();
@@ -124,12 +127,37 @@ void engine::Update()
 
 void engine::LoadGame()
 {
+	int wall[4];
 	std::ifstream configFile("Translation Files/l1 .cfg");
 		//读写文件
-	barrier->add(l1.wall)//目前只添加一个即可
-	p1x=
-	p1y=
-	p2x=
-	p2y=
-		//请填写
+	int* cfg1 = wall;
+	if (configFile.is_open()) {
+		std::string line;
+		while (std::getline(configFile, line)) {
+			// 判断当前行是否包含"wall"关键字
+			if (line.find("[wall]") != std::string::npos) {
+				// 读取下一行，该行包含四个整数
+				std::getline(configFile, line);
+
+				// 使用字符串流解析四个整数
+				std::istringstream iss(line);
+				int x1, y1, x2, y2;
+				if (iss >> x1 >> y1 >> x2 >> y2) {
+					// 调用 barrier 的 add 函数，将四个整数作为参数传递
+					barrier->add(x1, y1, x2, y2);
+					p1x = x1;
+					p1y = y1;
+					p2x = x2;
+					p2y = y2;
+						//请填写
+				}
+				else {
+					std::cerr << "Error parsing wall data." << std::endl;
+				}
+
+				// 结束循环，因为我们已经处理了"wall"部分
+				break;
+			}
+		}
+	}
 }
