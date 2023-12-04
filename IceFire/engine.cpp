@@ -1,13 +1,15 @@
 #include "engine.h"
 #include"Barrier.h"
+
 engine::engine(QWidget* par)
 {
 	Gameover = new QLabel("Gameover", par);
-	Gameover->setFont(QFont("Arial", 40));  // ÉèÖÃ×ÖÌå´óĞ¡
-	Gameover->setAlignment(Qt::AlignCenter); // ÉèÖÃÎÄ±¾¾ÓÖĞ
+	Gameover->setFont(QFont("Arial", 40));  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¡
+	Gameover->setAlignment(Qt::AlignCenter); // ï¿½ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½ï¿½ï¿½
 	Gameover->setGeometry(760, 440, 400, 200);
 	parent = par;
 	FirstLoad();
+
 }
 
 engine::~engine()
@@ -19,7 +21,6 @@ engine::~engine()
 	delete scene;
 	delete Gameover;
 	delete p2;
-	delete sp;
 }
 void engine::keyPressEvent(QKeyEvent* event)
 {
@@ -91,7 +92,18 @@ void engine::Update()
 {
 	p1->timeChange();
 	p2->timeChange();
-	sp->inte();
+}
+
+void engine::LoadGame()
+{
+	std::ifstream configFile("Translation Files/l1 .cfg");
+		//è¯»å†™æ–‡ä»¶
+	barrier->add(l1.wall)//ç›®å‰åªæ·»åŠ ä¸€ä¸ªå³å¯
+	p1x=
+	p1y=
+	p2x=
+	p2y=
+		//è¯·å¡«å†™
 }
 void engine::FirstLoad()
 {

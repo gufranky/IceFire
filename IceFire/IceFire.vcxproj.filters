@@ -99,4 +99,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\11361\Desktop\l1.cfg">
+      <Filter>Translation Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>
