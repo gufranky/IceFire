@@ -150,6 +150,7 @@ void engine::LoadGame()
 					p2x = x2;
 					p2y = y2;
 						//请填写
+					std::cout << p1x <<std:: endl;
 				}
 				else {
 					std::cerr << "Error parsing wall data." << std::endl;
