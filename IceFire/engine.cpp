@@ -94,17 +94,6 @@ void engine::Update()
 	p2->timeChange();
 }
 
-void engine::LoadGame()
-{
-	std::ifstream configFile("Translation Files/l1 .cfg");
-		//读写文件
-	barrier->add(l1.wall)//目前只添加一个即可
-	p1x=
-	p1y=
-	p2x=
-	p2y=
-		//请填写
-}
 void engine::FirstLoad()
 {
 	p1x = 100; p1y = 100; p2x = 0; p2y = 0;
