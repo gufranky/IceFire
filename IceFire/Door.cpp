@@ -22,6 +22,7 @@ void Door::interaction()
 		{
 			here = true;
 			update();
+			emit enter();
 		}
 	}
 	else
@@ -30,6 +31,7 @@ void Door::interaction()
 		{
 			here = false;
 			update();
+			emit exit();
 		}
 	}
 }

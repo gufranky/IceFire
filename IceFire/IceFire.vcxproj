@@ -98,6 +98,7 @@
     <ClCompile Include="mywidget.cpp" />
     <ClCompile Include="Spirit.cpp" />
     <ClCompile Include="start.cpp" />
+    <ClCompile Include="WaterFire.cpp" />
     <QtRcc Include="IceFire.qrc" />
     <QtUic Include="IceFire.ui" />
     <QtMoc Include="IceFire.h" />
@@ -113,7 +114,8 @@
   <ItemGroup>
     <ClInclude Include="Barrier.h" />
     <ClInclude Include="Door.h" />
-    <ClInclude Include="Spirit.h" />
+    <QtMoc Include="Spirit.h" />
+    <ClInclude Include="WaterFire.h" />
     <QtMoc Include="engine.h" />
     <QtMoc Include="IFaccomplish.h" />
     <QtMoc Include="Person.h" />

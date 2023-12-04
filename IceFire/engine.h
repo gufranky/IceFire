@@ -7,6 +7,7 @@
 #include <QVBoxLayout>
 #include <QKeyEvent>
 #include "IFaccomplish.h"
+#include <qlabel.h>
 #include "Spirit.h"
 class engine  : public QWidget
 {
@@ -21,16 +22,21 @@ public:
 	QGraphicsScene* scene;
 	QGraphicsView* view;
 	SpiritBase* spirit;
+	QLabel* Gameover;
 	Spirit* sp;
 	Door* d;
 	Barrier* barrier;
 	void keyPressEvent(QKeyEvent* event) override;
 	void keyReleaseEvent(QKeyEvent* event) override;
 	void Update();
-	void LoadGame();
+	void FirstLoad();
+	void reload();
+	void Win();
+	void gameover();
 private:
 	int p1x, p1y,p2x,p2y;
 	QTimer timer;
+	QWidget* parent;
 signals:
 	void signalA(int value);
 

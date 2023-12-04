@@ -25,4 +25,8 @@ public:
 	QGraphicsItem* p;
 	QString st;
 private:
+signals:
+	void death();
+	void enter();
+	void exit();
 };

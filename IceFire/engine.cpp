@@ -1,48 +1,15 @@
 #include "engine.h"
 #include"Barrier.h"
-#include <fstream>
-engine::engine(QWidget* parent)
-{
-	barrier = new Barrier();
-	LoadGame();
-	p1 = new IFaccomplish(p1x,p1y,true);
-	p2 = new IFaccomplish(p2x, p2y, false);
-	p1->GetAnother(p2);
-	p2->GetAnother(p1);
-	sp = new Spirit();
-	sp->addplayer(p1, p2);
-	sp->add(400, 800, 200, 200, 1, 1);
-	barrier = new Barrier();
 
-	barrier->add(800, 800, 100, 100);
-	scene = new QGraphicsScene(parent);
-	scene->addItem(p1);
-	scene->addItem(p2);
-	scene->addItem(p1->Debug());
-	scene->addItem(p2->Debug());
-	barrier->show(scene);
-	sp->show(scene);
-	p1->GetBarrier(barrier);
-	p2->GetBarrier(barrier);
-	scene->setSceneRect(0, 0, 1920, 1080);
-	view = new QGraphicsView(scene, parent);
-	view->setFixedSize(1920, 1080);
-	view->setContentsMargins(0, 0, 0, 0);
-	view->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-	view->setRenderHint(QPainter::Antialiasing, true);
-	view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-	view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-	layout = new QVBoxLayout(parent);
-	layout->addWidget(view);
-	layout->setSizeConstraint(QLayout::SetNoConstraint);
-	layout->setContentsMargins(0, 0, 0, 0);
-	setLayout(layout);
-	setFocusPolicy(Qt::StrongFocus);
-	timer.setInterval(30);
-	timer.start();
-	QObject::connect(this, &engine::signalA, p1, &IFaccomplish::handleSignalA);
-	QObject::connect(this, &engine::signalA, p2, &IFaccomplish::handleSignalA);
-	QObject::connect(&timer, &QTimer::timeout, this, &engine::Update);
+engine::engine(QWidget* par)
+{
+	Gameover = new QLabel("Gameover", par);
+	Gameover->setFont(QFont("Arial", 40));  // ���������С
+	Gameover->setAlignment(Qt::AlignCenter); // �����ı�����
+	Gameover->setGeometry(760, 440, 400, 200);
+	parent = par;
+	FirstLoad();
+
 }
 
 engine::~engine()
@@ -52,6 +19,7 @@ engine::~engine()
 	delete view;
 	delete barrier;
 	delete scene;
+	delete Gameover;
 	delete p2;
 }
 void engine::keyPressEvent(QKeyEvent* event)
@@ -82,6 +50,10 @@ void engine::keyPressEvent(QKeyEvent* event)
 	}
 	else if (event->key() == Qt::Key_Right) {
 		emit signalA(11);
+	}
+	if (event->text() == "r")
+	{
+		reload();
 	}
 
 }
@@ -132,4 +104,72 @@ void engine::LoadGame()
 	p2x=
 	p2y=
 		//请填写
+}
+void engine::FirstLoad()
+{
+	p1x = 100; p1y = 100; p2x = 0; p2y = 0;
+	p1 = new IFaccomplish(100, 100, true);
+	p2 = new IFaccomplish(0, 0, false);
+	p1->GetAnother(p2);
+	p2->GetAnother(p1);
+	sp = new Spirit();
+	sp->addplayer(p1, p2);
+	sp->add(400, 800, 200, 200, 1, 1);
+	sp->add(800, 600, 200, 200, 2, 1);
+	sp->add(800, 800, 200, 200, 1, 2);
+	barrier = new Barrier();
+	barrier->add(800, 800, 100, 100);
+	scene = new QGraphicsScene(parent);
+	scene->addItem(p1);
+	scene->addItem(p2);
+	scene->addItem(p1->Debug());
+	scene->addItem(p2->Debug());
+	barrier->show(scene);
+	sp->show(scene);
+	p1->GetBarrier(barrier);
+	p2->GetBarrier(barrier);
+	scene->setSceneRect(0, 0, 1920, 1080);
+	view = new QGraphicsView(scene, parent);
+	view->setFixedSize(1920, 1080);
+	view->setContentsMargins(0, 0, 0, 0);
+	view->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+	view->setRenderHint(QPainter::Antialiasing, true);
+	view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+	view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+	layout = new QVBoxLayout(parent);
+	layout->addWidget(view);
+	layout->setSizeConstraint(QLayout::SetNoConstraint);
+	layout->setContentsMargins(0, 0, 0, 0);
+	//layout->addWidget(Gameover);
+	Gameover->raise();
+	setLayout(layout);
+	setFocusPolicy(Qt::StrongFocus);
+	timer.setInterval(30);
+	timer.start();
+	QObject::connect(this, &engine::signalA, p1, &IFaccomplish::handleSignalA);
+	QObject::connect(this, &engine::signalA, p2, &IFaccomplish::handleSignalA);
+	QObject::connect(&timer, &QTimer::timeout, this, &engine::Update);
+	QObject::connect(sp, &Spirit::gameover, this, &engine::gameover);
+	QObject::connect(sp, &Spirit::win, this, &engine::Win);
+}
+void engine::reload()
+{
+	p1->SetPos(p1x, p1y);
+	p1->speedx = 0; p1->speedy = 0;
+	p2->SetPos(p2x, p2y);
+	p2->speedx = 0; p2->speedy = 0;
+	timer.start();
+	Gameover->hide();
+}
+void engine::gameover()
+{
+	timer.stop();
+	Gameover->show();
+}
+void engine::Win()
+{
+	timer.stop();
+	Gameover->setStyleSheet("color: red;");
+	Gameover->setText("Win!!!");
+	Gameover->show();
 }
