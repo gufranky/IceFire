@@ -66,6 +66,7 @@ public:
 	void GetAnother(IFaccomplish* Ano);
 	void interaction(IFaccomplish* p);
 	void Show(QGraphicsScene* s) override;
+	double x, y, speedx, speedy;
 	QGraphicsRectItem* Shadow;
 	bool player;
 	QGraphicsRectItem* Debug()
@@ -73,7 +74,6 @@ public:
 		return Shadow;
 	}
 private:
-	double x,y,speedx,speedy;
 	Barrier *bar;
 	IFaccomplish* Another;
 	bool w, a, s, d,jumpfirst;
