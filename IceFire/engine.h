@@ -28,6 +28,9 @@ public:
 	void keyReleaseEvent(QKeyEvent* event) override;
 	void Update();
 	void LoadGame();
+	bool readSection(std::ifstream& configFile, const std::string& sectionName, int& x, int& y);
+	bool readSection(std::ifstream& configFile, const std::string& sectionName, int& x1, int& y1, int& x2, int& y2);
+
 private:
 	int p1x, p1y,p2x,p2y;
 	QTimer timer;

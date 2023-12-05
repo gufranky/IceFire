@@ -127,8 +127,8 @@ void engine::Update()
 
 void engine::LoadGame()
 {
-	int wall[4];
-	std::ifstream configFile("Translation Files/l1 .cfg");
+
+	std::ifstream configFile("D:/ice&fire/IceFire/l1.cfg");
 		//读写文件
 	if (configFile.is_open()) {
 		std::string line,line1,line2;
@@ -154,7 +154,7 @@ void engine::LoadGame()
 				// 读取下一行，该行包含两个整数
 				std::getline(configFile, line1);
 
-				// 使用字符串流解析四个整数
+				// 使用字符串流解析2个整数
 				std::istringstream iss1(line1);
 				int x11, y11;
 				if (iss1 >> x11 >> y11)
@@ -172,7 +172,7 @@ void engine::LoadGame()
 				// 读取下一行，该行包含两个整数
 				std::getline(configFile, line2);
 
-				// 使用字符串流解析四个整数
+				// 使用字符串流解析2个整数
 				std::istringstream iss2(line2);
 				int x22, y22;
 				if (iss2 >> x22 >> y22)
