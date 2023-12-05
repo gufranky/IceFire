@@ -128,10 +128,10 @@ void engine::Update()
 void engine::LoadGame()
 {
 
-	std::ifstream configFile("D:/ice&fire/IceFire/l1.cfg");
-		//读写文件
+	std::ifstream configFile("D:\\ice&fire\\IceFire\\l1.cfg");
+	//读写文件
 	if (configFile.is_open()) {
-		std::string line,line1,line2;
+		std::string line, line1, line2;
 		while (std::getline(configFile, line)) {
 			// 判断当前行是否包含"wall"关键字
 			if (line.find("[wall]") != std::string::npos) {
@@ -144,7 +144,6 @@ void engine::LoadGame()
 				if (iss >> x1 >> y1 >> x2 >> y2) {
 					// 调用 barrier 的 add 函数，将四个整数作为参数传递
 					barrier->add(x1, y1, x2, y2);
-					break;
 				}
 			}
 		}
@@ -161,10 +160,9 @@ void engine::LoadGame()
 				{
 					p1x = x11;
 					p1y = y11;
-					break;
 				}
 			}
-			}
+		}
 		while (std::getline(configFile, line2)) {
 			// 判断当前行是否包含"ice"关键字
 
@@ -179,11 +177,9 @@ void engine::LoadGame()
 				{
 					p2x = x22;
 					p2y = y22;
-					break;
 				}
-
 			}
-		}		
 		}
 	}
-
+	configFile.close();  // 关闭文件，释放资源
+}
