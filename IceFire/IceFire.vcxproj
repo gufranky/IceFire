@@ -90,6 +90,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Barrier.cpp" />
+    <ClCompile Include="Diamond.cpp" />
     <ClCompile Include="Door.cpp" />
     <ClCompile Include="engine.cpp" />
     <ClCompile Include="IFaccomplish.cpp" />
@@ -113,6 +114,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Barrier.h" />
+    <ClInclude Include="Diamond.h" />
     <ClInclude Include="Door.h" />
     <QtMoc Include="Spirit.h" />
     <ClInclude Include="WaterFire.h" />
