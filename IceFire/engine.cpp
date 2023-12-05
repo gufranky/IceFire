@@ -141,10 +141,11 @@ void engine::LoadGame()
 				// 使用字符串流解析四个整数
 				std::istringstream iss(line);
 				int x1, y1, x2, y2;
-				if (iss >> x1 >> y1 >> x2 >> y2) {
+				iss >> x1 >> y1 >> x2 >> y2;
 					// 调用 barrier 的 add 函数，将四个整数作为参数传递
 					barrier->add(x1, y1, x2, y2);
-				}
+					break;
+				
 			}
 		}
 		while (std::getline(configFile, line1)) {
@@ -156,11 +157,10 @@ void engine::LoadGame()
 				// 使用字符串流解析2个整数
 				std::istringstream iss1(line1);
 				int x11, y11;
-				if (iss1 >> x11 >> y11)
-				{
+				iss1 >> x11 >> y11;
 					p1x = x11;
 					p1y = y11;
-				}
+					break;
 			}
 		}
 		while (std::getline(configFile, line2)) {
@@ -173,11 +173,11 @@ void engine::LoadGame()
 				// 使用字符串流解析2个整数
 				std::istringstream iss2(line2);
 				int x22, y22;
-				if (iss2 >> x22 >> y22)
-				{
+				iss2 >> x22 >> y22;
 					p2x = x22;
 					p2y = y22;
-				}
+					break;
+				
 			}
 		}
 	}
