@@ -92,6 +92,7 @@ void engine::Update()
 {
 	p1->timeChange();
 	p2->timeChange();
+	sp->inte();
 }
 
 void engine::FirstLoad()
