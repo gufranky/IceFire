@@ -7,6 +7,7 @@ Door::Door(int xx, int yy, int ww, int hh, bool fire,IFaccomplish* p11, IFaccomp
 	w = ww;
 	h = hh;
 	this->fire = fire;
+	Open = false;
 	here = false;
 	update();
 	this->p1 = p11;
@@ -16,6 +17,7 @@ Door::Door(int xx, int yy, int ww, int hh, bool fire,IFaccomplish* p11, IFaccomp
 
 void Door::interaction()
 {
+	if(Open)
 	if (((this->Shadow->collidesWithItem(p1->Shadow)) && (this->fire == p1->player))||((this->Shadow->collidesWithItem(p2->Shadow)) && (this->fire == p2->player)))
 	{
 		if (!here)
@@ -69,4 +71,14 @@ Door::~Door()
 {
 	delete Shadow;
 }
+void Door::CanOpen()
+{
+	Open = true;
+}
+void Door::Reload()
+{
+	Open = false;
+	here = false;
+	update();
 
+}
