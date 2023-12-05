@@ -17,6 +17,8 @@ public:
 	void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = nullptr) override;
 	void setPos(qreal x, qreal y) ;
 	void Change(QString c);
+	virtual void CanOpen() {};
+	virtual void Reload() {};
 	virtual void Show(QGraphicsScene* s)=0;
 	virtual void interaction();
 	QPixmap pixmap; // ´æ´¢Í¼Ïñ
@@ -29,4 +31,5 @@ signals:
 	void death();
 	void enter();
 	void exit();
+	void HadGet();
 };

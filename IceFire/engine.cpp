@@ -107,6 +107,7 @@ void engine::FirstLoad()
 	sp->add(400, 800, 200, 200, 1, 1);
 	sp->add(800, 600, 200, 200, 2, 1);
 	sp->add(800, 800, 200, 200, 1, 2);
+	sp->add(900, 700, 100, 100, 1, 3);
 	barrier = new Barrier();
 	barrier->add(800, 800, 100, 100);
 	scene = new QGraphicsScene(parent);
@@ -149,6 +150,7 @@ void engine::reload()
 	p2->SetPos(p2x, p2y);
 	p2->speedx = 0; p2->speedy = 0;
 	timer.start();
+	sp->reload();
 	Gameover->hide();
 }
 void engine::gameover()
