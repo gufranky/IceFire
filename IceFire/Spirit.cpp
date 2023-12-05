@@ -98,4 +98,5 @@ void Spirit::reload()
 	for (const auto& spirit : spirits) {
 		spirit->Reload();
 	}
+	winner = 0;
 }

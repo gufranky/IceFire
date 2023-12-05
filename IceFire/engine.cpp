@@ -4,8 +4,8 @@
 engine::engine(QWidget* par)
 {
 	Gameover = new QLabel("Gameover", par);
-	Gameover->setFont(QFont("Arial", 40));  // ���������С
-	Gameover->setAlignment(Qt::AlignCenter); // �����ı�����
+	Gameover->setFont(QFont("Arial", 40));  
+	Gameover->setAlignment(Qt::AlignCenter); 
 	Gameover->setGeometry(760, 440, 400, 200);
 	parent = par;
 	FirstLoad();
