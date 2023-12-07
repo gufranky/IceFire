@@ -36,8 +36,10 @@ MainWindow::MainWindow(QWidget* parent)
 MainWindow::~MainWindow()
 {
     delete  stackedWidget;
+    if (page1 != nullptr)
     delete page1;
-    delete page2;
+    if(page2!=nullptr)
+        delete page2;
     delete mainButton;
 }
 

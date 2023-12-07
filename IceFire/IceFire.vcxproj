@@ -96,6 +96,8 @@
     <ClCompile Include="engine.cpp" />
     <ClCompile Include="IFaccomplish.cpp" />
     <ClCompile Include="Mainwindow.cpp" />
+    <ClCompile Include="MoveBarrier.cpp" />
+    <ClCompile Include="MoveBarrierBase.cpp" />
     <ClCompile Include="Person.cpp" />
     <ClCompile Include="mywidget.cpp" />
     <ClCompile Include="Spirit.cpp" />
@@ -119,6 +121,8 @@
     <ClInclude Include="Diamond.h" />
     <ClInclude Include="Door.h" />
     <QtMoc Include="Spirit.h" />
+    <QtMoc Include="MoveBarrierBase.h" />
+    <ClInclude Include="MoveBarrier.h" />
     <ClInclude Include="WaterFire.h" />
     <QtMoc Include="engine.h" />
     <QtMoc Include="IFaccomplish.h" />

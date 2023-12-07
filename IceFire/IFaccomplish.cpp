@@ -129,6 +129,7 @@ void IFaccomplish::timeChange()
 }
 IFaccomplish::IFaccomplish(int xx , int yy , bool p) :x(xx), y(yy), SpiritBase(xx,yy,p?FIRE:ICE,10,10) 
 {
+	stuckdie = 0;
 	speedx = 0;
 	speedy = 0;
 	player = p;
@@ -156,6 +157,14 @@ bool IFaccomplish::collides(double xx,double yy)
 			return true;
 		}
 	}
+	for (int i = 0; i < mbar->NowBarrier; i++)
+	{
+		if(mbar->a[i].cansee)
+		if (Shadow->collidesWithItem(mbar->a[i].Shadow))
+		{
+			return true;
+		}
+	}
 	return false;
 }
 
@@ -165,6 +174,12 @@ void IFaccomplish::GetBarrier(Barrier *b)
 }
 void IFaccomplish::checkspeed()
 {
+	if (collides(0, 0))
+	{
+		stuckdie += 1;
+		if (stuckdie >= 60)
+			emit stuck();//TODO£ºÈçºÎÇåÁã´ý²âÊÔ
+	}
 	if (collides(0, speedy) && (speedy > 0))
 	{
 		jumpfirst = true;
@@ -208,4 +223,8 @@ void IFaccomplish::interaction(IFaccomplish* p)
 
 void IFaccomplish::Show(QGraphicsScene* s)
 {
+}
+void IFaccomplish::GetMoveBarrier(MoveBarrier* b)
+{
+	mbar = b;
 }

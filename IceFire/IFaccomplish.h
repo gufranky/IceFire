@@ -3,6 +3,8 @@
 #include <QObject>
 #include <QTimer>
 #include"Barrier.h"
+#include"MoveBarrier.h"
+class MoveBarrier;
 const int MAXSPEED = 7;
 const int A = 1.2;
 const QString FIRE=":/IceFire/fire.png";
@@ -51,6 +53,11 @@ public slots:
 			if (value == 15)
 				d = false;
 		}
+		if (value == 16)
+			Epress = true;
+		if (value == 17)
+			Epress = false;
+
 
 
 };
@@ -62,6 +69,7 @@ public:
 	void timeChange();
 	bool collides(double x, double y);
 	void GetBarrier(Barrier *b);
+	void GetMoveBarrier(MoveBarrier* b);
 	void checkspeed();
 	void GetAnother(IFaccomplish* Ano);
 	void interaction(IFaccomplish* p);
@@ -69,12 +77,17 @@ public:
 	double x, y, speedx, speedy;
 	QGraphicsRectItem* Shadow;
 	bool player;
+	bool Epress;
 	QGraphicsRectItem* Debug()
 	{
 		return Shadow;
 	}
 private:
 	Barrier *bar;
+	MoveBarrier *mbar;
 	IFaccomplish* Another;
 	bool w, a, s, d,jumpfirst;
+	int stuckdie;
+signals:
+	void stuck();
 };
