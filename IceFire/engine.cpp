@@ -120,6 +120,10 @@ void engine::FirstLoad()
 	sp->add(900, 700, 100, 100, 1, 3);
 	barrier = new Barrier();
 	barrier->add(800, 800, 100, 100);
+	m = new MoveBarrier();
+	m->add(1000, 800, 300, 50, 2, 1000, 300, 90, p1, p2);
+	sp->getm(m);
+	sp->add(1000, 1000, 100, 100, 0, 5);
 	scene = new QGraphicsScene(parent);
 	scene->addItem(p1);
 	scene->addItem(p2);
@@ -127,8 +131,8 @@ void engine::FirstLoad()
 	scene->addItem(p2->Debug());
 	barrier->show(scene);
 	sp->show(scene);
-	m = new MoveBarrier();
-	m->add(1000, 800, 300, 50, 1, 1000, 300, 90, p1, p2);
+
+
 	m->show(scene);
 	p1->GetBarrier(barrier);
 	p2->GetBarrier(barrier);

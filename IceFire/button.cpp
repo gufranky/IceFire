@@ -37,13 +37,13 @@ void button::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QW
 	{
 		painter->setPen(Qt::green);
 		painter->setBrush(Qt::green);
-		painter->drawRect(x, y + h / 3 * 2, w, h / 3);
+		painter->drawRect(0, 0 + h / 3 * 2, w, h / 3);
 	}
 	else
 	{
 		painter->setPen(Qt::red);
 		painter->setBrush(Qt::red);
-		painter->drawRect(x, y + h / 3, w, h / 3 * 2);
+		painter->drawRect(0, 0 + h / 3, w, h / 3 * 2);
 	}
 
 
@@ -55,6 +55,8 @@ void button::Show(QGraphicsScene* s)
 void button::Reload()
 {
 	isPressed = false;
+	cold = true;
+	coldtimer.stop();
 	update();
 	emit bepress(isPressed);
 

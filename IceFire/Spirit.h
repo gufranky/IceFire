@@ -10,6 +10,9 @@
 #include "Diamond.h"
 #include "Barrier.h"
 #include "button.h"
+#include "MoveBarrier.h"
+#include "StoneButton.h"
+class MoveBarrier;
 class Barrier;
 const int MAXSPIRIT = 20;
 class Spirit :public QObject
@@ -26,6 +29,7 @@ public:
 	void show(QGraphicsScene* s);
 	void inte();
 	void addplayer(IFaccomplish* p1, IFaccomplish* p2);
+	void getm(MoveBarrier* m);
 	void dead();
 	void reload();
 	void DiamondCheck();
@@ -35,6 +39,7 @@ private:
 	int winner=0;
 	int AllDiamond = 0;
 	int NowDiamond = 0;
+	MoveBarrier* m;
 	bool Epress;
 
 signals:

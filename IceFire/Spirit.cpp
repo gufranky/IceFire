@@ -59,7 +59,13 @@ void Spirit::add(int x, int y, int w, int h,int more,int i)
 	{
 		spirits.push_back(std::make_unique<button>(x, y, w, h, p1, p2));
 		auto* lastButton = spirits.back().get();
-
+		QObject::connect(lastButton, &SpiritBase::bepress, &m->a[more], &MoveBarrierBase::getit);
+	}
+	if (i == 5)
+	{
+		spirits.push_back(std::make_unique<StoneButton>(x, y, w, h, p1, p2));
+		auto* lastButton = spirits.back().get();
+		QObject::connect(lastButton, &SpiritBase::bepress, &m->a[more], &MoveBarrierBase::getit);
 	}
 } 
 
@@ -106,4 +112,7 @@ void Spirit::reload()
 	}
 	winner = 0;
 }
-
+void Spirit::getm(MoveBarrier* mm)
+{
+	m = mm;
+}
