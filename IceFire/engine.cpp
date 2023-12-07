@@ -4,8 +4,8 @@
 engine::engine(QWidget* par)
 {
 	Gameover = new QLabel("Gameover", par);
-	Gameover->setFont(QFont("Arial", 40));  // ���������С
-	Gameover->setAlignment(Qt::AlignCenter); // �����ı�����
+	Gameover->setFont(QFont("Arial", 40));  
+	Gameover->setAlignment(Qt::AlignCenter); 
 	Gameover->setGeometry(760, 440, 400, 200);
 	parent = par;
 	FirstLoad();
@@ -18,9 +18,10 @@ engine::~engine()
 	delete layout;
 	delete view;
 	delete barrier;
-	delete scene;
 	delete Gameover;
 	delete p2;
+	delete m;
+	delete scene;
 }
 void engine::keyPressEvent(QKeyEvent* event)
 {
@@ -55,6 +56,10 @@ void engine::keyPressEvent(QKeyEvent* event)
 	{
 		reload();
 	}
+	if (event->text() == "e")
+	{
+		emit signalA(16);
+	}
 
 }
 void engine::keyReleaseEvent(QKeyEvent* event)
@@ -87,12 +92,17 @@ void engine::keyReleaseEvent(QKeyEvent* event)
 	else if (event->key() == Qt::Key_Right) {
 		emit signalA(15);
 	}
+	if (event->text() == "e")
+	{
+		emit signalA(17);
+	}
 }
 void engine::Update()
 {
 	p1->timeChange();
 	p2->timeChange();
 	sp->inte();
+	m->onemove();
 }
 
 void engine::FirstLoad()
@@ -117,8 +127,13 @@ void engine::FirstLoad()
 	scene->addItem(p2->Debug());
 	barrier->show(scene);
 	sp->show(scene);
+	m = new MoveBarrier();
+	m->add(1000, 800, 300, 50, 1, 1000, 300, 90, p1, p2);
+	m->show(scene);
 	p1->GetBarrier(barrier);
 	p2->GetBarrier(barrier);
+	p1->GetMoveBarrier(m);
+	p2->GetMoveBarrier(m);
 	scene->setSceneRect(0, 0, 1920, 1080);
 	view = new QGraphicsView(scene, parent);
 	view->setFixedSize(1920, 1080);
@@ -151,6 +166,7 @@ void engine::reload()
 	p2->speedx = 0; p2->speedy = 0;
 	timer.start();
 	sp->reload();
+	m->reload();
 	Gameover->hide();
 }
 void engine::gameover()

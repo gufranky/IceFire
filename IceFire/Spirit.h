@@ -8,10 +8,18 @@
 #include "Door.h"
 #include "WaterFire.h"
 #include "Diamond.h"
+#include "Barrier.h"
+#include "button.h"
+class Barrier;
 const int MAXSPIRIT = 20;
 class Spirit :public QObject
 {
 	Q_OBJECT
+public slots:
+	void handleSignal(bool check)
+	{
+		Epress = check;
+	}
 public:
 	~Spirit();
 	void add(int x, int y, int w, int h,int i,int more);
@@ -27,6 +35,7 @@ private:
 	int winner=0;
 	int AllDiamond = 0;
 	int NowDiamond = 0;
+	bool Epress;
 
 signals:
 	void gameover();

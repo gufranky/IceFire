@@ -90,11 +90,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Barrier.cpp" />
+    <ClCompile Include="button.cpp" />
     <ClCompile Include="Diamond.cpp" />
     <ClCompile Include="Door.cpp" />
     <ClCompile Include="engine.cpp" />
     <ClCompile Include="IFaccomplish.cpp" />
     <ClCompile Include="Mainwindow.cpp" />
+    <ClCompile Include="MoveBarrier.cpp" />
+    <ClCompile Include="MoveBarrierBase.cpp" />
     <ClCompile Include="Person.cpp" />
     <ClCompile Include="mywidget.cpp" />
     <ClCompile Include="Spirit.cpp" />
@@ -114,9 +117,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Barrier.h" />
+    <ClInclude Include="button.h" />
     <ClInclude Include="Diamond.h" />
     <ClInclude Include="Door.h" />
     <QtMoc Include="Spirit.h" />
+    <QtMoc Include="MoveBarrierBase.h" />
+    <ClInclude Include="MoveBarrier.h" />
     <ClInclude Include="WaterFire.h" />
     <QtMoc Include="engine.h" />
     <QtMoc Include="IFaccomplish.h" />

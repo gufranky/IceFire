@@ -55,7 +55,13 @@ void Spirit::add(int x, int y, int w, int h,int more,int i)
 		QObject::connect(lastDiamond, &Diamond::HadGet, this, &Spirit::DiamondCheck);
 		AllDiamond += 1;
 	}
-}
+	if (i == 4)
+	{
+		spirits.push_back(std::make_unique<button>(x, y, w, h, p1, p2));
+		auto* lastButton = spirits.back().get();
+
+	}
+} 
 
 void Spirit::show(QGraphicsScene * s)
 {
@@ -98,4 +104,6 @@ void Spirit::reload()
 	for (const auto& spirit : spirits) {
 		spirit->Reload();
 	}
+	winner = 0;
 }
+

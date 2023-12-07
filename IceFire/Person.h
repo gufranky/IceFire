@@ -32,4 +32,5 @@ signals:
 	void enter();
 	void exit();
 	void HadGet();
+	void bepress(bool status);
 };

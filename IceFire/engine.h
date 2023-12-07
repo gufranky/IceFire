@@ -9,6 +9,7 @@
 #include "IFaccomplish.h"
 #include <qlabel.h>
 #include "Spirit.h"
+#include"MoveBarrier.h"
 class engine  : public QWidget
 {
 	Q_OBJECT
@@ -24,7 +25,9 @@ public:
 	SpiritBase* spirit;
 	QLabel* Gameover;
 	Spirit* sp;
+	MoveBarrier* m;
 	Door* d;
+
 	Barrier* barrier;
 	void keyPressEvent(QKeyEvent* event) override;
 	void keyReleaseEvent(QKeyEvent* event) override;
@@ -39,6 +42,5 @@ private:
 	QWidget* parent;
 signals:
 	void signalA(int value);
-
 };
 #endif
