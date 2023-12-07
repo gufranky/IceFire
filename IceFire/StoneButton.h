@@ -1,13 +1,11 @@
 #pragma once
-#include "Person.h"
-#include "Spirit.h"
-#include "IFaccomplish.h"
-class button:
+#include"button.h"
+class StoneButton :
     public SpiritBase
 {
 public:
-    button(int x, int y, int w, int h, IFaccomplish* p1, IFaccomplish* p2);
-    ~button();
+    StoneButton(int x, int y, int w, int h, IFaccomplish* p1, IFaccomplish* p2);
+    ~StoneButton();
     void interaction() override;
     void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = nullptr) override;
     void Show(QGraphicsScene* s)override;
@@ -19,3 +17,4 @@ public:
     IFaccomplish* p1, * p2;
     QGraphicsRectItem* Shadow;
 };
+

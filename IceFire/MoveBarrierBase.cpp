@@ -21,6 +21,7 @@ void MoveBarrierBase::set(int xx, int yy, int ww, int hh, int mmovemod, int xx2,
 	x2 = xx2;
 	y2 = yy2;
 	time = ttime;
+	turnmark = 1;
 	p1 = p11;
 	p2 = p22;
 	cansee = true;
@@ -102,6 +103,7 @@ void MoveBarrierBase::check(int mx, int my)
 void MoveBarrierBase::Reload()
 {
 	nowtime = 0;
+	turnmark = 1;
 	nowx = x;
 	nowy = y;
 	Shadow->setPos(nowx, nowy);
@@ -123,7 +125,7 @@ void MoveBarrierBase::getit(bool x)
 	{
 		if (movemod == 2)
 		{
-			nowturn = 1;
+			nowturn = turnmark;
 		}
 		if (movemod == 3)
 		{
@@ -137,11 +139,10 @@ void MoveBarrierBase::getit(bool x)
 	}
 	if (x == false)
 	{
-		if (x == 1)
-		{
 			if (movemod == 2)
 			{
-				nowturn = 1;
+				turnmark = nowturn;
+				nowturn = 0;
 			}
 			if (movemod == 3)
 			{
@@ -151,7 +152,5 @@ void MoveBarrierBase::getit(bool x)
 			{
 				cansee = false;
 			}
-
-		}
 	}
 }

@@ -27,8 +27,9 @@ void Reload();
 QGraphicsRectItem* Shadow;
 private:
 	IFaccomplish* p1, * p2;
+
 	double x, y, w, h, x2, y2, nowx, nowy,time,nowtime;
-	
+	int turnmark;
 	int movemod;
 	int nowturn;//0Í£Ö¹ 1Ïòx2£¬y2
 
