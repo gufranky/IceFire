@@ -31,10 +31,10 @@ void IFaccomplish::SetPos(double xx, double yy)
 }
 void IFaccomplish::PosChange(int Deltax, int Deltay)
 {
-	checkspeed();
+	CheckSpeed();
 	SetPos(x + speedx, y + speedy);
 }
-void IFaccomplish::timeChange()
+void IFaccomplish::TimeChange()
 {
 	if (a && (speedx >= -MAXSPEED) && (!d))
 	{
@@ -69,7 +69,7 @@ void IFaccomplish::timeChange()
 			speedx = 0;
 		}
 	}//水平处理已完成
-	if (!collides(0, 3))
+	if (!Collides(0, 3))
 	{
 		speedy += 3;
 	}//垂直处理已完成
@@ -144,7 +144,7 @@ IFaccomplish::~IFaccomplish()
 	delete Shadow;
 }
 
-bool IFaccomplish::collides(double xx,double yy)
+bool IFaccomplish::Collides(double xx,double yy)
 {
 	Shadow->setPos(x + 15 + xx, y + 10 + yy);
 	if (Shadow->collidesWithItem(Another->Shadow))
@@ -172,28 +172,28 @@ void IFaccomplish::GetBarrier(Barrier *b)
 {
 	bar = b;
 }
-void IFaccomplish::checkspeed()
+void IFaccomplish::CheckSpeed()
 {
-	if (collides(0, 0))
+	if (Collides(0, 0))
 	{
 		stuckdie += 1;
-		if (stuckdie >= 60)
+		if (stuckdie >= 20)
 			emit stuck();//TODO：如何清零待测试
 	}
-	if (collides(0, speedy) && (speedy > 0))
+	if (Collides(0, speedy) && (speedy > 0))
 	{
 		jumpfirst = true;
 	}
 
-	while (collides(speedx, 0) && (abs(speedx)>0.25))
+	while (Collides(speedx, 0) && (abs(speedx)>0.25))
 	{
 		speedx = speedx / 2;
 	}
-	while (collides(0, speedy) && (abs(speedy) > 0.25))
+	while (Collides(0, speedy) && (abs(speedy) > 0.25))
 	{
 		speedy = speedy / 2;
 	}	
-	while (collides(speedx, speedy) && ((abs(speedx)>0.25)&&(abs(speedy) > 0.25)))
+	while (Collides(speedx, speedy) && ((abs(speedx)>0.25)&&(abs(speedy) > 0.25)))
 	{
 		speedx = speedx / 2;
 		speedy = speedy / 2;
@@ -206,7 +206,7 @@ void IFaccomplish::checkspeed()
 	{
 		speedy = 0;
 	}
-	if (collides(speedx, speedy))
+	if (Collides(speedx, speedy))
 	{
 		speedx = 0;
 		speedy = 0;
@@ -217,7 +217,7 @@ void IFaccomplish::GetAnother(IFaccomplish* Ano)
 {
 	Another = Ano;
 }
-void IFaccomplish::interaction(IFaccomplish* p)
+void IFaccomplish::Interaction(IFaccomplish* p)
 {
 }
 
