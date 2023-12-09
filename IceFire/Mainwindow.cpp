@@ -13,7 +13,7 @@ MainWindow::MainWindow(QWidget* parent)
     {
         stackedWidget = new QStackedWidget(this);
         page1 = new start;
-        this->setFixedSize(1920, 1080);
+		this->setFixedSize(1920, 1080);
         this->setWindowTitle("Myrt1e");
         stackedWidget->addWidget(page1);
         stackedWidget->setCurrentIndex(0);

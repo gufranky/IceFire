@@ -32,10 +32,10 @@ public:
 	void keyPressEvent(QKeyEvent* event) override;
 	void keyReleaseEvent(QKeyEvent* event) override;
 	void Update();
-	void FirstLoad();
 	void reload();
 	void Win();
 	void gameover();
+	void LoadGame();
 private:
 	int p1x, p1y,p2x,p2y;
 	QTimer timer;

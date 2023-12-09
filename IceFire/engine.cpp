@@ -8,7 +8,7 @@ engine::engine(QWidget* par)
 	Gameover->setAlignment(Qt::AlignCenter); 
 	Gameover->setGeometry(760, 440, 400, 200);
 	parent = par;
-	FirstLoad();
+	LoadGame();
 
 }
 
@@ -99,45 +99,59 @@ void engine::keyReleaseEvent(QKeyEvent* event)
 }
 void engine::Update()
 {
-	p1->timeChange();
-	p2->timeChange();
+	p1->TimeChange();
+	p2->TimeChange();
 	sp->inte();
 	m->onemove();
 }
-
-void engine::FirstLoad()
+void engine::reload()
 {
-	p1x = 100; p1y = 100; p2x = 0; p2y = 0;
-	p1 = new IFaccomplish(100, 100, true);
-	p2 = new IFaccomplish(0, 0, false);
-	p1->GetAnother(p2);
-	p2->GetAnother(p1);
-	sp = new Spirit();
-	sp->addplayer(p1, p2);
-	sp->add(400, 800, 200, 200, 1, 1);
-	sp->add(800, 600, 200, 200, 2, 1);
-	sp->add(800, 800, 200, 200, 1, 2);
-	sp->add(900, 700, 100, 100, 1, 3);
-	barrier = new Barrier();
-	barrier->add(800, 800, 100, 100);
-	m = new MoveBarrier();
-	m->add(1000, 800, 300, 50, 5, 1000, 300, 90, p1, p2);
-	sp->getm(m);
-	sp->add(1000, 1000, 100, 100, 0, 5);
+	p1->SetPos(p1x, p1y);
+	p1->speedx = 0; p1->speedy = 0; p1->stuckdie = 0;
+	p2->SetPos(p2x, p2y);
+	p2->speedx = 0; p2->speedy = 0; p2->stuckdie = 0;
+	timer.start();
+	sp->reload();
+	m->reload();
+	Gameover->hide();
 	scene = new QGraphicsScene(parent);
 	scene->addItem(p1);
 	scene->addItem(p2);
-	scene->addItem(p1->Debug());
-	scene->addItem(p2->Debug());
-	barrier->show(scene);
-	sp->show(scene);
+}
+void engine::gameover()
+{
+	timer.stop();
+	Gameover->show();
+}
+void engine::LoadGame()
+{
 
+	//player读写完成
+	p1 = new IFaccomplish(p1x, p1y, true);
+	p2 = new IFaccomplish(p2x, p2y, false);
+	p1->GetAnother(p2);
+	p2->GetAnother(p1);
+	barrier = new Barrier();
+	//以下写wall
+	
+	//wall已完成
+	m = new MoveBarrier();
+	//以下写move
 
-	m->show(scene);
+	//move已完成
+	//以下写sp
+	sp = new Spirit();
+	sp->addplayer(p1, p2);
+	sp->getm(m);
+	//sp已完成
 	p1->GetBarrier(barrier);
 	p2->GetBarrier(barrier);
 	p1->GetMoveBarrier(m);
 	p2->GetMoveBarrier(m);
+	scene=new QGraphicsScene(parent);
+	barrier->show(scene);
+	sp->show(scene);
+	m->show(scene);
 	scene->setSceneRect(0, 0, 1920, 1080);
 	view = new QGraphicsView(scene, parent);
 	view->setFixedSize(1920, 1080);
@@ -161,22 +175,8 @@ void engine::FirstLoad()
 	QObject::connect(&timer, &QTimer::timeout, this, &engine::Update);
 	QObject::connect(sp, &Spirit::gameover, this, &engine::gameover);
 	QObject::connect(sp, &Spirit::win, this, &engine::Win);
-}
-void engine::reload()
-{
-	p1->SetPos(p1x, p1y);
-	p1->speedx = 0; p1->speedy = 0;
-	p2->SetPos(p2x, p2y);
-	p2->speedx = 0; p2->speedy = 0;
-	timer.start();
-	sp->reload();
-	m->reload();
-	Gameover->hide();
-}
-void engine::gameover()
-{
-	timer.stop();
-	Gameover->show();
+	QObject::connect(p1, &IFaccomplish::stuck, this, &engine::gameover);
+	QObject::connect(p2, &IFaccomplish::stuck, this, &engine::gameover);
 }
 void engine::Win()
 {

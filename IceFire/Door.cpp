@@ -18,7 +18,7 @@ Door::Door(int xx, int yy, int ww, int hh, bool fire,IFaccomplish* p11, IFaccomp
 void Door::interaction()
 {
 	if(Open)
-	if (((this->Shadow->collidesWithItem(p1->Shadow)) && (this->fire == p1->player))||((this->Shadow->collidesWithItem(p2->Shadow)) && (this->fire == p2->player)))
+	if (((this->Shadow->sceneBoundingRect().contains(p1->Shadow->sceneBoundingRect())) && (this->fire == p1->player))||((this->Shadow->sceneBoundingRect().contains(p2->Shadow->sceneBoundingRect())) && (this->fire == p2->player)))
 	{
 		if (!here)
 		{
