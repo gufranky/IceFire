@@ -6,7 +6,6 @@
 #include <QPalette>
 #include <QStackedWidget>
 #include <QVBoxLayout>
-#include"mywidget.h"
 
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent)
@@ -23,14 +22,6 @@ MainWindow::MainWindow(QWidget* parent)
         setContentsMargins(0, 0, 0, 0); // 设置边距为0
 
     }
-    // 创建按钮
-    mainButton = new QPushButton("Main Button", this);
-
-    // 设置按钮的位置
-    mainButton->setGeometry(50, 150, 150, 30);
-
-    // 连接按钮的点击信号与槽函数
-    connect(mainButton, SIGNAL(clicked()), this, SLOT(onMainButtonClicked()));
 }
 
 MainWindow::~MainWindow()
@@ -40,7 +31,6 @@ MainWindow::~MainWindow()
     delete page1;
     if(page2!=nullptr)
         delete page2;
-    delete mainButton;
 }
 
 void MainWindow::onButtonClicked()
@@ -50,5 +40,4 @@ void MainWindow::onButtonClicked()
     stackedWidget->addWidget(page2);
     stackedWidget->setCurrentIndex(1);
     qDebug() << "Main Button Clicked!";
-    mainButton->hide();
 }

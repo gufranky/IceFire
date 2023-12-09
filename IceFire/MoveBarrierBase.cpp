@@ -66,7 +66,12 @@ void MoveBarrierBase::onemove()
 		{
 			nowturn = (nowturn == 1) ? 2 : 1;
 			nowtime = 0;
+			if (movemod == 5)
+			{
+				nowturn = 0;
+			}
 		}
+		
 		check(movex,movey);
 	}
 	
@@ -135,6 +140,13 @@ void MoveBarrierBase::getit(bool x)
 		{
 			cansee = false;
 		}
+		if (movemod == 5)
+		{
+				if(nowturn!=0)
+					nowtime = time - nowtime;
+				nowturn = 1;
+				
+		}
 
 	}
 	if (x == false)
@@ -151,6 +163,13 @@ void MoveBarrierBase::getit(bool x)
 			if (movemod == 4)
 			{
 				cansee = false;
+			}
+			if (movemod == 5)
+			{
+
+				if (nowturn != 0)
+					nowtime = time - nowtime;
+				nowturn = 2;
 			}
 	}
 }
