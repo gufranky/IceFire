@@ -66,18 +66,19 @@ public:
 	~IFaccomplish();
 	void SetPos(double xx, double yy);
 	void PosChange(int Deltax, int Deltay);
-	void timeChange();
-	bool collides(double x, double y);
+	void TimeChange();
+	bool Collides(double x, double y);
 	void GetBarrier(Barrier *b);
 	void GetMoveBarrier(MoveBarrier* b);
-	void checkspeed();
+	void CheckSpeed();
 	void GetAnother(IFaccomplish* Ano);
-	void interaction(IFaccomplish* p);
+	void Interaction(IFaccomplish* p);
 	void Show(QGraphicsScene* s) override;
 	double x, y, speedx, speedy;
 	QGraphicsRectItem* Shadow;
 	bool player;
 	bool Epress;
+	int stuckdie;
 	QGraphicsRectItem* Debug()
 	{
 		return Shadow;
@@ -87,7 +88,6 @@ private:
 	MoveBarrier *mbar;
 	IFaccomplish* Another;
 	bool w, a, s, d,jumpfirst;
-	int stuckdie;
 signals:
 	void stuck();
 };

@@ -9,11 +9,11 @@ using namespace std;
 engine::engine(QWidget* par)
 {
 	Gameover = new QLabel("Gameover", par);
-	Gameover->setFont(QFont("Arial", 40));  
-	Gameover->setAlignment(Qt::AlignCenter); 
+	Gameover->setFont(QFont("Arial", 40));
+	Gameover->setAlignment(Qt::AlignCenter);
 	Gameover->setGeometry(760, 440, 400, 200);
 	parent = par;
-	FirstLoad();
+	LoadGame();
 
 }
 
@@ -46,7 +46,8 @@ void engine::keyPressEvent(QKeyEvent* event)
 	{
 		emit signalA(3);
 	}
-	if (event->key() == Qt::Key_Up) { emit signalA(8);
+	if (event->key() == Qt::Key_Up) {
+		emit signalA(8);
 	}
 	else if (event->key() == Qt::Key_Left) {
 		emit signalA(9);
@@ -104,31 +105,21 @@ void engine::keyReleaseEvent(QKeyEvent* event)
 }
 void engine::Update()
 {
-	p1->timeChange();
-	p2->timeChange();
+	p1->TimeChange();
+	p2->TimeChange();
 	sp->inte();
 	m->onemove();
 }
-
-void engine::FirstLoad()
+void engine::reload()
 {
-	p1x = 100; p1y = 100; p2x = 0; p2y = 0;
-	p1 = new IFaccomplish(100, 100, true);
-	p2 = new IFaccomplish(0, 0, false);
-	p1->GetAnother(p2);
-	p2->GetAnother(p1);
-	sp = new Spirit();
-	sp->addplayer(p1, p2);
-	sp->add(400, 800, 200, 200, 1, 1);
-	sp->add(800, 600, 200, 200, 2, 1);
-	sp->add(800, 800, 200, 200, 1, 2);
-	sp->add(900, 700, 100, 100, 1, 3);
-	barrier = new Barrier();
-	barrier->add(800, 800, 100, 100);
-	m = new MoveBarrier();
-	m->add(1000, 800, 300, 50, 5, 1000, 300, 90, p1, p2);
-	sp->getm(m);
-	sp->add(1000, 1000, 100, 100, 0, 5);
+	p1->SetPos(p1x, p1y);
+	p1->speedx = 0; p1->speedy = 0; p1->stuckdie = 0;
+	p2->SetPos(p2x, p2y);
+	p2->speedx = 0; p2->speedy = 0; p2->stuckdie = 0;
+	timer.start();
+	sp->reload();
+	m->reload();
+	Gameover->hide();
 	scene = new QGraphicsScene(parent);
 	scene->addItem(p1);
 	scene->addItem(p2);
@@ -146,12 +137,12 @@ void engine::LoadGame()
 		
 		string  line1, line2 ,line3, line4, line5;
 		while (std::getline(configFile, line1)) {
-			// ÅÐ¶Ïµ±Ç°ÐÐÊÇ·ñ°üº¬"fire"¹Ø¼ü×Ö
+			// åˆ¤æ–­å½“å‰è¡Œæ˜¯å¦åŒ…å«"fire"å…³é”®å­—
 			if (line1.find("fire") != string::npos) {
-				// ¶ÁÈ¡ÏÂÒ»ÐÐ£¬¸ÃÐÐ°üº¬Á½¸öÕûÊý
+				// è¯»å–ä¸‹ä¸€è¡Œï¼Œè¯¥è¡ŒåŒ…å«ä¸¤ä¸ªæ•´æ•°
 				std::getline(configFile, line1);
 
-				// Ê¹ÓÃ×Ö·û´®Á÷½âÎö2¸öÕûÊý
+				// ä½¿ç”¨å­—ç¬¦ä¸²æµè§£æž2ä¸ªæ•´æ•°
 				std::istringstream iss1(line1);
 				int x11, y11;
 				iss1 >> x11 >> y11;
@@ -161,13 +152,13 @@ void engine::LoadGame()
 			}
 		}
 		while (std::getline(configFile, line2)) {
-			// ÅÐ¶Ïµ±Ç°ÐÐÊÇ·ñ°üº¬"ice"¹Ø¼ü×Ö
+			// åˆ¤æ–­å½“å‰è¡Œæ˜¯å¦åŒ…å«"ice"å…³é”®å­—
 
 			if (line2.find("ice") != string::npos) {
-				// ¶ÁÈ¡ÏÂÒ»ÐÐ£¬¸ÃÐÐ°üº¬Á½¸öÕûÊý
+				// è¯»å–ä¸‹ä¸€è¡Œï¼Œè¯¥è¡ŒåŒ…å«ä¸¤ä¸ªæ•´æ•°
 				std::getline(configFile, line2);
 
-				// Ê¹ÓÃ×Ö·û´®Á÷½âÎö2¸öÕûÊý
+				// ä½¿ç”¨å­—ç¬¦ä¸²æµè§£æž2ä¸ªæ•´æ•°
 				std::istringstream iss2(line2);
 				int x22, y22;
 				iss2 >> x22 >> y22;
@@ -177,53 +168,53 @@ void engine::LoadGame()
 
 			}
 		}
-		//player¶ÁÐ´Íê³É
+		//playerè¯»å†™å®Œæˆ
 		p1 = new IFaccomplish(p1x, p1y, true);
 		p2 = new IFaccomplish(p2x, p2y, false);
 		p1->GetAnother(p2);
 		p2->GetAnother(p1);
 		barrier = new Barrier();
-		//ÒÔÏÂÐ´wall
+		//ä»¥ä¸‹å†™wall
 		while (std::getline(configFile, line3)) {
-			// ÅÐ¶Ïµ±Ç°ÐÐÊÇ·ñ°üº¬"wall"¹Ø¼ü×Ö
+			// åˆ¤æ–­å½“å‰è¡Œæ˜¯å¦åŒ…å«"wall"å…³é”®å­—
 			if (line3.find("[wall]") != std::string::npos)
-				// ÅÐ¶Ïµ±Ç°ÐÐÊÇ·ñ°üº¬"wall"¹Ø¼ü×Ö
+				// åˆ¤æ–­å½“å‰è¡Œæ˜¯å¦åŒ…å«"wall"å…³é”®å­—
 			{
 				while (1)
 				{
-					// ¶ÁÈ¡ÏÂÒ»ÐÐ£¬¸ÃÐÐ°üº¬ËÄ¸öÕûÊý
+					// è¯»å–ä¸‹ä¸€è¡Œï¼Œè¯¥è¡ŒåŒ…å«å››ä¸ªæ•´æ•°
 					std::getline(configFile, line3);
 
-					// Ê¹ÓÃ×Ö·û´®Á÷½âÎöËÄ¸öÕûÊý
+					// ä½¿ç”¨å­—ç¬¦ä¸²æµè§£æžå››ä¸ªæ•´æ•°
 					std::istringstream iss(line3);
 					int x1, y1, x2, y2;
 					iss >> x1 >> y1 >> x2 >> y2;
-					// µ÷ÓÃ barrier µÄ add º¯Êý£¬½«ËÄ¸öÕûÊý×÷Îª²ÎÊý´«µÝ
+					// è°ƒç”¨ barrier çš„ add å‡½æ•°ï¼Œå°†å››ä¸ªæ•´æ•°ä½œä¸ºå‚æ•°ä¼ é€’
 					barrier->add(x1, y1, x2, y2);
 					if (line3.find("break") != std::string::npos) { break; }
-					//Á¬Ðø¶ÁÈ¡Êý¾Ý£¬Óöµ½breakÌø³öÑ­»·
+					//è¿žç»­è¯»å–æ•°æ®ï¼Œé‡åˆ°breakè·³å‡ºå¾ªçŽ¯
 				}
 			}
 			if (line3.find("break") != std::string::npos) { break; }
 		}
-		//wallÒÑÍê³É
+		//wallå·²å®Œæˆ
 		m = new MoveBarrier();
-		//ÒÔÏÂÐ´move
+		//ä»¥ä¸‹å†™move
 		while (std::getline(configFile, line4)) {
-			// ÅÐ¶Ïµ±Ç°ÐÐÊÇ·ñ°üº¬"wall"¹Ø¼ü×Ö
+			// åˆ¤æ–­å½“å‰è¡Œæ˜¯å¦åŒ…å«"wall"å…³é”®å­—
 			if (line4.find("[movewall]") != std::string::npos)
-				// ÅÐ¶Ïµ±Ç°ÐÐÊÇ·ñ°üº¬"wall"¹Ø¼ü×Ö
+				// åˆ¤æ–­å½“å‰è¡Œæ˜¯å¦åŒ…å«"wall"å…³é”®å­—
 			{
 				while (1) {
 					std::getline(configFile, line4);
-					// ¶ÁÈ¡ÏÂÒ»ÐÐ£¬¸ÃÐÐ°üº¬8¸öÕûÊý
+					// è¯»å–ä¸‹ä¸€è¡Œï¼Œè¯¥è¡ŒåŒ…å«8ä¸ªæ•´æ•°
 					std::istringstream iss(line4);
-					// Ê¹ÓÃ×Ö·û´®Á÷½âÎö8¸öÕûÊý
+					// ä½¿ç”¨å­—ç¬¦ä¸²æµè§£æž8ä¸ªæ•´æ•°
 					int a, b, c, d, e, f, g, h;
 					iss >> a >> b >> c >> d >> e >> f >> g >> h;
-					// µ÷ÓÃ mµÄ add º¯Êý£¬½«8¸öÕûÊý×÷Îª²ÎÊý´«µÝ
+					// è°ƒç”¨ mçš„ add å‡½æ•°ï¼Œå°†8ä¸ªæ•´æ•°ä½œä¸ºå‚æ•°ä¼ é€’
 					m->add(a, b, c, d, e, f, g, h, p1, p2);
-					//Á¬Ðø¶ÁÈ¡Êý¾Ý£¬Óöµ½breakÌø³öÑ­»·
+					//è¿žç»­è¯»å–æ•°æ®ï¼Œé‡åˆ°breakè·³å‡ºå¾ªçŽ¯
 					if (line4.find("break") != std::string::npos) { break; }
 
 				}
@@ -231,8 +222,8 @@ void engine::LoadGame()
 			if (line4.find("break") != std::string::npos) { break; }
 		}
 
-		//moveÒÑÍê³É
-		//ÒÔÏÂÐ´sp
+		//moveå·²å®Œæˆ
+		//ä»¥ä¸‹å†™sp
 		while (getline(configFile, line5)) {
 
 			if (line5.find("spirit") != string::npos) {
@@ -250,7 +241,7 @@ void engine::LoadGame()
 		sp = new Spirit();
 		sp->addplayer(p1, p2);
 		sp->getm(m);
-		//spÒÑÍê³É
+		//spå·²å®Œæˆ
 		p1->GetBarrier(barrier);
 		p2->GetBarrier(barrier);
 		p1->GetMoveBarrier(m);

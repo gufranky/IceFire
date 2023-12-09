@@ -36,7 +36,7 @@ void Diamond::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, Q
 {
 	Q_UNUSED(option);
 	Q_UNUSED(widget);
-	if(!get)
+	if (!get)
 	{
 		if (fire)
 			painter->setPen(QPen(Qt::red, 4));
@@ -44,13 +44,11 @@ void Diamond::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, Q
 			painter->setPen(QPen(Qt::blue, 4));
 		qreal size = 40;
 		qreal halfSize = size / 2.0;
-
-
 		painter->drawLine(0, halfSize, halfSize, 0);
 		painter->drawLine(halfSize, 0, size, halfSize);
 		painter->drawLine(size, halfSize, halfSize, size);
 		painter->drawLine(halfSize, size, 0, halfSize);
-		
+
 	}
 	setPos(x, y);
 }
