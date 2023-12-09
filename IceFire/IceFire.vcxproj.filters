@@ -58,9 +58,6 @@
     <ClCompile Include="IFaccomplish.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="mywidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Spirit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -100,9 +97,6 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="Person.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="mywidget.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="Spirit.h">
