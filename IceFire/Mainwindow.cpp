@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent)
 { 
@@ -11,7 +12,7 @@ MainWindow::MainWindow(QWidget* parent)
         stackedWidget->setCurrentIndex(0);
         this->setCentralWidget(stackedWidget);
         connect(page1, &start::buttonClicked, this, &MainWindow::onButtonClicked);
-        setContentsMargins(0, 0, 0, 0); // ���ñ߾�Ϊ0
+        setContentsMargins(0, 0, 0, 0); // ÉèÖÃ±ß¾àÎª0
 
     }
 }
@@ -25,6 +26,7 @@ MainWindow::~MainWindow()
         delete page2;
     if (page3 != nullptr)
        delete page3;
+
 }
 
 void MainWindow::onButtonClicked()
