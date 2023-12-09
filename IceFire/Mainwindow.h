@@ -4,7 +4,6 @@
 #include <QStackedWidget>
 #include "engine.h"
 #include "start.h"
-#include "mywidget.h"
 
 namespace Ui {
     class Mainwindow;
@@ -25,7 +24,5 @@ public:
 
 private:
     Ui::Mainwindow* ui;
-    MyWidget* myWidget;
-    QPushButton* mainButton;
 };
 #endif // MAINWINDOW_H
