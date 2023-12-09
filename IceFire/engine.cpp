@@ -4,8 +4,8 @@
 engine::engine(QWidget* par)
 {
 	Gameover = new QLabel("Gameover", par);
-	Gameover->setFont(QFont("Arial", 40));  
-	Gameover->setAlignment(Qt::AlignCenter); 
+	Gameover->setFont(QFont("Arial", 40));
+	Gameover->setAlignment(Qt::AlignCenter);
 	Gameover->setGeometry(760, 440, 400, 200);
 	parent = par;
 	LoadGame();
@@ -41,7 +41,8 @@ void engine::keyPressEvent(QKeyEvent* event)
 	{
 		emit signalA(3);
 	}
-	if (event->key() == Qt::Key_Up) { emit signalA(8);
+	if (event->key() == Qt::Key_Up) {
+		emit signalA(8);
 	}
 	else if (event->key() == Qt::Key_Left) {
 		emit signalA(9);
@@ -133,7 +134,7 @@ void engine::LoadGame()
 	p2->GetAnother(p1);
 	barrier = new Barrier();
 	//以下写wall
-	
+
 	//wall已完成
 	m = new MoveBarrier();
 	//以下写move
@@ -148,7 +149,7 @@ void engine::LoadGame()
 	p2->GetBarrier(barrier);
 	p1->GetMoveBarrier(m);
 	p2->GetMoveBarrier(m);
-	scene=new QGraphicsScene(parent);
+	scene = new QGraphicsScene(parent);
 	barrier->show(scene);
 	sp->show(scene);
 	m->show(scene);
