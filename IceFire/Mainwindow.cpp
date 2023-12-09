@@ -1,12 +1,4 @@
 #include "mainwindow.h"
-#include "engine.h"
-#include "start.h"
-#include <QPushButton>
-#include <QPixmap>
-#include <QPalette>
-#include <QStackedWidget>
-#include <QVBoxLayout>
-
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent)
 { 
@@ -29,15 +21,24 @@ MainWindow::~MainWindow()
     delete  stackedWidget;
     if (page1 != nullptr)
     delete page1;
-    if(page2!=nullptr)
+    if (page2 != nullptr)
         delete page2;
+    if (page3 != nullptr)
+       delete page3;
 }
 
 void MainWindow::onButtonClicked()
 {
     this->setWindowTitle("Menu");
-    page2 = new engine(this);
+    page2 = new LevelChoose(this);
     stackedWidget->addWidget(page2);
     stackedWidget->setCurrentIndex(1);
-    qDebug() << "Main Button Clicked!";
+    connect(page2, &LevelChoose::level, this, &MainWindow::ChooseFinish);
+}
+void MainWindow::ChooseFinish(int i)
+{
+    this->setWindowTitle("Game");
+    page3 = new engine(this);
+    stackedWidget->addWidget(page3);
+    stackedWidget->setCurrentIndex(2);
 }

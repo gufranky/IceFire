@@ -95,6 +95,7 @@
     <ClCompile Include="Door.cpp" />
     <ClCompile Include="engine.cpp" />
     <ClCompile Include="IFaccomplish.cpp" />
+    <ClCompile Include="LevelChoose.cpp" />
     <ClCompile Include="Mainwindow.cpp" />
     <ClCompile Include="MoveBarrier.cpp" />
     <ClCompile Include="MoveBarrierBase.cpp" />
@@ -122,6 +123,7 @@
     <ClInclude Include="Door.h" />
     <QtMoc Include="Spirit.h" />
     <QtMoc Include="MoveBarrierBase.h" />
+    <QtMoc Include="LevelChoose.h" />
     <ClInclude Include="MoveBarrier.h" />
     <ClInclude Include="StoneButton.h" />
     <ClInclude Include="WaterFire.h" />
