@@ -20,4 +20,5 @@ private:
 	QPushButton *LevelButton;
 signals:
 	void level(int i);
+	
 };

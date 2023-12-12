@@ -35,7 +35,7 @@ int LevelChoose::levelCompleted = 0;
 
 LevelChoose::~LevelChoose()
 {
-	delete LevelButton;
+	delete[] LevelButton;
 }
 
 void LevelChoose::handleLevelButtonClick(int Level)
