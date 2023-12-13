@@ -1,4 +1,6 @@
 #include "LevelChoose.h"
+#include <QPixmap>
+#include <QPainter>
 LevelChoose::LevelChoose(QWidget* parent) :
 	QWidget(parent)
 
@@ -8,7 +10,7 @@ LevelChoose::LevelChoose(QWidget* parent) :
 		for (int j = 0; j < 5; j++)
 		{
 			LevelButton[i * 5 + j].setParent(this);
-			LevelButton[i * 5 + j].move(100 + 200 * j, 100 + 200 * i);
+			LevelButton[i * 5 + j].move(460 + 200 * j, 100 + 200 * i);
 			LevelButton[i * 5 + j].setFixedSize(100, 100);
 			LevelButton[i * 5 + j].setText(QString::number(i * 5 + j + 1));
 			LevelButton[i * 5 + j].show();
@@ -18,6 +20,8 @@ LevelChoose::LevelChoose(QWidget* parent) :
 				"    color: white;"
 				"    border: none;"
 				"    font-size: 28px;"
+				"    background-image: url(:/IceFire/re/button.png);"
+				"    background-position: center;"
 				"}"
 				"QPushButton:hover {"
 				"    background-color: lightblue;"  // 鼠标悬停时的背景色
@@ -30,8 +34,14 @@ LevelChoose::LevelChoose(QWidget* parent) :
 			);
 		}
 }
-int LevelChoose::currentLevel = 1;
-int LevelChoose::levelCompleted = 0;
+void LevelChoose::paintEvent(QPaintEvent* event)
+{
+	QWidget::paintEvent(event);
+
+	QPainter painter(this);
+	QPixmap backgroundImage(":/IceFire/re/back2.png"); // 在.qrc文件中添加的背景图像文件的路径
+	painter.drawPixmap(0, 0, width(), height(), backgroundImage);
+}
 
 LevelChoose::~LevelChoose()
 {
