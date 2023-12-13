@@ -82,6 +82,9 @@
     <ClCompile Include="StoneButton.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="LevelChoose.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Mainwindow.h">
@@ -103,6 +106,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="MoveBarrierBase.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="LevelChoose.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
@@ -128,10 +134,5 @@
     <ClInclude Include="StoneButton.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="C:\Users\11361\Desktop\l1.cfg">
-      <Filter>Translation Files</Filter>
-    </None>
   </ItemGroup>
 </Project>
