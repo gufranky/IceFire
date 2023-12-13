@@ -1,6 +1,8 @@
 #include "LevelChoose.h"
 #include <QPixmap>
 #include <QPainter>
+int LevelChoose::currentLevel = 1;
+int LevelChoose::levelCompleted = 0;
 LevelChoose::LevelChoose(QWidget* parent) :
 	QWidget(parent)
 
