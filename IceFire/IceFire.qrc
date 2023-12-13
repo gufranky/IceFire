@@ -24,5 +24,6 @@
         <file>re/back1.jpg</file>
         <file>re/back2.png</file>
         <file>re/button.png</file>
+        <file>re/buttonpush.png</file>
     </qresource>
 </RCC>

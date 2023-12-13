@@ -26,8 +26,10 @@ LevelChoose::LevelChoose(QWidget* parent) :
 				"    background-position: center;"
 				"}"
 				"QPushButton:hover {"
-				"    background-color: lightblue;"  // 鼠标悬停时的背景色
+				"    background-image: url(:/IceFire/re/buttonpush.png);" // 鼠标悬停时的背景图像路径
+				"    background-position: center;"
 				"}");
+
 
 			QObject::connect(&LevelButton[i * 5 + j], &QPushButton::clicked, this, [=]()
 				{
