@@ -1,17 +1,12 @@
 #include "LevelChoose.h"
-#include <QPixmap>
-#include <QPainter>
-#include <QGraphicsScene>
-#include <QGraphicsTextItem>
-#include <QFont>
-#include <QTimer>
-#include <QPropertyAnimation>
+
 int LevelChoose::currentLevel = 1;
 int LevelChoose::levelCompleted = 0;
 LevelChoose::LevelChoose(QWidget* parent) :
 	QWidget(parent)
 
 {
+	p = parent;
 	LevelButton = new QPushButton[20];
 	for (int i = 0; i < 4; i++)
 		for (int j = 0; j < 5; j++)
@@ -57,6 +52,8 @@ void LevelChoose::paintEvent(QPaintEvent* event)
 LevelChoose::~LevelChoose()
 {
 	delete[] LevelButton;
+	delete scene;
+	delete fadeAnimation;
 }
 
 
@@ -74,40 +71,27 @@ void LevelChoose::handleLevelButtonClick(int Level)
     else
     {
         // 创建文本项、图形场景和计时器
-        QGraphicsTextItem* textItem = new QGraphicsTextItem("请先完成前置关卡");
-        QGraphicsScene* scene = new QGraphicsScene();
-        QTimer timer;
+		textItem = new QLabel("请先完成前置关卡", p);
 
-        // 设置文本样式和位置
-        QFont font("Arial", 16);
-        textItem->setFont(font);
-        textItem->setDefaultTextColor(Qt::black);
-        QPointF sceneCenter = scene->sceneRect().center();
-        textItem->setPos(sceneCenter.x() - textItem->boundingRect().width() / 2,
-                         sceneCenter.y() - textItem->boundingRect().height() / 2);
-        textItem->setZValue(1);  // 设置较高的Z坐标值
 
-        // 设置透明度动画
-        QPropertyAnimation* fadeAnimation = new QPropertyAnimation(textItem, "opacity");
-        fadeAnimation->setDuration(1500);
+        textItem->show();
+        fadeAnimation = new QPropertyAnimation(textItem, "windowOpacity");
+		textItem->setWindowOpacity(0.0);
+        fadeAnimation->setDuration(3000);
         fadeAnimation->setStartValue(0.0);
         fadeAnimation->setEndValue(1.0);
-
+		
+	   
         // 将文本项添加到图形场景中
-        scene->addItem(textItem);
         // 启动定时器，开始显示文本项
-        timer.start(50);  
+        timer.start(1500);   
+		fadeAnimation->start();
         // 槽函数，处理定时器超时信号
         QObject::connect(&timer, &QTimer::timeout, [=]() {
-            // 启动透明度动画
-            fadeAnimation->start();
-
-            // 将文本项从场景中移除
-            scene->removeItem(textItem);
-
+            // 启动透明度动
+			timer.stop();
+			delete textItem;
             // 删除动画和文本项
-            delete fadeAnimation;
-            delete textItem;
             });
     }
 }
