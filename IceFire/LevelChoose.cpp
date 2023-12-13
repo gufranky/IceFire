@@ -1,6 +1,11 @@
 #include "LevelChoose.h"
 #include <QPixmap>
 #include <QPainter>
+#include <QGraphicsScene>
+#include <QGraphicsTextItem>
+#include <QFont>
+#include <QTimer>
+#include <QPropertyAnimation>
 int LevelChoose::currentLevel = 1;
 int LevelChoose::levelCompleted = 0;
 LevelChoose::LevelChoose(QWidget* parent) :
@@ -33,17 +38,19 @@ LevelChoose::LevelChoose(QWidget* parent) :
 
 			QObject::connect(&LevelButton[i * 5 + j], &QPushButton::clicked, this, [=]()
 				{
-					handleLevelButtonClick(i * 5 + j + 1);
+				 handleLevelButtonClick(i * 5 + j + 1);
 				}
 			);
 		}
 }
+
+
 void LevelChoose::paintEvent(QPaintEvent* event)
 {
 	QWidget::paintEvent(event);
 
 	QPainter painter(this);
-	QPixmap backgroundImage(":/IceFire/re/back2.png"); // 在.qrc文件中添加的背景图像文件的路径
+	QPixmap backgroundImage(":/IceFire/re/back20.png"); // 在.qrc文件中添加的背景图像文件的路径
 	painter.drawPixmap(0, 0, width(), height(), backgroundImage);
 }
 
@@ -52,23 +59,60 @@ LevelChoose::~LevelChoose()
 	delete[] LevelButton;
 }
 
+
 void LevelChoose::handleLevelButtonClick(int Level)
 {
-	// 如果点击的关卡小于当前关卡，已完成
-	if (Level <= currentLevel)
-	{
-		emit level(Level);
-		levelCompleted = std::max(levelCompleted, Level);
-		// 解锁下一关
-		if (Level == currentLevel)
-			unlockNextLevel();
-	}
-	else 
-	{
-		// 提示未完成前置关卡
-		qDebug() << "请先完成前置关卡";
-	}
+    // 如果点击的关卡小于当前关卡，已完成
+    if (Level <= currentLevel)
+    {
+        emit level(Level);
+        levelCompleted = std::max(levelCompleted, Level);
+        // 解锁下一关
+        if (Level == currentLevel)
+            unlockNextLevel();
+    }
+    else
+    {
+        // 创建文本项、图形场景和计时器
+        QGraphicsTextItem* textItem = new QGraphicsTextItem("请先完成前置关卡");
+        QGraphicsScene* scene = new QGraphicsScene();
+        QTimer timer;
+
+        // 设置文本样式和位置
+        QFont font("Arial", 16);
+        textItem->setFont(font);
+        textItem->setDefaultTextColor(Qt::black);
+        QPointF sceneCenter = scene->sceneRect().center();
+        textItem->setPos(sceneCenter.x() - textItem->boundingRect().width() / 2,
+                         sceneCenter.y() - textItem->boundingRect().height() / 2);
+        textItem->setZValue(1);  // 设置较高的Z坐标值
+
+        // 设置透明度动画
+        QPropertyAnimation* fadeAnimation = new QPropertyAnimation(textItem, "opacity");
+        fadeAnimation->setDuration(1500);
+        fadeAnimation->setStartValue(0.0);
+        fadeAnimation->setEndValue(1.0);
+
+        // 将文本项添加到图形场景中
+        scene->addItem(textItem);
+        // 启动定时器，开始显示文本项
+        timer.start(50);  
+        // 槽函数，处理定时器超时信号
+        QObject::connect(&timer, &QTimer::timeout, [=]() {
+            // 启动透明度动画
+            fadeAnimation->start();
+
+            // 将文本项从场景中移除
+            scene->removeItem(textItem);
+
+            // 删除动画和文本项
+            delete fadeAnimation;
+            delete textItem;
+            });
+    }
 }
+
+
 void LevelChoose::unlockNextLevel()
 {
 	// 解锁下一关
