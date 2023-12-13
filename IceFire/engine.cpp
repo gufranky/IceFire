@@ -12,7 +12,10 @@ engine::engine(QWidget* par)
 	Gameover->setFont(QFont("Arial", 40));
 	Gameover->setAlignment(Qt::AlignCenter);
 	Gameover->setGeometry(760, 440, 400, 200);
-	parent = par;
+	parent = par;	
+	back = new QPushButton("back",par);
+	back->setFixedSize(400, 100);
+	back->move(760, 900);
 	LoadGame();
 
 }
@@ -27,6 +30,7 @@ engine::~engine()
 	delete p2;
 	delete m;
 	delete scene;
+	delete back;
 }
 void engine::keyPressEvent(QKeyEvent* event)
 {
@@ -120,11 +124,13 @@ void engine::reload()
 	sp->reload();
 	m->reload();
 	Gameover->hide();
+	back->hide();
 }
 void engine::gameover()
 {
 	timer.stop();
 	Gameover->show();
+	back->show();
 }
 void engine::LoadGame()
 {
@@ -263,6 +269,7 @@ void engine::LoadGame()
 		layout->setContentsMargins(0, 0, 0, 0);
 		//layout->addWidget(Gameover);
 		Gameover->raise();
+		back->raise();
 		setLayout(layout);
 		setFocusPolicy(Qt::StrongFocus);
 		timer.setInterval(30);
@@ -274,6 +281,9 @@ void engine::LoadGame()
 		QObject::connect(sp, &Spirit::win, this, &engine::Win);
 		QObject::connect(p1, &IFaccomplish::stuck, this, &engine::gameover);
 		QObject::connect(p2, &IFaccomplish::stuck, this, &engine::gameover);
+		QObject::connect(back, &QPushButton::clicked, [=]() {
+			emit BackMenu();
+			});
 	}
 	configFile.close();
 }
@@ -283,4 +293,6 @@ void engine::Win()
 	Gameover->setStyleSheet("color: red;");
 	Gameover->setText("Win!!!");
 	Gameover->show();
+	back->show();
+	emit winnew();
 }

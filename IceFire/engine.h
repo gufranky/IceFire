@@ -10,6 +10,7 @@
 #include <qlabel.h>
 #include "Spirit.h"
 #include"MoveBarrier.h"
+#include <qpushbutton.h>
 class engine  : public QWidget
 {
 	Q_OBJECT
@@ -40,7 +41,10 @@ private:
 	int p1x, p1y,p2x,p2y;
 	QTimer timer;
 	QWidget* parent;
+	QPushButton* back;
 signals:
 	void signalA(int value);
+	void winnew();
+	void BackMenu();
 };
 #endif
