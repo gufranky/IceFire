@@ -120,9 +120,6 @@ void engine::reload()
 	sp->reload();
 	m->reload();
 	Gameover->hide();
-	scene = new QGraphicsScene(parent);
-	scene->addItem(p1);
-	scene->addItem(p2);
 }
 void engine::gameover()
 {
@@ -224,6 +221,9 @@ void engine::LoadGame()
 
 		//move已完成
 		//以下写sp
+		sp = new Spirit();
+		sp->addplayer(p1, p2);
+		sp->getm(m);
 		while (getline(configFile, line5)) {
 
 			if (line5.find("spirit") != string::npos) {
@@ -238,15 +238,14 @@ void engine::LoadGame()
 			}
 			if (line5.find("break") != std::string::npos) { break; }
 		}
-		sp = new Spirit();
-		sp->addplayer(p1, p2);
-		sp->getm(m);
 		//sp已完成
 		p1->GetBarrier(barrier);
 		p2->GetBarrier(barrier);
 		p1->GetMoveBarrier(m);
 		p2->GetMoveBarrier(m);
 		scene = new QGraphicsScene(parent);
+		scene->addItem(p1);
+		scene->addItem(p2);
 		barrier->show(scene);
 		sp->show(scene);
 		m->show(scene);
