@@ -12,10 +12,11 @@ class LevelChoose  : public QWidget
 public:
 	LevelChoose(QWidget *parent);
 	~LevelChoose();
-	void handleLevelButtonClick(int i);
+	void paintEvent(QPaintEvent* event);
+	void handleLevelButtonClick(int Level);
 	void unlockNextLevel();
 	static int currentLevel;//当前解锁的关卡
-	static int  levelCompleted;//当前完成的关卡
+	static int levelCompleted;//当前完成的关卡
 private:
 	QPushButton *LevelButton;
 signals:

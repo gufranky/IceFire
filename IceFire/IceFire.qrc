@@ -21,5 +21,8 @@
         <file>re/iceydown.png</file>
         <file>re/iceyplus.png</file>
         <file>re/icrd.png</file>
+        <file>re/back1.jpg</file>
+        <file>re/back2.png</file>
+        <file>re/button.png</file>
     </qresource>
 </RCC>
