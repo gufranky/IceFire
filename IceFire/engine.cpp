@@ -6,7 +6,7 @@
 #include<iostream>
 using namespace std;
 
-engine::engine(QWidget* par)
+engine::engine(int p, QWidget* par,QTcpSocket* S)
 {
 	Gameover = new QLabel("Gameover", par);
 	Gameover->setFont(QFont("Arial", 40));
@@ -17,9 +17,49 @@ engine::engine(QWidget* par)
 	back->setFixedSize(400, 100);
 	back->move(760, 900);
 	LoadGame();
+	player = p;
+	socket = S;
+	for (int i = 0; i <= 9; i++)
+	{
+		signal[i] = 0;
+	}
+	if (socket != nullptr)
+	{
+		connect(socket, &QTcpSocket::readyRead, this, &engine::receiveData);
+	}
+}
+void engine::receiveData()
+{
+	QByteArray data = socket->readAll();
+	QString c = QString::fromUtf8(data);
+	if (c == "Reload")
+	{
+		reload();
+	}
+	else if (c == "Back")
+	{
+		emit BackMenu();
+	}
+	else
+	{
+		if (player == 1)
+		{
+			for (int i = 4; i <= 7; i++)
+			{
+				signal[i] = c[i].digitValue();
+			}
+		}
+		else
+		{
+			for (int i = 0; i <= 3; i++)
+			{
+				signal[i] = c[i].digitValue();
+			}
+		}
+		signal[8] = max(c[8].digitValue(), signal[8]);
+	}
 
 }
-
 engine::~engine()
 {
 	delete p1;
@@ -34,81 +74,116 @@ engine::~engine()
 }
 void engine::keyPressEvent(QKeyEvent* event)
 {
-	if (event->text() == "w")
+	if (player != 2)
 	{
-		emit signalA(0);
+		if (event->text() == "w")
+		{
+			signal[0] = 1;
+		}
+		if (event->text() == "a")
+		{
+			signal[1] = 1;
+		}
+		if (event->text() == "s")
+		{
+			signal[2] = 1;
+		}
+		if (event->text() == "d")
+		{
+			signal[3] = 1;
+		}
 	}
-	if (event->text() == "a")
+	if (player != 1)
 	{
-		emit signalA(1);
+		if (event->key() == Qt::Key_Up) {
+		signal[4] = 1;
+		}
+		if (event->key() == Qt::Key_Left) {
+			signal[5] = 1;
+		}
+		if (event->key() == Qt::Key_Down) {
+			signal[6] = 1;
+		}
+		if (event->key() == Qt::Key_Right) {
+			signal[7] = 1;
+		}
 	}
-	if (event->text() == "s")
-	{
-		emit signalA(2);
-	}
-	if (event->text() == "d")
-	{
-		emit signalA(3);
-	}
-	if (event->key() == Qt::Key_Up) {
-		emit signalA(8);
-	}
-	else if (event->key() == Qt::Key_Left) {
-		emit signalA(9);
-	}
-	else if (event->key() == Qt::Key_Down) {
-		emit signalA(10);
-	}
-	else if (event->key() == Qt::Key_Right) {
-		emit signalA(11);
-	}
+	
 	if (event->text() == "r")
 	{
+		signal[9] = 1;
 		reload();
+		if (socket != nullptr)
+		{
+			socket->write(QString("Reload").toUtf8());
+			socket->flush();
+		}
+		
 	}
 	if (event->text() == "e")
 	{
-		emit signalA(16);
+		signal[8] = 1;
 	}
 
 }
 void engine::keyReleaseEvent(QKeyEvent* event)
 {
-	if (event->text() == "w")
+	if (player != 2)
 	{
-		emit signalA(4);
+		if (event->text() == "w")
+		{
+			signal[0] = 0;
+		}
+		if (event->text() == "a")
+		{
+			signal[1] = 0;
+		}
+		if (event->text() == "s")
+		{
+			signal[2] = 0;
+		}
+		if (event->text() == "d")
+		{
+			signal[3] = 0;
+		}
 	}
-	if (event->text() == "a")
+	if (player != 1)
 	{
-		emit signalA(5);
+		if (event->key() == Qt::Key_Up) {
+			signal[4] = 0;
+		}
+		else if (event->key() == Qt::Key_Left) {
+			signal[5] = 0;
+		}
+		else if (event->key() == Qt::Key_Down) {
+			signal[6] = 0;
+		}
+		else if (event->key() == Qt::Key_Right) {
+			signal[7] = 0;
+		}
 	}
-	if (event->text() == "s")
-	{
-		emit signalA(6);
-	}
-	if (event->text() == "d")
-	{
-		emit signalA(7);
-	}
-	if (event->key() == Qt::Key_Up) {
-		emit signalA(12);
-	}
-	else if (event->key() == Qt::Key_Left) {
-		emit signalA(13);
-	}
-	else if (event->key() == Qt::Key_Down) {
-		emit signalA(14);
-	}
-	else if (event->key() == Qt::Key_Right) {
-		emit signalA(15);
-	}
+	
 	if (event->text() == "e")
 	{
-		emit signalA(17);
+		signal[8] = 0;
 	}
 }
 void engine::Update()
 {
+	QString message;
+	for (int i = 0; i <= 8; i++)
+	{
+		message += QString::number(signal[i]);
+	}
+	if (socket != nullptr)
+	{
+		socket->write(message.toUtf8());
+		socket->flush();
+	}
+	for (int i = 0; i <= 8; i++)
+	{
+		emit signalA(i+((signal[i]==1)?0:9));
+	}
 	p1->TimeChange();
 	p2->TimeChange();
 	sp->inte();
@@ -282,7 +357,14 @@ void engine::LoadGame()
 		QObject::connect(p1, &IFaccomplish::stuck, this, &engine::gameover);
 		QObject::connect(p2, &IFaccomplish::stuck, this, &engine::gameover);
 		QObject::connect(back, &QPushButton::clicked, [=]() {
+			if(socket!=nullptr)
+			{
+				socket->write(QString("Back").toUtf8());
+				socket->flush();
+				QObject::disconnect(socket, &QTcpSocket::readyRead, this, &engine::receiveData);
+			}
 			emit BackMenu();
+			
 			});
 	}
 	configFile.close();
