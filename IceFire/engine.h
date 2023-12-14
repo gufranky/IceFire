@@ -11,12 +11,14 @@
 #include "Spirit.h"
 #include"MoveBarrier.h"
 #include <qpushbutton.h>
+#include <QtWidgets>
+#include <QtNetwork>
 class engine  : public QWidget
 {
 	Q_OBJECT
 
 public:
-	engine(QWidget *parent=nullptr);
+	engine(int p,QWidget *parent=nullptr, QTcpSocket* s=nullptr);
 	~engine();
 	IFaccomplish*p1;
 	IFaccomplish* p2;
@@ -28,8 +30,11 @@ public:
 	Spirit* sp;
 	MoveBarrier* m;
 	Door* d;
-
+	QTcpSocket* socket;
 	Barrier* barrier;
+	int signal[10];
+	int player;
+	int more;
 	void keyPressEvent(QKeyEvent* event) override;
 	void keyReleaseEvent(QKeyEvent* event) override;
 	void Update();
@@ -37,6 +42,7 @@ public:
 	void Win();
 	void gameover();
 	void LoadGame();
+	void receiveData();
 private:
 	int p1x, p1y,p2x,p2y;
 	QTimer timer;

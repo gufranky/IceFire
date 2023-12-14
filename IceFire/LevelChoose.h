@@ -10,7 +10,7 @@ class LevelChoose  : public QWidget
 	Q_OBJECT
 
 public:
-	LevelChoose(QWidget *parent);
+	LevelChoose(int p,QWidget *parent);
 	~LevelChoose();
 	void paintEvent(QPaintEvent* event);
 	void handleLevelButtonClick(int Level);

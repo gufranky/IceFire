@@ -20,13 +20,13 @@ class start : public QWidget
 public:
     start(QWidget* parent = nullptr);
     ~start();
-    void onStartButtonClicked();
 private:
-    QPushButton* startButton;
+    QPushButton* startButton,*moreButton;
     QLabel* imageLabel;
 signals:
     // 定义一个信号，表示按钮被点击
     void buttonClicked();
+    void moreClicked();
 };
 
 #endif // START_H
