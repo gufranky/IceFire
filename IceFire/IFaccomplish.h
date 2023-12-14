@@ -25,35 +25,35 @@ public slots:
 				s = true;
 			if (value == 3)
 				d = true;
-			if (value == 4)
+			if (value == 9)
 				w = false;
-			if (value == 5)
+			if (value == 10)
 				a = false;
-			if (value == 6)
+			if (value == 11)
 				s = false;
-			if (value == 7)
+			if (value == 12)
 				d = false;
 		}
 		else
 		{
-			if (value == 8)
+			if (value == 4)
 				w = true;
-			if (value == 9)
+			if (value == 5)
 				a = true;
-			if (value == 10)
+			if (value == 6)
 				s = true;
-			if (value == 11)
+			if (value == 7)
 				d = true;
-			if (value == 12)
-				w = false;
 			if (value == 13)
-				a = false;
+				w = false;
 			if (value == 14)
-				s = false;
+				a = false;
 			if (value == 15)
+				s = false;
+			if (value == 16)
 				d = false;
 		}
-		if (value == 16)
+		if (value == 8)
 			Epress = true;
 		if (value == 17)
 			Epress = false;

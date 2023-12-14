@@ -38,7 +38,7 @@
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
     <QtInstall>5.14.2_msvc2017_64</QtInstall>
-    <QtModules>core;gui;multimedia;widgets;multimediawidgets</QtModules>
+    <QtModules>core;network;gui;multimedia;widgets;multimediawidgets</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
@@ -100,6 +100,7 @@
     <ClCompile Include="MoveBarrier.cpp" />
     <ClCompile Include="MoveBarrierBase.cpp" />
     <ClCompile Include="Person.cpp" />
+    <ClCompile Include="PersonChoose.cpp" />
     <ClCompile Include="Spirit.cpp" />
     <ClCompile Include="start.cpp" />
     <ClCompile Include="StoneButton.cpp" />
@@ -125,6 +126,7 @@
     <QtMoc Include="MoveBarrierBase.h" />
     <QtMoc Include="LevelChoose.h" />
     <ClInclude Include="MoveBarrier.h" />
+    <QtMoc Include="PersonChoose.h" />
     <ClInclude Include="StoneButton.h" />
     <ClInclude Include="WaterFire.h" />
     <QtMoc Include="engine.h" />

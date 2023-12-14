@@ -3,7 +3,7 @@
 #include <QPainter>
 int LevelChoose::currentLevel = 1;
 int LevelChoose::levelCompleted = 0;
-LevelChoose::LevelChoose(QWidget* parent) :
+LevelChoose::LevelChoose(int p,QWidget* parent) :
 	QWidget(parent)
 
 {
@@ -29,7 +29,10 @@ LevelChoose::LevelChoose(QWidget* parent) :
 				"    background-image: url(:/IceFire/re/buttonpush.png);" // Êó±êÐüÍ£Ê±µÄ±³¾°Í¼ÏñÂ·¾¶
 				"    background-position: center;"
 				"}");
-
+			if (p == 2)
+			{
+				LevelButton[i * 5 + j].setEnabled(false);
+			}
 
 			QObject::connect(&LevelButton[i * 5 + j], &QPushButton::clicked, this, [=]()
 				{
