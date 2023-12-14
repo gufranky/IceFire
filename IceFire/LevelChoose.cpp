@@ -76,7 +76,7 @@ void LevelChoose::handleLevelButtonClick(int Level)
 
 		// 设置文本项的字体颜色为白色
 		QPalette palette = textItem->palette();
-		palette.setColor(QPalette::WindowText, Qt::blue);
+		palette.setColor(QPalette::WindowText, Qt::Key_LightBulb);
 		textItem->setPalette(palette);
 
 		// 设置文本项的位置
