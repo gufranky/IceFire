@@ -13,6 +13,13 @@
 #include <qpushbutton.h>
 #include <QtWidgets>
 #include <QtNetwork>
+#include <QMediaPlayer>
+#include <QMediaPlaylist>
+#include <QApplication>
+#include <QPushButton>
+#include <QPalette>
+#include <QStackedWidget>
+#include <QLabel>
 class engine  : public QWidget
 {
 	Q_OBJECT
@@ -43,11 +50,14 @@ public:
 	void gameover();
 	void LoadGame();
 	void receiveData();
+	void LoadBack();
 private:
 	int p1x, p1y,p2x,p2y;
 	QTimer timer;
 	QWidget* parent;
 	QPushButton* back;
+	QMediaPlayer* player;
+	
 signals:
 	void signalA(int value);
 	void winnew();

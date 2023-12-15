@@ -6,7 +6,6 @@ LevelChoose::LevelChoose(int p,QWidget* parent) :
 	QWidget(parent)
 
 {
-	p = parent;
 	LevelButton = new QPushButton[20];
 	for (int i = 0; i < 4; i++)
 		for (int j = 0; j < 5; j++)
