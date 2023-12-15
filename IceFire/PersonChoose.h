@@ -9,6 +9,8 @@
 #include <QPalette>
 #include <QStackedWidget>
 #include <QLabel>
+#include <QtWidgets>
+#include <QtNetwork>
 
 class PersonChoose  : public QWidget
 {
@@ -16,10 +18,15 @@ class PersonChoose  : public QWidget
 		QMediaPlayer* player;
 	QMediaPlaylist* playlist;
 public:
-	PersonChoose(QWidget *parent);
+	PersonChoose(QTcpSocket* s, QWidget *parent);
 	~PersonChoose();
+	QLabel* word;
+	QTcpSocket* socket;
+	QLineEdit* lineEdit;
+	QPushButton* button;
 	QPushButton* fireButton, * iceButton;
 	QLabel* imageLabel;
+	void receiveData();
 signals:
 	// 定义一个信号，表示按钮被点击
 	void iceClicked();
