@@ -6,7 +6,6 @@ LevelChoose::LevelChoose(int p,QWidget* parent) :
 	QWidget(parent)
 
 {
-	p = parent;
 	LevelButton = new QPushButton[20];
 	for (int i = 0; i < 4; i++)
 		for (int j = 0; j < 5; j++)
@@ -17,7 +16,7 @@ LevelChoose::LevelChoose(int p,QWidget* parent) :
 			LevelButton[i * 5 + j].setText(QString::number(i * 5 + j + 1));
 			LevelButton[i * 5 + j].show();
 			LevelButton[i * 5 + j].setStyleSheet("QPushButton {"
-				"    border-radius: 20px;"  // ¿ØÖÆÔ²½Ç°ë¾¶£¬¿ÉÒÔ¸ù¾İĞèÒªµ÷Õû
+				"    border-radius: 20px;"  // æ§åˆ¶åœ†è§’åŠå¾„ï¼Œå¯ä»¥æ ¹æ®éœ€è¦è°ƒæ•´
 				"    background-color:rgb(0, 128, 255);"
 				"    color: white;"
 				"    border: none;"
@@ -26,7 +25,7 @@ LevelChoose::LevelChoose(int p,QWidget* parent) :
 				"    background-position: center;"
 				"}"
 				"QPushButton:hover {"
-				"    background-image: url(:/IceFire/re/buttonpush.png);" // Êó±êĞüÍ£Ê±µÄ±³¾°Í¼ÏñÂ·¾¶
+				"    background-image: url(:/IceFire/re/buttonpush.png);" // é¼ æ ‡æ‚¬åœæ—¶çš„èƒŒæ™¯å›¾åƒè·¯å¾„
 				"    background-position: center;"
 				"}");
 			if (p == 2)
@@ -47,7 +46,7 @@ void LevelChoose::paintEvent(QPaintEvent* event)
 	QWidget::paintEvent(event);
 
 	QPainter painter(this);
-	QPixmap backgroundImage(":/IceFire/re/back2.png"); // ÔÚ.qrcÎÄ¼şÖĞÌí¼ÓµÄ±³¾°Í¼ÏñÎÄ¼şµÄÂ·¾¶
+	QPixmap backgroundImage(":/IceFire/re/back2.png"); // åœ¨.qrcæ–‡ä»¶ä¸­æ·»åŠ çš„èƒŒæ™¯å›¾åƒæ–‡ä»¶çš„è·¯å¾„
 	painter.drawPixmap(0, 0, width(), height(), backgroundImage);
 }
 
@@ -60,32 +59,32 @@ LevelChoose::~LevelChoose()
 void LevelChoose::handleLevelButtonClick(int Level)
 {
 
-	// Èç¹ûµã»÷µÄ¹Ø¿¨Ğ¡ÓÚµ±Ç°¹Ø¿¨£¬ÒÑÍê³É
+	// å¦‚æœç‚¹å‡»çš„å…³å¡å°äºå½“å‰å…³å¡ï¼Œå·²å®Œæˆ
 	if (Level <= currentLevel)
 	{
 		emit level(Level);
 		levelCompleted = std::max(levelCompleted, Level);
-		// ½âËøÏÂÒ»¹Ø
+		// è§£é”ä¸‹ä¸€å…³
 		if (Level == currentLevel)
 			unlockNextLevel();
 	}
 	else
-	{		// ´´½¨ÎÄ±¾Ïî¡¢Í¼ĞÎ³¡¾°ºÍ¼ÆÊ±Æ÷
+	{		// åˆ›å»ºæ–‡æœ¬é¡¹ã€å›¾å½¢åœºæ™¯å’Œè®¡æ—¶å™¨
 		textItem = new QLabel("Please complete the pre-level from the first level", p);
 
-		// ÉèÖÃÎÄ±¾µÄ×ÖÌå
-		QFont font("KaiTi", 35, QFont::Bold);  // Ñ¡Ôñ×ÖÌå¡¢´óĞ¡ºÍ´ÖÏ¸
+		// è®¾ç½®æ–‡æœ¬çš„å­—ä½“
+		QFont font("KaiTi", 35, QFont::Bold);  // é€‰æ‹©å­—ä½“ã€å¤§å°å’Œç²—ç»†
 		textItem->setFont(font);
 
-		// ÉèÖÃÎÄ±¾ÏîµÄ×ÖÌåÑÕÉ«Îª°×É«
+		// è®¾ç½®æ–‡æœ¬é¡¹çš„å­—ä½“é¢œè‰²ä¸ºç™½è‰²
 		QPalette palette = textItem->palette();
 		palette.setColor(QPalette::WindowText, Qt::Key_LightBulb);
 		textItem->setPalette(palette);
 
-		// ÉèÖÃÎÄ±¾ÏîµÄÎ»ÖÃ
-		textItem->setGeometry(100, 410, 5000, 300);  // ÉèÖÃ x, y, width, height
+		// è®¾ç½®æ–‡æœ¬é¡¹çš„ä½ç½®
+		textItem->setGeometry(100, 410, 5000, 300);  // è®¾ç½® x, y, width, height
 
-		// ½«ÎÄ±¾ÏîÌí¼Óµ½Í¼ĞÎ³¡¾°ÖĞ
+		// å°†æ–‡æœ¬é¡¹æ·»åŠ åˆ°å›¾å½¢åœºæ™¯ä¸­
 		textItem->show();
 		fadeAnimation = new QPropertyAnimation(textItem, "windowOpacity");
 		textItem->setWindowOpacity(0.0);
@@ -93,9 +92,9 @@ void LevelChoose::handleLevelButtonClick(int Level)
 		fadeAnimation->setStartValue(0.0);
 		fadeAnimation->setEndValue(1.0);
 
-		// Æô¶¯¶¨Ê±Æ÷£¬¿ªÊ¼ÏÔÊ¾ÎÄ±¾Ïî
+		// å¯åŠ¨å®šæ—¶å™¨ï¼Œå¼€å§‹æ˜¾ç¤ºæ–‡æœ¬é¡¹
 		fadeAnimation->start();
-		QObject::disconnect(&timer, &QTimer::timeout, nullptr, nullptr);//¶Ï¿ªÖ®Ç°µÄÁ¬½Ó£¬ÒÔÃâ¶à´Î´¥·¢
+		QObject::disconnect(&timer, &QTimer::timeout, nullptr, nullptr);//æ–­å¼€ä¹‹å‰çš„è¿æ¥ï¼Œä»¥å…å¤šæ¬¡è§¦å‘
 		connect(&timer, &QTimer::timeout, this, [this]() {
 			timer.stop();
 			fadeAnimation->stop();
@@ -111,16 +110,16 @@ void LevelChoose::handleLevelButtonClick(int Level)
 
 	void LevelChoose::unlockNextLevel()
 	{
-		// ½âËøÏÂÒ»¹Ø
+		// è§£é”ä¸‹ä¸€å…³
 		currentLevel++;
 
-		// ¸üĞÂ°´Å¥×´Ì¬
+		// æ›´æ–°æŒ‰é’®çŠ¶æ€
 		for (int i = 0; i < 4; i++)
 			for (int j = 0; j < 5; j++)
 			{
 				int level = i * 5 + j + 1;
 				LevelButton[i * 5 + j].setEnabled(level <= currentLevel);
-				//Ö»ÓĞµ±Ç°½âËøµÄ¹Ø¿¨¼°Ö®Ç°µÄ¹Ø¿¨µÄ°´Å¥²ÅÊÇ¿Éµã»÷µÄ£¬¶øÎ´½âËøµÄ¹Ø¿¨µÄ°´Å¥µã»÷ÎŞĞ§
+				//åªæœ‰å½“å‰è§£é”çš„å…³å¡åŠä¹‹å‰çš„å…³å¡çš„æŒ‰é’®æ‰æ˜¯å¯ç‚¹å‡»çš„ï¼Œè€Œæœªè§£é”çš„å…³å¡çš„æŒ‰é’®ç‚¹å‡»æ— æ•ˆ
 			}
 	}
 
