@@ -2,12 +2,11 @@
 
 int LevelChoose::currentLevel = 1;
 int LevelChoose::levelCompleted = 0;
-LevelChoose::LevelChoose(int p,QWidget* parent) :
+LevelChoose::LevelChoose(int p, QWidget* parent) :
 	QWidget(parent)
-
 {
-	p = parent;
 	LevelButton = new QPushButton[20];
+
 	for (int i = 0; i < 4; i++)
 		for (int j = 0; j < 5; j++)
 		{
@@ -17,7 +16,7 @@ LevelChoose::LevelChoose(int p,QWidget* parent) :
 			LevelButton[i * 5 + j].setText(QString::number(i * 5 + j + 1));
 			LevelButton[i * 5 + j].show();
 			LevelButton[i * 5 + j].setStyleSheet("QPushButton {"
-				"    border-radius: 20px;"  // 控制圆角半径，可以根据需要调整
+				"    border-radius: 20px;" // 控制圆角半径，可以根据需要调整
 				"    background-color:rgb(0, 128, 255);"
 				"    color: white;"
 				"    border: none;"
@@ -29,17 +28,19 @@ LevelChoose::LevelChoose(int p,QWidget* parent) :
 				"    background-image: url(:/IceFire/re/buttonpush.png);" // 鼠标悬停时的背景图像路径
 				"    background-position: center;"
 				"}");
+
 			if (p == 2)
 			{
 				LevelButton[i * 5 + j].setEnabled(false);
 			}
 
-
+			// 连接按钮点击的槽函数
 			QObject::connect(&LevelButton[i * 5 + j], &QPushButton::clicked, this, [=]()
 				{
 					handleLevelButtonClick(i * 5 + j + 1);
-				}
-			);
+				});
+
+			
 		}
 }
 
@@ -72,7 +73,7 @@ void LevelChoose::handleLevelButtonClick(int Level)
 	}
 	else
 	{		// 创建文本项、图形场景和计时器
-		textItem = new QLabel("Please complete the pre-level from the first level", p);
+		textItem = new QLabel("Please complete the pre-level from the first level", this);
 
 		// 设置文本的字体
 		QFont font("KaiTi", 35, QFont::Bold);  // 选择字体、大小和粗细

@@ -12,6 +12,8 @@
 #include <QFont>
 #include <QTimer>
 #include <QPropertyAnimation>
+#include <QSoundEffect>
+#include<QApplication>
 class LevelChoose  : public QWidget
 {
 	Q_OBJECT
@@ -24,13 +26,12 @@ public:
 	void unlockNextLevel();
 	static int currentLevel;//当前解锁的关卡
 	static int levelCompleted;//当前完成的关卡
-private:
 	QPushButton *LevelButton;
 	QLabel* textItem;
 	QGraphicsScene* scene;
 	QTimer timer;
 	QPropertyAnimation* fadeAnimation;
 	QWidget* p;
-signals:
+	signals:
 	void level(int i);
 };

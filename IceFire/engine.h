@@ -13,10 +13,12 @@
 #include <qpushbutton.h>
 #include <QtWidgets>
 #include <QtNetwork>
+#include <QMediaPlayer>
+#include <QMediaPlaylist>
 class engine  : public QWidget
 {
 	Q_OBJECT
-
+	
 public:
 	engine(int p,QWidget *parent=nullptr, QTcpSocket* s=nullptr);
 	~engine();
@@ -32,6 +34,9 @@ public:
 	Door* d;
 	QTcpSocket* socket;
 	Barrier* barrier;
+	QMediaPlayer* mplayer;
+	QMediaPlaylist* playlist;
+	QLabel* imageLabel;
 	int signal[10];
 	int player;
 	int more;
@@ -41,8 +46,9 @@ public:
 	void reload();
 	void Win();
 	void gameover();
-	void LoadGame();
+	void LoadGame(); 
 	void receiveData();
+	void Background();
 private:
 	int p1x, p1y,p2x,p2y;
 	QTimer timer;
