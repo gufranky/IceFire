@@ -105,16 +105,16 @@ void engine::keyPressEvent(QKeyEvent* event)
 	}
 	if (player != 1)
 	{
-		if (event->key() == Qt::Key_Up) {
+		if (event->text() == "i") {
 		signal[4] = 1;
 		}
-		if (event->key() == Qt::Key_Left) {
+		if (event->text() == "j") {
 			signal[5] = 1;
 		}
-		if (event->key() == Qt::Key_Down) {
+		if (event->text() == "k") {
 			signal[6] = 1;
 		}
-		if (event->key() == Qt::Key_Right) {
+		if (event->text() == "l") {
 			signal[7] = 1;
 		}
 	}
@@ -159,16 +159,16 @@ void engine::keyReleaseEvent(QKeyEvent* event)
 	}
 	if (player != 1)
 	{
-		if (event->key() == Qt::Key_Up) {
+		if (event->text() == "i") {
 			signal[4] = 0;
 		}
-		else if (event->key() == Qt::Key_Left) {
+		else if (event->text() == "j") {
 			signal[5] = 0;
 		}
-		else if (event->key() == Qt::Key_Down) {
+		else if (event->text() == "k") {
 			signal[6] = 0;
 		}
-		else if (event->key() == Qt::Key_Right) {
+		else if (event->text() == "l") {
 			signal[7] = 0;
 		}
 	}
