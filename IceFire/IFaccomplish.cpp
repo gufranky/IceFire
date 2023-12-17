@@ -119,7 +119,7 @@ void IFaccomplish::TimeChange()
 	}
 	if ((speedx < 0) && (speedy > 0))
 	{
-		Change(player ? ":/IceFire/re/firelu.png": ":/IceFire/re/icelu.png");
+		Change(player ? ":/IceFire/re/fireld.png": ":/IceFire/re/iceld.png");
 	}
 	if ((speedx < 0) && (speedy < 0))
 	{
