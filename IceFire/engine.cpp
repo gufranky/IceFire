@@ -335,7 +335,7 @@ void engine::LoadGame()
 		sp->getm(m);
 		while (getline(configFile, line5)) {
 
-			if (line5.find("spirit") != string::npos) {
+			if (line5.find("[spirit]") != string::npos) {
 				while (1) {
 					getline(configFile, line5);
 					istringstream iss(line5);
