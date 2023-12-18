@@ -16,6 +16,11 @@ engine::engine(int p, QWidget* par,QTcpSocket* S)
 	back = new QPushButton("back",par);
 	back->setFixedSize(400, 100);
 	back->move(760, 900);
+	mplayer = new QMediaPlayer(this);
+	playlist = new QMediaPlaylist(this);
+	imageLabel = new QLabel(this);
+	QPixmap pixmap(":/IceFire/re/back2.png");
+	pixmapItem = new QGraphicsPixmapItem(pixmap);
 	LoadGame();
 	player = p;
 	socket = S;
@@ -65,12 +70,17 @@ engine::~engine()
 	delete p1;
 	delete layout;
 	delete view;
+	delete pixmapItem;
 	delete barrier;
 	delete Gameover;
 	delete p2;
 	delete m;
 	delete scene;
 	delete back;
+	delete mplayer;
+	delete playlist;
+	delete imageLabel;
+	
 }
 void engine::keyPressEvent(QKeyEvent* event)
 {
@@ -207,8 +217,30 @@ void engine::gameover()
 	Gameover->show();
 	back->show();
 }
+void engine::Background()
+{
+
+	mplayer->setMedia(QUrl("qrc:/IceFire/re/menu.mp3"));
+	playlist->addMedia(QUrl("qrc:/IceFire/re/menu.mp3"));
+	playlist->setPlaybackMode(QMediaPlaylist::Loop);
+	mplayer->setPlaylist(playlist);
+	mplayer->play();
+
+	QPixmap image;
+	if (image.load(":/IceFire/re/back2.png")) {
+		imageLabel->show();
+		imageLabel->setPixmap(image);
+		imageLabel->setScaledContents(true);
+		imageLabel->lower();
+	}
+	else {
+		qDebug() << "Failed to load background image!";
+	}
+	
+}
 void engine::LoadGame()
 {
+	Background();
 	std::ifstream configFile("D:\\ice&fire\\IceFire\\l2.cfg");
 
 	if (configFile.is_open()) {
@@ -325,6 +357,7 @@ void engine::LoadGame()
 		p1->GetMoveBarrier(m);
 		p2->GetMoveBarrier(m);
 		scene = new QGraphicsScene(parent);
+		scene->addItem(pixmapItem);
 		scene->addItem(p1);
 		scene->addItem(p2);
 		barrier->show(scene);
@@ -377,4 +410,8 @@ void engine::Win()
 	Gameover->show();
 	back->show();
 	emit winnew();
+	// 停止音乐
+	mplayer->stop();
+	// 隐藏背景图片
+	imageLabel->hide();
 }

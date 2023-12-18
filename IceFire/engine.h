@@ -15,15 +15,10 @@
 #include <QtNetwork>
 #include <QMediaPlayer>
 #include <QMediaPlaylist>
-#include <QApplication>
-#include <QPushButton>
-#include <QPalette>
-#include <QStackedWidget>
-#include <QLabel>
 class engine  : public QWidget
 {
 	Q_OBJECT
-
+	
 public:
 	engine(int p,QWidget *parent=nullptr, QTcpSocket* s=nullptr);
 	~engine();
@@ -32,6 +27,7 @@ public:
 	QVBoxLayout* layout;
 	QGraphicsScene* scene;
 	QGraphicsView* view;
+	QGraphicsPixmapItem* pixmapItem;
 	SpiritBase* spirit;
 	QLabel* Gameover;
 	Spirit* sp;
@@ -39,6 +35,9 @@ public:
 	Door* d;
 	QTcpSocket* socket;
 	Barrier* barrier;
+	QMediaPlayer* mplayer;
+	QMediaPlaylist* playlist;
+	QLabel* imageLabel;
 	int signal[10];
 	int player;
 	int more;
@@ -48,16 +47,14 @@ public:
 	void reload();
 	void Win();
 	void gameover();
-	void LoadGame();
+	void LoadGame(); 
 	void receiveData();
-	void LoadBack();
+	void Background();
 private:
 	int p1x, p1y,p2x,p2y;
 	QTimer timer;
 	QWidget* parent;
 	QPushButton* back;
-	QMediaPlayer* player;
-	
 signals:
 	void signalA(int value);
 	void winnew();

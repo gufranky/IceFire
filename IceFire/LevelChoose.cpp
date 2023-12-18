@@ -2,11 +2,11 @@
 
 int LevelChoose::currentLevel = 1;
 int LevelChoose::levelCompleted = 0;
-LevelChoose::LevelChoose(int p,QWidget* parent) :
+LevelChoose::LevelChoose(int p, QWidget* parent) :
 	QWidget(parent)
-
 {
 	LevelButton = new QPushButton[20];
+
 	for (int i = 0; i < 4; i++)
 		for (int j = 0; j < 5; j++)
 		{
@@ -28,17 +28,19 @@ LevelChoose::LevelChoose(int p,QWidget* parent) :
 				"    background-image: url(:/IceFire/re/buttonpush.png);" // 鼠标悬停时的背景图像路径
 				"    background-position: center;"
 				"}");
+
 			if (p == 2)
 			{
 				LevelButton[i * 5 + j].setEnabled(false);
 			}
 
-
+			// ���Ӱ�ť����Ĳۺ���
 			QObject::connect(&LevelButton[i * 5 + j], &QPushButton::clicked, this, [=]()
 				{
 					handleLevelButtonClick(i * 5 + j + 1);
-				}
-			);
+				});
+
+			
 		}
 }
 
