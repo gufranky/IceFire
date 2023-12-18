@@ -27,6 +27,7 @@ public:
 	QVBoxLayout* layout;
 	QGraphicsScene* scene;
 	QGraphicsView* view;
+	QGraphicsPixmapItem* pixmapItem;
 	SpiritBase* spirit;
 	QLabel* Gameover;
 	Spirit* sp;

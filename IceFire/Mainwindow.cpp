@@ -41,7 +41,7 @@ void MainWindow::moreClicked()
 	more = true;
 	socket = new QTcpSocket(this);
 	socket->connectToHost("localhost", 12345);
-	page4= new PersonChoose(this);
+	page4= new PersonChoose(socket,this);
 	stackedWidget->addWidget(page4);
 	stackedWidget->setCurrentIndex(1);
 	connect(page4, &PersonChoose::iceClicked, [=]() {

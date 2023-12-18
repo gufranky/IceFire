@@ -19,6 +19,8 @@ engine::engine(int p, QWidget* par,QTcpSocket* S)
 	mplayer = new QMediaPlayer(this);
 	playlist = new QMediaPlaylist(this);
 	imageLabel = new QLabel(this);
+	QPixmap pixmap(":/IceFire/re/back2.png");
+	pixmapItem = new QGraphicsPixmapItem(pixmap);
 	LoadGame();
 	player = p;
 	socket = S;
@@ -68,6 +70,7 @@ engine::~engine()
 	delete p1;
 	delete layout;
 	delete view;
+	delete pixmapItem;
 	delete barrier;
 	delete Gameover;
 	delete p2;
@@ -77,6 +80,7 @@ engine::~engine()
 	delete mplayer;
 	delete playlist;
 	delete imageLabel;
+	
 }
 void engine::keyPressEvent(QKeyEvent* event)
 {
@@ -101,16 +105,16 @@ void engine::keyPressEvent(QKeyEvent* event)
 	}
 	if (player != 1)
 	{
-		if (event->key() == Qt::Key_Up) {
+		if (event->text() == "i") {
 		signal[4] = 1;
 		}
-		if (event->key() == Qt::Key_Left) {
+		if (event->text() == "j") {
 			signal[5] = 1;
 		}
-		if (event->key() == Qt::Key_Down) {
+		if (event->text() == "k") {
 			signal[6] = 1;
 		}
-		if (event->key() == Qt::Key_Right) {
+		if (event->text() == "l") {
 			signal[7] = 1;
 		}
 	}
@@ -155,16 +159,16 @@ void engine::keyReleaseEvent(QKeyEvent* event)
 	}
 	if (player != 1)
 	{
-		if (event->key() == Qt::Key_Up) {
+		if (event->text() == "i") {
 			signal[4] = 0;
 		}
-		else if (event->key() == Qt::Key_Left) {
+		else if (event->text() == "j") {
 			signal[5] = 0;
 		}
-		else if (event->key() == Qt::Key_Down) {
+		else if (event->text() == "k") {
 			signal[6] = 0;
 		}
-		else if (event->key() == Qt::Key_Right) {
+		else if (event->text() == "l") {
 			signal[7] = 0;
 		}
 	}
@@ -353,6 +357,7 @@ void engine::LoadGame()
 		p1->GetMoveBarrier(m);
 		p2->GetMoveBarrier(m);
 		scene = new QGraphicsScene(parent);
+		scene->addItem(pixmapItem);
 		scene->addItem(p1);
 		scene->addItem(p2);
 		barrier->show(scene);

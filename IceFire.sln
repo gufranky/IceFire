@@ -5,8 +5,6 @@ VisualStudioVersion = 17.7.34202.233
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IceFire", "IceFire\IceFire.vcxproj", "{7F14ADF6-7C69-4DA4-874F-2AE54F3C2FC6}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IF_server", "..\IF_server\IF_server\IF_server.vcxproj", "{4699D7FE-E4DB-459C-B31D-AC42E9EDD3DC}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -17,10 +15,6 @@ Global
 		{7F14ADF6-7C69-4DA4-874F-2AE54F3C2FC6}.Debug|x64.Build.0 = Debug|x64
 		{7F14ADF6-7C69-4DA4-874F-2AE54F3C2FC6}.Release|x64.ActiveCfg = Release|x64
 		{7F14ADF6-7C69-4DA4-874F-2AE54F3C2FC6}.Release|x64.Build.0 = Release|x64
-		{4699D7FE-E4DB-459C-B31D-AC42E9EDD3DC}.Debug|x64.ActiveCfg = Debug|x64
-		{4699D7FE-E4DB-459C-B31D-AC42E9EDD3DC}.Debug|x64.Build.0 = Debug|x64
-		{4699D7FE-E4DB-459C-B31D-AC42E9EDD3DC}.Release|x64.ActiveCfg = Release|x64
-		{4699D7FE-E4DB-459C-B31D-AC42E9EDD3DC}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

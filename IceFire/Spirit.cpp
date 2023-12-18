@@ -111,6 +111,8 @@ void Spirit::reload()
 		spirit->Reload();
 	}
 	winner = 0;
+	if (AllDiamond == 0)
+		emit WinCheck();
 }
 void Spirit::getm(MoveBarrier* mm)
 {
