@@ -13,7 +13,7 @@ public:
 
 protected:
     void drawBackground(QPainter* painter, const QRectF& rect) override {
-        QImage backgroundImage(":/IceFire/re/back2.png");
+        QImage backgroundImage(":/IceFire/re/back1.png");
         painter->drawImage(rect,backgroundImage);
     }
 };   

@@ -1,13 +1,15 @@
 #include "engine.h"
 #include"Barrier.h"
+#include"LevelChoose.h"
 #include <fstream>
 #include <string>
 #include <sstream>
 #include<iostream>
 using namespace std;
 
-engine::engine(int p, QWidget* par,QTcpSocket* S)
+engine::engine(int i,int p, QWidget* par,QTcpSocket* S)
 {
+	levelclicked = i;
 	Gameover = new QLabel("Gameover", par);
 	Gameover->setFont(QFont("Arial", 40));
 	Gameover->setAlignment(Qt::AlignCenter);
@@ -19,9 +21,22 @@ engine::engine(int p, QWidget* par,QTcpSocket* S)
 	mplayer = new QMediaPlayer(this);
 	playlist = new QMediaPlaylist(this);
 	imageLabel = new QLabel(this);
-	QPixmap pixmap(":/IceFire/re/back2.png");
+	QPixmap pixmap(":/IceFire/re/back1.jpg");//关卡背景图片
 	pixmapItem = new QGraphicsPixmapItem(pixmap);
-	LoadGame();
+	int windowWidth = 1920; // 窗口宽度
+	int windowHeight = 1080; // 窗口高度
+
+	// 获取图片的宽度和高度
+	int pixmapWidth = pixmap.width();
+	int pixmapHeight = pixmap.height();
+
+	// 计算图片放置在窗口中心时的坐标
+	int x = (windowWidth - pixmapWidth) / 2;
+	int y = (windowHeight - pixmapHeight) / 2;
+
+	// 设置图片项的位置为窗口中心
+	pixmapItem->setPos(x, y);
+	
 	player = p;
 	socket = S;
 	for (int i = 0; i <= 9; i++)
@@ -32,7 +47,9 @@ engine::engine(int p, QWidget* par,QTcpSocket* S)
 	{
 		connect(socket, &QTcpSocket::readyRead, this, &engine::receiveData);
 	}
+	LoadGame(levelclicked);
 }
+
 void engine::receiveData()
 {
 	QByteArray data = socket->readAll();
@@ -225,23 +242,34 @@ void engine::Background()
 	playlist->setPlaybackMode(QMediaPlaylist::Loop);
 	mplayer->setPlaylist(playlist);
 	mplayer->play();
-
-	QPixmap image;
-	if (image.load(":/IceFire/re/back2.png")) {
-		imageLabel->show();
-		imageLabel->setPixmap(image);
-		imageLabel->setScaledContents(true);
-		imageLabel->lower();
-	}
-	else {
-		qDebug() << "Failed to load background image!";
-	}
-	
 }
-void engine::LoadGame()
+
+void engine::LoadGame(int levelclicked)
 {
 	Background();
-	std::ifstream configFile("D:\\ice&fire\\IceFire\\l2.cfg");
+	std::ifstream configFile;
+
+	if (levelclicked == 1)
+	{
+		configFile.open("D:\\ice&fire\\IceFire\\l2.cfg");
+	}
+	else if (levelclicked == 2)
+	{
+		configFile.open("D:\\ice&fire\\IceFire\\l3.cfg");
+	}
+	else if (levelclicked == 3)
+	{
+		configFile.open("D:\\ice&fire\\IceFire\\l2.cfg");
+	}
+	else if (levelclicked == 4)
+	{
+		configFile.open("D:\\ice&fire\\IceFire\\l2.cfg");
+	}
+	else if (levelclicked == 5)
+	{
+		configFile.open("D:\\ice&fire\\IceFire\\l2.cfg");
+	}
+
 
 	if (configFile.is_open()) {
 		
@@ -360,7 +388,7 @@ void engine::LoadGame()
 		scene->addItem(pixmapItem);
 		scene->addItem(p1);
 		scene->addItem(p2);
-		barrier->show(scene);
+		barrier->show(scene, ":/IceFire/re/buttonpush.png");
 		sp->show(scene);
 		m->show(scene);
 		scene->setSceneRect(0, 0, 1920, 1080);

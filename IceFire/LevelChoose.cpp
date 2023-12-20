@@ -1,12 +1,19 @@
 #include "LevelChoose.h"
-
+#include"start.h"
 int LevelChoose::currentLevel = 1;
 int LevelChoose::levelCompleted = 0;
 LevelChoose::LevelChoose(int p, QWidget* parent) :
 	QWidget(parent)
 {
-	LevelButton = new QPushButton[20];
+	BackButton = new QPushButton(this);
+	QString buttonText = "Back";  // 文本内容
+	BackButton->setText(buttonText);
+	BackButton->move(100, 100);
+	BackButton->setFixedSize(120, 80);
+	BackButton->show();
+	connect(BackButton, &QPushButton::clicked, this, &LevelChoose::onBackButtonClicked);
 
+	LevelButton = new QPushButton[20];
 	for (int i = 0; i < 4; i++)
 		for (int j = 0; j < 5; j++)
 		{
@@ -34,14 +41,17 @@ LevelChoose::LevelChoose(int p, QWidget* parent) :
 				LevelButton[i * 5 + j].setEnabled(false);
 			}
 
-			// ���Ӱ�ť����Ĳۺ���
 			QObject::connect(&LevelButton[i * 5 + j], &QPushButton::clicked, this, [=]()
 				{
 					handleLevelButtonClick(i * 5 + j + 1);
-				});
 
-			
+				});
 		}
+}
+
+void LevelChoose::onBackButtonClicked()
+{
+	emit p2backClicked(); // 发出信号通知MainWindow
 }
 
 void LevelChoose::paintEvent(QPaintEvent* event)
@@ -50,13 +60,14 @@ void LevelChoose::paintEvent(QPaintEvent* event)
 
 	QPainter painter(this);
 	QPixmap backgroundImage(":/IceFire/re/back2.png"); // 在.qrc文件中添加的背景图像文件的路径
+
 	painter.drawPixmap(0, 0, width(), height(), backgroundImage);
 }
 
 LevelChoose::~LevelChoose()
 {
 	delete[] LevelButton;
-
+	delete BackButton;
 }
 
 void LevelChoose::handleLevelButtonClick(int Level)
@@ -73,7 +84,7 @@ void LevelChoose::handleLevelButtonClick(int Level)
 	}
 	else
 	{		// 创建文本项、图形场景和计时器
-		textItem = new QLabel("Please complete the pre-level from the first level", p);
+		textItem = new QLabel("Please complete the pre-level from the first level", this);
 
 		// 设置文本的字体
 		QFont font("KaiTi", 35, QFont::Bold);  // 选择字体、大小和粗细
