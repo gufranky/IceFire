@@ -44,6 +44,7 @@ LevelChoose::LevelChoose(int p, QWidget* parent) :
 			QObject::connect(&LevelButton[i * 5 + j], &QPushButton::clicked, this, [=]()
 				{
 					handleLevelButtonClick(i * 5 + j + 1);
+
 				});
 		}
 }

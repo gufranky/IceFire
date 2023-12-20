@@ -76,7 +76,7 @@ void MainWindow::onButtonClicked()
 	stackedWidget->addWidget(page2);
 	stackedWidget->setCurrentIndex(1);
 	connect(page2, &LevelChoose::level, this, &MainWindow::ChooseFinish);
-	connect(page2, &LevelChoose::p2backClicked, this, &MainWindow::p2onBackButtonClicked);
+	connect(page2, &LevelChoose::p2backClicked, this, &MainWindow::p2onBackButtonClicked); 
 }
 void MainWindow::ChooseFinish(int i)
 {
@@ -88,7 +88,8 @@ void MainWindow::ChooseFinish(int i)
 	}
 
 	this->setWindowTitle("Game");
-	page3 = new engine(player,this, socket);
+	
+	page3 = new engine(i,player,this, socket);
 	stackedWidget->addWidget(page3);
 	stackedWidget->setCurrentIndex(2);
 	connect(page3, &engine::winnew, page2, &LevelChoose::unlockNextLevel);

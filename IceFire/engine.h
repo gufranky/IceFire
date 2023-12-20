@@ -18,9 +18,8 @@
 class engine  : public QWidget
 {
 	Q_OBJECT
-	
 public:
-	engine(int p,QWidget *parent=nullptr, QTcpSocket* s=nullptr);
+	engine(int l,int p,QWidget *parent=nullptr, QTcpSocket* s=nullptr);
 	~engine();
 	IFaccomplish*p1;
 	IFaccomplish* p2;
@@ -47,12 +46,11 @@ public:
 	void reload();
 	void Win();
 	void gameover();
-	
 	void receiveData();
 	void Background();
 	int levelclicked;
 public slots:
-	void LoadGame();
+	void LoadGame(int levelclicked);
 
 private:
 	int p1x, p1y,p2x,p2y;

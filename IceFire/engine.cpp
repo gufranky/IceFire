@@ -7,8 +7,9 @@
 #include<iostream>
 using namespace std;
 
-engine::engine(int p, QWidget* par,QTcpSocket* S)
+engine::engine(int i,int p, QWidget* par,QTcpSocket* S)
 {
+	levelclicked = i;
 	Gameover = new QLabel("Gameover", par);
 	Gameover->setFont(QFont("Arial", 40));
 	Gameover->setAlignment(Qt::AlignCenter);
@@ -46,10 +47,9 @@ engine::engine(int p, QWidget* par,QTcpSocket* S)
 	{
 		connect(socket, &QTcpSocket::readyRead, this, &engine::receiveData);
 	}
-	LevelChoose levelChooser(1,this);
-//	connect(&levelChooser, &LevelChoose::level, this, &engine::LoadGame);
-	LoadGame();
+	LoadGame(levelclicked);
 }
+
 void engine::receiveData()
 {
 	QByteArray data = socket->readAll();
@@ -244,23 +244,31 @@ void engine::Background()
 	mplayer->play();
 }
 
-void engine::LoadGame()
+void engine::LoadGame(int levelclicked)
 {
 	Background();
-	/*std::ifstream configFile;
-	if(levelclicked==1)
-		std::ifstream configFile("D:\\ice&fire\\IceFire\\l2.cfg");
-	if (levelclicked == 2)
-		std::ifstream configFile("D:\\ice&fire\\IceFire\\l2.cfg");
-	if (levelclicked == 3)
-		std::ifstream configFile("D:\\ice&fire\\IceFire\\l2.cfg");
-	if (levelclicked == 4)
-		std::ifstream configFile("D:\\ice&fire\\IceFire\\l2.cfg");
-	if (levelclicked == 5)
-		std::ifstream configFile("D:\\ice&fire\\IceFire\\l2.cfg");*/
+	std::ifstream configFile;
 
-	std::ifstream configFile("D:\\ice&fire\\IceFire\\l2.cfg");
-
+	if (levelclicked == 1)
+	{
+		configFile.open("D:\\ice&fire\\IceFire\\l2.cfg");
+	}
+	else if (levelclicked == 2)
+	{
+		configFile.open("D:\\ice&fire\\IceFire\\l3.cfg");
+	}
+	else if (levelclicked == 3)
+	{
+		configFile.open("D:\\ice&fire\\IceFire\\l2.cfg");
+	}
+	else if (levelclicked == 4)
+	{
+		configFile.open("D:\\ice&fire\\IceFire\\l2.cfg");
+	}
+	else if (levelclicked == 5)
+	{
+		configFile.open("D:\\ice&fire\\IceFire\\l2.cfg");
+	}
 
 
 	if (configFile.is_open()) {
