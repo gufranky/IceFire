@@ -3,6 +3,14 @@
 PersonChoose::PersonChoose(QTcpSocket* S, QWidget* parent)
 	: QWidget(parent)
 {
+	BackButton = new QPushButton(this);
+	QString buttonText = "Back";  // 文本内容
+	BackButton->setText(buttonText);
+	BackButton->move(100, 100);
+	BackButton->setFixedSize(120, 80);
+	BackButton->show();
+	connect(BackButton, &QPushButton::clicked, this, &PersonChoose::onBackButtonClicked);
+
 	word = new QLabel(this);
 	socket = S;
 	iceButton = new QPushButton("ice", this);
@@ -92,6 +100,10 @@ PersonChoose::PersonChoose(QTcpSocket* S, QWidget* parent)
 		}
 	);
 }
+void PersonChoose::onBackButtonClicked()
+{
+	emit p4backClicked(); // 发出信号通知MainWindow
+}
 
 PersonChoose::~PersonChoose()
 {
@@ -103,6 +115,7 @@ PersonChoose::~PersonChoose()
 	delete lineEdit;
 	delete button;
 	delete word;
+	delete BackButton;
 }
 void PersonChoose::receiveData()
 {

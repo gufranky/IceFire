@@ -34,6 +34,8 @@ public:
     LevelChoose *page2=nullptr;
     engine* page3=nullptr;
     PersonChoose* page4=nullptr;
+    void p2onBackButtonClicked();
+    void p4onBackButtonClicked();
     void receiveData()
     {
         QByteArray data = socket->readAll();

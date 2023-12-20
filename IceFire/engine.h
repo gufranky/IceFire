@@ -47,9 +47,13 @@ public:
 	void reload();
 	void Win();
 	void gameover();
-	void LoadGame(); 
+	
 	void receiveData();
 	void Background();
+	int levelclicked;
+public slots:
+	void LoadGame();
+
 private:
 	int p1x, p1y,p2x,p2y;
 	QTimer timer;

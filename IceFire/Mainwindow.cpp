@@ -13,11 +13,12 @@ MainWindow::MainWindow(QWidget* parent)
 		stackedWidget->setCurrentIndex(0);
 		this->setCentralWidget(stackedWidget);
 		connect(page1, &start::buttonClicked, this, &MainWindow::onButtonClicked);
-		connect(page1, &start::moreClicked, this, &MainWindow::moreClicked);
+		connect(page1, &start::moreClicked, this, &MainWindow::moreClicked);	
 		setContentsMargins(0, 0, 0, 0);
 		more = false;
 		socket = nullptr;
 		player = 0;
+		
 	}
 }
 
@@ -35,7 +36,15 @@ MainWindow::~MainWindow()
 		delete page4;
 	delete  stackedWidget;
 }
+void MainWindow::p2onBackButtonClicked()
+{
+	stackedWidget->setCurrentIndex(0); // ÇÐ»»µ½page1
+}
 
+void MainWindow::p4onBackButtonClicked()
+{
+	stackedWidget->setCurrentIndex(0); // ÇÐ»»µ½page1
+}
 void MainWindow::moreClicked()
 {
 	more = true;
@@ -57,6 +66,7 @@ void MainWindow::moreClicked()
 		stackedWidget->removeWidget(page4);
 		onButtonClicked();
 		});
+	connect(page4, &PersonChoose::p4backClicked, this, &MainWindow::p2onBackButtonClicked);
 }
 
 void MainWindow::onButtonClicked()
@@ -66,6 +76,7 @@ void MainWindow::onButtonClicked()
 	stackedWidget->addWidget(page2);
 	stackedWidget->setCurrentIndex(1);
 	connect(page2, &LevelChoose::level, this, &MainWindow::ChooseFinish);
+	connect(page2, &LevelChoose::p2backClicked, this, &MainWindow::p2onBackButtonClicked);
 }
 void MainWindow::ChooseFinish(int i)
 {
