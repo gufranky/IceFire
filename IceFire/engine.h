@@ -49,9 +49,10 @@ public:
 	void receiveData();
 	void Background();
 	int levelclicked;
+	
 public slots:
 	void LoadGame(int levelclicked);
-
+	void BackgroundChoose(QString &levelpath,int levelclicked);
 private:
 	int p1x, p1y,p2x,p2y;
 	QTimer timer;

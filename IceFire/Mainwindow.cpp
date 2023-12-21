@@ -39,11 +39,13 @@ MainWindow::~MainWindow()
 void MainWindow::p2onBackButtonClicked()
 {
 	stackedWidget->setCurrentIndex(0); // ÇÐ»»µ½page1
+	delete page2;
 }
 
 void MainWindow::p4onBackButtonClicked()
 {
 	stackedWidget->setCurrentIndex(0); // ÇÐ»»µ½page1
+	delete page4;
 }
 void MainWindow::moreClicked()
 {
@@ -66,7 +68,7 @@ void MainWindow::moreClicked()
 		stackedWidget->removeWidget(page4);
 		onButtonClicked();
 		});
-	connect(page4, &PersonChoose::p4backClicked, this, &MainWindow::p2onBackButtonClicked);
+	connect(page4, &PersonChoose::p4backClicked, this, &MainWindow::p4onBackButtonClicked);
 }
 
 void MainWindow::onButtonClicked()
