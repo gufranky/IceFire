@@ -21,9 +21,13 @@
         <file>re/iceydown.png</file>
         <file>re/iceyplus.png</file>
         <file>re/icrd.png</file>
-        <file>re/back1.jpg</file>
         <file>re/back2.png</file>
         <file>re/button.png</file>
         <file>re/buttonpush.png</file>
+        <file>re/Barrier.jpg</file>
+        <file>re/firedoor.png</file>
+        <file>re/icedoor.png</file>
+        <file>re/levelbg1.png</file>
+        <file>re/levelbg2.png</file>
     </qresource>
 </RCC>

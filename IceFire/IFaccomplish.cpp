@@ -10,9 +10,9 @@ void IFaccomplish::SetPos(double xx, double yy)
 		speedx = 0;
 	}
 
-	if (x > 1900)
+	if (x > 1800)
 	{
-		x = 1900;
+		x = 1800;
 		speedx = 0;
 	}
 	if (y < 0) 

@@ -20,8 +20,20 @@ engine::engine(int i,int p, QWidget* par,QTcpSocket* S)
 	back->move(760, 900);
 	mplayer = new QMediaPlayer(this);
 	playlist = new QMediaPlaylist(this);
-	imageLabel = new QLabel(this);
-	QPixmap pixmap(":/IceFire/re/back1.jpg");//关卡背景图片
+	imageLabel = new QLabel(this);	
+	player = p;
+	socket = S;
+	for (int i = 0; i <= 9; i++)
+	{
+		signal[i] = 0;
+	}
+	if (socket != nullptr)
+	{
+		connect(socket, &QTcpSocket::readyRead, this, &engine::receiveData);
+	}
+	QString levelpath = " ";
+	BackgroundChoose(levelpath,levelclicked);
+	QPixmap pixmap(levelpath);//关卡背景图片
 	pixmapItem = new QGraphicsPixmapItem(pixmap);
 	int windowWidth = 1920; // 窗口宽度
 	int windowHeight = 1080; // 窗口高度
@@ -36,20 +48,30 @@ engine::engine(int i,int p, QWidget* par,QTcpSocket* S)
 
 	// 设置图片项的位置为窗口中心
 	pixmapItem->setPos(x, y);
-	
-	player = p;
-	socket = S;
-	for (int i = 0; i <= 9; i++)
-	{
-		signal[i] = 0;
-	}
-	if (socket != nullptr)
-	{
-		connect(socket, &QTcpSocket::readyRead, this, &engine::receiveData);
-	}
 	LoadGame(levelclicked);
 }
 
+
+void engine::BackgroundChoose(QString &levelpath,int levelclicked) 
+{
+	
+	if (levelclicked == 1) {
+		levelpath = ":/IceFire/re/levelbg1.png";
+	}
+	else if (levelclicked == 2) {
+		levelpath = ":/IceFire/re/levelbg2.png";
+	}
+	else if (levelclicked == 3) {
+		levelpath = ":/IceFire/re/levelbg3.png";
+	}
+	else if (levelclicked == 4) {
+		levelpath = ":/IceFire/re/levelbg4.png";
+	}
+	else if (levelclicked == 5) {
+		levelpath = ":/IceFire/re/levelbg5.png";
+	}
+
+}
 void engine::receiveData()
 {
 	QByteArray data = socket->readAll();
@@ -388,7 +410,7 @@ void engine::LoadGame(int levelclicked)
 		scene->addItem(pixmapItem);
 		scene->addItem(p1);
 		scene->addItem(p2);
-		barrier->show(scene, ":/IceFire/re/buttonpush.png");
+		barrier->show(scene, ":/IceFire/re/Barrier.jpg");
 		sp->show(scene);
 		m->show(scene);
 		scene->setSceneRect(0, 0, 1920, 1080);

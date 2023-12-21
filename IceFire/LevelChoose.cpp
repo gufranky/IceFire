@@ -83,7 +83,10 @@ void LevelChoose::handleLevelButtonClick(int Level)
 			unlockNextLevel();
 	}
 	else
-	{		// 创建文本项、图形场景和计时器
+	{
+		
+
+		// 创建文本项、图形场景和计时器
 		textItem = new QLabel("Please complete the pre-level from the first level", this);
 
 		// 设置文本的字体
@@ -118,6 +121,7 @@ void LevelChoose::handleLevelButtonClick(int Level)
 			fadeAnimation = nullptr;
 			});
 		timer.start(1500);
+		
 
 	}
 }
