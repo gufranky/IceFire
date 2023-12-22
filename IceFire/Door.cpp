@@ -13,6 +13,10 @@ Door::Door(int xx, int yy, int ww, int hh, bool fire, IFaccomplish* p11, IFaccom
 	this->p1 = p11;
 	this->p2 = p22;
 	Shadow = new QGraphicsRectItem(x, y, w, h);
+	QPixmap redImage(":/IceFire/re/firedoor.png");
+	QPixmap blueImage(":/IceFire/re/icedoor.png");
+	red = redImage.scaled(w, h, Qt::KeepAspectRatio);
+	blue= blueImage.scaled(w, h, Qt::KeepAspectRatio);
 }
 
 void Door::interaction()
@@ -52,16 +56,11 @@ void Door::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWid
 	{
 		if (fire)
 		{
-			
-			QPixmap redImage(":/IceFire/re/firedoor.png"); 
-			redImage = redImage.scaled(w, h, Qt::KeepAspectRatio);
-			painter->drawPixmap(0, 0, redImage);
+			painter->drawPixmap(0, 0, red);
 		}
 		else
 		{
-			QPixmap blueImage(":/IceFire/re/icedoor.png"); 
-			blueImage = blueImage.scaled(w, h, Qt::KeepAspectRatio);
-			painter->drawPixmap(0, 0, blueImage);
+			painter->drawPixmap(0, 0, blue);
 		}
 	}
 

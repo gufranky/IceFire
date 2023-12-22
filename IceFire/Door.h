@@ -14,6 +14,7 @@ public:
     void CanOpen()override;
     void Reload()override;
     bool fire, here,Open;
+    QPixmap red, blue;
     int  x, y, w, h;
     IFaccomplish* p1, * p2;
     private:
