@@ -29,5 +29,6 @@
         <file>re/levelbg1.png</file>
         <file>re/levelbg2.png</file>
         <file>re/background.png</file>
+        <file>re/levelmusic.mp3</file>
     </qresource>
 </RCC>

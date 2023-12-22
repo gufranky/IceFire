@@ -259,8 +259,8 @@ void engine::gameover()
 void engine::Background()
 {
 
-	mplayer->setMedia(QUrl("qrc:/IceFire/re/menu.mp3"));
-	playlist->addMedia(QUrl("qrc:/IceFire/re/menu.mp3"));
+	mplayer->setMedia(QUrl("qrc:/IceFire/re/levelmusic.mp3"));
+	playlist->addMedia(QUrl("qrc:/IceFire/re/levelmusic.mp3"));
 	playlist->setPlaybackMode(QMediaPlaylist::Loop);
 	mplayer->setPlaylist(playlist);
 	mplayer->play();
