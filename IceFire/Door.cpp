@@ -52,20 +52,15 @@ void Door::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWid
 	{
 		if (fire)
 		{
-			// Load the red image
-			QPixmap redImage(":/IceFire/re/icedoor.png"); // Replace with the actual path
+			
+			QPixmap redImage(":/IceFire/re/firedoor.png"); 
 			redImage = redImage.scaled(w, h, Qt::KeepAspectRatio);
-
-			// Draw the red image
 			painter->drawPixmap(0, 0, redImage);
 		}
 		else
 		{
-			// Load the blue image
-			QPixmap blueImage(":/IceFire/re/icedoor.png"); // Replace with the actual path
+			QPixmap blueImage(":/IceFire/re/icedoor.png"); 
 			blueImage = blueImage.scaled(w, h, Qt::KeepAspectRatio);
-
-			// Draw the blue image
 			painter->drawPixmap(0, 0, blueImage);
 		}
 	}
