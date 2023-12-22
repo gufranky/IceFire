@@ -8,6 +8,10 @@ LevelChoose::LevelChoose(int p, QWidget* parent) :
 	BackButton = new QPushButton(this);
 	QString buttonText = "Back";  // 文本内容
 	BackButton->setText(buttonText);
+	QFont font1;
+	font1.setPointSize(21);  // 设置字体大小
+	font1.setBold(true);     // 设置粗体
+	BackButton->setFont(font1);
 	BackButton->move(100, 100);
 	BackButton->setFixedSize(120, 80);
 	BackButton->show();

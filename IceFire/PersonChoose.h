@@ -11,7 +11,8 @@
 #include <QLabel>
 #include <QtWidgets>
 #include <QtNetwork>
-
+#include <QLineEdit>
+#include <QFont>
 class PersonChoose  : public QWidget
 {
 	Q_OBJECT

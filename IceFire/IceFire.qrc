@@ -30,5 +30,6 @@
         <file>re/levelbg2.png</file>
         <file>re/background.png</file>
         <file>re/levelmusic.mp3</file>
+        <file>re/diamond.wav</file>
     </qresource>
 </RCC>

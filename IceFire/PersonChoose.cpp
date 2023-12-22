@@ -6,6 +6,10 @@ PersonChoose::PersonChoose(QTcpSocket* S, QWidget* parent)
 	BackButton = new QPushButton(this);
 	QString buttonText = "Back";  // 文本内容
 	BackButton->setText(buttonText);
+	QFont font1;
+	font1.setPointSize(21);  // 设置字体大小
+	font1.setBold(true);     // 设置粗体
+	BackButton->setFont(font1);
 	BackButton->move(100, 100);
 	BackButton->setFixedSize(120, 80);
 	BackButton->show();
@@ -18,9 +22,46 @@ PersonChoose::PersonChoose(QTcpSocket* S, QWidget* parent)
 	lineEdit = new QLineEdit(this);
 	button = new QPushButton("enter", this);
 	word->show();
-	word->setGeometry(960, 300, 200, 30);
-	lineEdit->setGeometry(100, 100, 200, 30);
-	button->move(960, 540);
+	word->setGeometry(530, 300, 800, 300);
+	QFont font;
+	font.setPointSize(36); 
+	font.setBold(true);   
+	word->setFont(font);
+	word->setStyleSheet("color: blue;"); 
+	word->setAlignment(Qt::AlignCenter); 
+	QGraphicsDropShadowEffect* shadowEffect = new QGraphicsDropShadowEffect(this);
+	shadowEffect->setBlurRadius(5);
+	shadowEffect->setColor(QColor(0, 0, 0, 160));
+	shadowEffect->setOffset(3, 3);
+	word->setGraphicsEffect(shadowEffect);
+	lineEdit->setGeometry(760, 500, 300, 80);
+	connect(lineEdit, &QLineEdit::textChanged, this, [=](const QString& text)
+		{
+			QFont font;
+
+			// 根据输入文本的总宽度动态计算字体大小
+			int totalWidth = lineEdit->fontMetrics().width(text);
+			// 设置一个基础字体大小
+			int baseFontSize = 26;
+			// 根据总宽度计算字体大小，确保不小于最小值
+			int fontSize = qMax(baseFontSize - totalWidth / 15, 20);
+			font.setPointSize(fontSize);
+
+			lineEdit->setFont(font);
+		});
+	button->move(760, 740);
+	
+	button->setFixedSize(320, 70);
+	button->setStyleSheet("QPushButton {"
+		"    border-radius: 20px;"  // 控制圆角半径，可以根据需要调整
+		"    background-color:rgb(0, 128, 255);"
+		"    color: white;"
+		"    border: none;"
+		"    font-size: 28px;"
+		"}"
+		"QPushButton:hover {"
+		"    background-color: lightblue;"  // 鼠标悬停时的背景色
+		"}");
 	if (socket != nullptr)
 	{
 		word->setText("Connect Success");

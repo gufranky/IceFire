@@ -1,6 +1,8 @@
 #include "Diamond.h"
 Diamond::Diamond(int xx, int yy, int ww, int hh, bool fire, IFaccomplish* p11, IFaccomplish* p22) :SpiritBase(xx, yy, NULL)
 {
+	player = new QMediaPlayer;
+	player->setMedia(QUrl("qrc:/IceFire/re/diamond.wav"));
 	x = xx;
 	y = yy;
 	w = ww;
@@ -20,6 +22,7 @@ void Diamond::interaction()
 		{
 			get = true;
 			update();
+			player->play();
 			emit HadGet();
 		}
 	}

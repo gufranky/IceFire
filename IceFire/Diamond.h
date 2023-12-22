@@ -1,5 +1,6 @@
 #pragma once
 #include "Person.h"
+#include <QMediaPlayer>
 #include "Spirit.h"
 #include "IFaccomplish.h"
 class Diamond :
@@ -13,6 +14,7 @@ public:
 	void Show(QGraphicsScene* s)override;
 	void Reload()override;
 	bool fire, get;
+	QMediaPlayer* player;
 	int  x, y, w, h;
 	IFaccomplish* p1, * p2;
 private:
