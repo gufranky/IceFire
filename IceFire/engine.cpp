@@ -273,29 +273,29 @@ void engine::LoadGame(int levelclicked)
 
 	if (levelclicked == 1)
 	{
-		configFile.open("D:\\ice&fire\\IceFire\\l2.cfg");
+		configFile.open("D:\\ice&fire\\IceFire\\l1.cfg");
 	}
 	else if (levelclicked == 2)
 	{
-		configFile.open("D:\\ice&fire\\IceFire\\l3.cfg");
+		configFile.open("D:\\ice&fire\\IceFire\\l2.cfg");
 	}
 	else if (levelclicked == 3)
 	{
-		configFile.open("D:\\ice&fire\\IceFire\\l2.cfg");
+		configFile.open("D:\\ice&fire\\IceFire\\l3.cfg");
 	}
 	else if (levelclicked == 4)
 	{
-		configFile.open("D:\\ice&fire\\IceFire\\l2.cfg");
+		configFile.open("D:\\ice&fire\\IceFire\\l4.cfg");
 	}
 	else if (levelclicked == 5)
 	{
-		configFile.open("D:\\ice&fire\\IceFire\\l2.cfg");
+		configFile.open("D:\\ice&fire\\IceFire\\l5.cfg");
 	}
 
 
 	if (configFile.is_open()) {
 		
-		string  line1, line2 ,line3, line4, line5;
+		string  line1, line2 ,line3, line4, line5,line6,line7,line8,line9;
 		while (std::getline(configFile, line1)) {
 			// 判断当前行是否包含"fire"关键字
 			if (line1.find("fire") != string::npos) {
@@ -401,6 +401,75 @@ void engine::LoadGame(int levelclicked)
 			}
 			if (line5.find("break") != std::string::npos) { break; }
 		}
+
+		while (getline(configFile, line6)) {
+
+			if (line6.find("diamond") != string::npos) {
+				while (1) {
+					getline(configFile, line6);
+					istringstream iss(line6);
+					int a, b, c, d, e, f;
+					iss >> a >> b >> c >> d >> e>> f;
+					sp->add(a, b, c, d, e, f);
+					//diamond展示
+					if (line6.find("3break") != std::string::npos) { break; }
+				}
+			}
+			if (line6.find("3break") != std::string::npos) { break; }
+		}
+
+
+		while (getline(configFile, line7)) {
+
+			if (line7.find("waterfire") != string::npos) {
+				while (1) {
+					getline(configFile, line7);
+					istringstream iss(line7);
+					int a, b, c, d, e, f;
+					iss >> a >> b >> c >> d >> e>>f;
+					sp->add(a, b, c, d, e, f);
+					//waterfire展示
+					if (line7.find("2break") != std::string::npos) { break; }
+				}
+			}
+			if (line7.find("2break") != std::string::npos) { break; }
+		}
+
+
+		while (getline(configFile, line8)) {
+
+			if (line8.find("button") != string::npos) {
+				while (1) {
+					getline(configFile, line8);
+					istringstream iss(line8);
+					int a, b, c, d, e, f;
+					iss >> a >> b >> c >> d >> e >> f;
+					sp->add(a, b, c, d, e, f);
+					//按钮展示
+					if (line8.find("4break") != std::string::npos) { break; }
+				}
+			}
+			if (line8.find("4break") != std::string::npos) { break; }
+		}
+
+
+		while (getline(configFile, line9)) {
+
+			if (line9.find("stonebutton") != string::npos) {
+				while (1) {
+					getline(configFile, line9);
+					istringstream iss(line9);
+					int a, b, c, d, e, f;
+					iss >> a >> b >> c >> d >> e >> f;
+					sp->add(a, b, c, d, e, f);
+					//开关展示
+					if (line9.find("5break") != std::string::npos) { break; }
+				}
+			}
+			if (line9.find("5break") != std::string::npos) { break; }
+		}
+
+		
 		//sp已完成
 		p1->GetBarrier(barrier);
 		p2->GetBarrier(barrier);
