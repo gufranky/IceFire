@@ -264,7 +264,6 @@ void engine::reload()
 	m->reload();
 	Gameover->hide();
 	back->hide();
-	BackButton1->hide();
 }
 void engine::gameover()
 {
@@ -289,23 +288,23 @@ void engine::LoadGame(int levelclicked)
 	std::ifstream configFile;
 	if (levelclicked == 1)
 	{
-		configFile.open("D:\\ice&fire\\IceFire\\l1.cfg");
+		configFile.open("l1.cfg");
 	}
 	else if (levelclicked == 2)
 	{
-		configFile.open("D:\\ice&fire\\IceFire\\l2.cfg");
+		configFile.open("l2.cfg");
 	}
 	else if (levelclicked == 3)
 	{
-		configFile.open("D:\\ice&fire\\IceFire\\l3.cfg");
+		configFile.open("l3.cfg");
 	}
 	else if (levelclicked == 4)
 	{
-		configFile.open("D:\\ice&fire\\IceFire\\l4.cfg");
+		configFile.open("l4.cfg");
 	}
 	else if (levelclicked == 5)
 	{
-		configFile.open("D:\\ice&fire\\IceFire\\l5.cfg");
+		configFile.open("l5.cfg");
 	}
 
 

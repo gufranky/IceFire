@@ -100,7 +100,7 @@ void Spirit::dead()
 void Spirit::DiamondCheck()
 {
 	NowDiamond += 1;
-	if (AllDiamond = NowDiamond)
+	if (AllDiamond == NowDiamond)
 	{
 		emit WinCheck();
 	}
@@ -111,6 +111,7 @@ void Spirit::reload()
 		spirit->Reload();
 	}
 	winner = 0;
+	NowDiamond = 0;
 	if (AllDiamond == 0)
 		emit WinCheck();
 }

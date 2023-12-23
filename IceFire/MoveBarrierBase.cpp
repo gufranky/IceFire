@@ -45,6 +45,7 @@ void MoveBarrierBase::paint(QPainter* painter, const QStyleOptionGraphicsItem* o
 	if (cansee)
 	{
 		painter->setPen(QColor(255, 182, 193));
+		painter->setBrush(QColor(255, 182, 193));
 		painter->drawRect(nowx, nowy, w, h);
 	}
 	
@@ -172,4 +173,5 @@ void MoveBarrierBase::getit(bool x)
 				nowturn = 2;
 			}
 	}
+	update();
 }

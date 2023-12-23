@@ -1,6 +1,6 @@
 #include "LevelChoose.h"
 #include"start.h"
-int LevelChoose::currentLevel = 1;
+int LevelChoose::currentLevel = 3;
 int LevelChoose::levelCompleted = 0;
 int temp = 0;
 LevelChoose::LevelChoose(int p, QWidget* parent) :
