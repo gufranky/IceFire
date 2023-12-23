@@ -35,6 +35,7 @@ public:
     engine* page3=nullptr;
     PersonChoose* page4=nullptr;
     void p2onBackButtonClicked();
+    void p3onBackButtonClicked();
     void p4onBackButtonClicked();
     void receiveData()
     {

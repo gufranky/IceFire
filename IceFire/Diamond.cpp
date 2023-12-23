@@ -2,7 +2,7 @@
 Diamond::Diamond(int xx, int yy, int ww, int hh, bool fire, IFaccomplish* p11, IFaccomplish* p22) :SpiritBase(xx, yy, NULL)
 {
 	player = new QMediaPlayer;
-	player->setMedia(QUrl("qrc:/IceFire/re/diamond.wav"));
+	player->setMedia(QUrl("qrc:/IceFire/re/di.wav"));
 	x = xx;
 	y = yy;
 	w = ww;
@@ -34,6 +34,7 @@ void Diamond::Show(QGraphicsScene* s)
 Diamond::~Diamond()
 {
 	delete Shadow;
+	delete player;
 }
 void Diamond::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {

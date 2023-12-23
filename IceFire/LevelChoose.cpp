@@ -2,6 +2,7 @@
 #include"start.h"
 int LevelChoose::currentLevel = 1;
 int LevelChoose::levelCompleted = 0;
+int temp = 0;
 LevelChoose::LevelChoose(int p, QWidget* parent) :
 	QWidget(parent)
 {
@@ -77,19 +78,15 @@ LevelChoose::~LevelChoose()
 void LevelChoose::handleLevelButtonClick(int Level)
 {
 
-	// 如果点击的关卡小于当前关卡，已完成
+	// 如果点击的关卡小于当前关卡(已完成)
 	if (Level <= currentLevel)
 	{
 		emit level(Level);
 		levelCompleted = std::max(levelCompleted, Level);
-		// 解锁下一关
-		if (Level == currentLevel)
-			unlockNextLevel();
+		temp = Level;
 	}
 	else
 	{
-		
-
 		// 创建文本项、图形场景和计时器
 		textItem = new QLabel("Please complete the pre-level from the first level", this);
 
@@ -133,7 +130,7 @@ void LevelChoose::handleLevelButtonClick(int Level)
 	void LevelChoose::unlockNextLevel()
 	{
 		// 解锁下一关
-		currentLevel++;
+		currentLevel = temp + 1;
 
 		// 更新按钮状态
 		for (int i = 0; i < 4; i++)

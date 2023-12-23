@@ -25,6 +25,7 @@ public:
 	IFaccomplish* p2;
 	QVBoxLayout* layout;
 	QGraphicsScene* scene;
+	QPushButton* BackButton1;
 	QGraphicsView* view;
 	QGraphicsPixmapItem* pixmapItem;
 	SpiritBase* spirit;
@@ -53,6 +54,7 @@ public:
 public slots:
 	void LoadGame(int levelclicked);
 	void BackgroundChoose(QString &levelpath,int levelclicked);
+	void returnChoose();
 private:
 	int p1x, p1y,p2x,p2y;
 	QTimer timer;
@@ -62,5 +64,6 @@ signals:
 	void signalA(int value);
 	void winnew();
 	void BackMenu();
+	void returnChooseClicked();
 };
 #endif

@@ -41,7 +41,11 @@ void MainWindow::p2onBackButtonClicked()
 	stackedWidget->setCurrentIndex(0); // ÇÐ»»µ½page1
 	delete page2;
 }
-
+void MainWindow::p3onBackButtonClicked()
+{
+	stackedWidget->setCurrentIndex(1); // ÇÐ»»µ½page2
+	delete page3;
+}
 void MainWindow::p4onBackButtonClicked()
 {
 	stackedWidget->setCurrentIndex(0); // ÇÐ»»µ½page1
@@ -95,6 +99,7 @@ void MainWindow::ChooseFinish(int i)
 	stackedWidget->addWidget(page3);
 	stackedWidget->setCurrentIndex(2);
 	connect(page3, &engine::winnew, page2, &LevelChoose::unlockNextLevel);
+	connect(page3, &engine::returnChooseClicked, this, &MainWindow::p3onBackButtonClicked);
 	connect(page3, &engine::BackMenu, [=]() {
 		stackedWidget->setCurrentIndex(1);
 		stackedWidget->removeWidget(page3);

@@ -9,6 +9,17 @@ using namespace std;
 
 engine::engine(int i,int p, QWidget* par,QTcpSocket* S)
 {
+	BackButton1 = new QPushButton("back", par);
+	QString buttonText = "Back";  // 文本内容
+	BackButton1->setText(buttonText);
+	QFont font1;
+	font1.setPointSize(21);  // 设置字体大小
+	font1.setBold(true);     // 设置粗体
+	BackButton1->setFont(font1);
+	BackButton1->move(100, 100);
+	BackButton1->setFixedSize(120, 80);
+	connect(BackButton1, &QPushButton::clicked, this, &engine::returnChoose);
+
 	levelclicked = i;
 	Gameover = new QLabel("Gameover", par);
 	Gameover->setFont(QFont("Arial", 40));
@@ -50,7 +61,10 @@ engine::engine(int i,int p, QWidget* par,QTcpSocket* S)
 	pixmapItem->setPos(x, y);
 	LoadGame(levelclicked);
 }
+void engine::returnChoose() {
 
+	emit returnChooseClicked(); // 发出信号通知MainWindow
+}
 
 void engine::BackgroundChoose(QString &levelpath,int levelclicked) 
 {
@@ -119,6 +133,7 @@ engine::~engine()
 	delete mplayer;
 	delete playlist;
 	delete imageLabel;
+	delete BackButton1;
 	
 }
 void engine::keyPressEvent(QKeyEvent* event)
@@ -249,6 +264,7 @@ void engine::reload()
 	m->reload();
 	Gameover->hide();
 	back->hide();
+	BackButton1->hide();
 }
 void engine::gameover()
 {
@@ -268,9 +284,9 @@ void engine::Background()
 
 void engine::LoadGame(int levelclicked)
 {
+	BackButton1->show();
 	Background();
 	std::ifstream configFile;
-
 	if (levelclicked == 1)
 	{
 		configFile.open("D:\\ice&fire\\IceFire\\l1.cfg");
@@ -533,4 +549,5 @@ void engine::Win()
 	mplayer->stop();
 	// 隐藏背景图片
 	imageLabel->hide();
+	BackButton1->hide();
 }

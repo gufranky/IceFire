@@ -36,6 +36,7 @@ public:
 	QTimer timer;
 	QPropertyAnimation* fadeAnimation;
 	QWidget* p;
+	int temp;
 	signals:
 	void level(int i);
 	void p2backClicked();
