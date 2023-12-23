@@ -121,7 +121,8 @@ void LevelChoose::handleLevelButtonClick(int Level)
 			delete fadeAnimation;
 			fadeAnimation = nullptr;
 			});
-		timer.start(1500);
+		if(!timer.isActive())
+			timer.start(1500);
 		
 
 	}
