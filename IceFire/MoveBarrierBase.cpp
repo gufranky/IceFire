@@ -158,11 +158,11 @@ void MoveBarrierBase::getit(bool x)
 			}
 			if (movemod == 3)
 			{
-				cansee = true;
+				cansee = false;
 			}
 			if (movemod == 4)
 			{
-				cansee = false;
+				cansee = true;
 			}
 			if (movemod == 5)
 			{

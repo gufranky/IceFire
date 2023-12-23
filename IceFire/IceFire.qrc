@@ -28,9 +28,11 @@
         <file>re/icedoor.png</file>
         <file>re/levelbg1.png</file>
         <file>re/levelbg2.png</file>
-        <file>re/background.png</file>
         <file>re/levelmusic.mp3</file>
         <file>re/diamond.wav</file>
         <file>re/di.wav</file>
+        <file>re/levelbg4.png</file>
+        <file>re/levelbg3.png</file>
+        <file>re/levelbg5.png</file>
     </qresource>
 </RCC>
